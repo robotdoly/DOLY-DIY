@@ -1,5 +1,5 @@
 
-![Logo](https://doly.ai/wp-content/uploads/2023/04/doly_image_640x.jpg)
+![Logo](https://doly.ai/wp-content/uploads/2023/04/doly_image_640.jpg)
 
 
 # DIY DOLY
