@@ -46,5 +46,5 @@ So, if you're looking for a fully-featured robot with advanced capabilities, the
 
 ## NEWS
 
-Exciting news! For all DIY enthusiasts, I've heard your feedback. In my upcoming Kickstarter campaign for Project Doly, I will be offering a DIY kit, making it even more accessible. [Stay tuned on Doly Kickstarter page for updates!](https://www.kickstarter.com/projects/doly/doly-more-than-a-robot)
+Exciting news! For all DIY enthusiasts, I've heard your feedback. In my upcoming Kickstarter campaign for Project Doly, I will be offering a DIY kit, making it even more accessible. [Stay tuned on Doly Kickstarter page for updates!](https://www.kickstarter.com/projects/doly/doly-more-than-a-robot?ref=edmdn2)
     
