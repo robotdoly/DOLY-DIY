@@ -13,6 +13,8 @@ DIY Doly is an open robot project based on Raspberry PI CM4.
 [Hackster.io DIY Doly project page](https://www.hackster.io/robotdoly/open-doly-more-than-a-robot-d182c6)
 or
 [Hackaday.io DIY Doly project page](https://hackaday.io/project/193336-diy-doly)
+or
+[Instructables.com DIY Doly project page](https://www.instructables.com/DIY-Doly-a-Companion-Robot-Powered-by-Raspberry-Pi/)
 
 
 ## License
