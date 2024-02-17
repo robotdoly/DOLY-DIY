@@ -1,3 +1,9 @@
+
+## NEWS
+
+[👉 WE ARE LIVE ON KICSTARTER 🚀 BACK US TO MAKE DOLY BETTER! 👈](https://www.kickstarter.com/projects/doly/doly-more-than-a-robot?ref=edmdn2)
+
+
 *** PLEASE BE AWARE THAT THIS REPOSITORY IS CURRENTLY IN BETA. WE ARE ACTIVELY WORKING ON ENHANCING BOTH THE ELECTRONICS AND DESIGN TO PROVIDE YOU WITH AN IMPROVED EXPERIENCE. ALL MISSING INFORMATION AND UPDATED FILES WILL BE RELEASED AS SOON AS POSSIBLE. ***
 
 ![Logo](https://doly.ai/wp-content/uploads/2023/04/doly_image_640.jpg)
@@ -47,7 +53,4 @@ Luckily, both DIY Doly and the official Doly robot share the Raspberry Pi CM4. T
 
 So, if you're looking for a fully-featured robot with advanced capabilities, the official [Doly](https://doly.ai/) robot may be the better choice for you. However, if you're looking more customizable and DIY-friendly robot platform, the DIY Doly project is a great option.
 
-## NEWS
-
-Exciting news! For all DIY enthusiasts, I've heard your feedback. In my upcoming Kickstarter campaign for Project Doly, I will be offering a DIY kit, making it even more accessible. [Stay tuned on Doly Kickstarter page for updates!](https://www.kickstarter.com/projects/doly/doly-more-than-a-robot?ref=edmdn2)
     
