@@ -21,12 +21,14 @@ jobs:
       - run: pip install mkdocs-material ghp-import
 
       # Build from your folder, publish into /python/
+      - run: mkdocs build -f SDK/docs/python/mkdocs.yml -d "${GITHUB_WORKSPACE}/site/python" --clean
+      # Build from your folder, publish into /cpp/
       - run: |
-          rm -rf site
-          mkdir -p site/python
-          mkdocs build -f SDK/docs/python/mkdocs.yml -d "${GITHUB_WORKSPACE}/site/python" --clean
-          ls -la site/python
-          test -f site/python/index.html
+          mkdir -p "${GITHUB_WORKSPACE}/site/cpp"
+          cp -r SDK/docs/cpp/* "${GITHUB_WORKSPACE}/site/cpp/"
+          test -f site/cpp/index.html
+
+      - run: ghp-import -n -p -f site
 
       # Optional root landing page (prevents /DOLY-DIY/ from being blank/404)
       - run: |
