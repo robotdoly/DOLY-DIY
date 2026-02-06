@@ -1,0 +1,39 @@
+name: Deploy Python Docs
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - run: pip install mkdocs-material ghp-import
+
+      # Build from your folder, publish into /python/
+      - run: mkdocs build -f SDK/docs/python/mkdocs.yml -d site/python
+
+      # Optional root landing page (prevents /DOLY-DIY/ from being blank/404)
+      - run: |
+          cat > site/index.html << 'EOF'
+          <!doctype html><meta charset="utf-8">
+          <title>DOLY Docs</title>
+          <h2>DOLY Documentation</h2>
+          <ul>
+            <li><a href="./python/">Python SDK Docs</a></li>
+            <li><a href="./cpp/">C++ SDK Docs</a></li>
+          </ul>
+          EOF
+
+      # Publish to gh-pages branch
+      - run: ghp-import -n -p -f site
