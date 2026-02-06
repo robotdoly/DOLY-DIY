@@ -24,15 +24,8 @@ jobs:
       - run: |
           rm -rf site
           mkdir -p site/python
-
-          mkdocs build -f SDK/docs/python/mkdocs.yml -d site/python --clean
-
-          echo "---- site/ ----"
-          ls -la site || true
-          echo "---- site/python/ ----"
-          ls -la site/python || true
-
-          # hard fail if index.html missing
+          mkdocs build -f SDK/docs/python/mkdocs.yml -d "${GITHUB_WORKSPACE}/site/python" --clean
+          ls -la site/python
           test -f site/python/index.html
 
       # Optional root landing page (prevents /DOLY-DIY/ from being blank/404)
