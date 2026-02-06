@@ -25,6 +25,7 @@ jobs:
 
       # Optional root landing page (prevents /DOLY-DIY/ from being blank/404)
       - run: |
+          mkdir -p site
           cat > site/index.html << 'EOF'
           <!doctype html><meta charset="utf-8">
           <title>DOLY Docs</title>
