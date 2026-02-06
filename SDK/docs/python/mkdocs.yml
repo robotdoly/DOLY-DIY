@@ -1,0 +1,96 @@
+site_name: Doly Python SDK
+site_description: Python SDK documentation for Doly robot (Raspberry Pi OS Kernel 6.6.51,
+  Python 3.11)
+theme:
+  name: material
+  logo: assets/doly_48h_white.png
+  favicon: assets/doly_icon_32x32.png
+  features:
+  - navigation.tabs
+  - navigation.sections
+  - navigation.indexes
+  - toc.follow
+  - search.suggest
+  - search.highlight
+  - navigation.expand
+  - content.code.copy
+  palette:
+    # Light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+markdown_extensions:
+- admonition
+- tables
+- toc:
+    permalink: true
+- pymdownx.superfences
+- pymdownx.details
+- pymdownx.inlinehilite
+- pymdownx.highlight
+- pymdownx.snippets
+plugins:
+- search
+nav:
+- Home: index.md
+- Getting Started:
+  - Install: getting-started/install.md
+  - Quickstart: getting-started/quickstart.md
+- Python SDK:
+  - Modules:
+    - ArmControl: modules/arm_control.md
+    - Camera: modules/camera.md
+    - DriveControl: modules/drive_control.md
+    - EdgeControl: modules/edge_control.md
+    - EyeControl: modules/eye_control.md
+    - FanControl: modules/fan_control.md
+    - Helper: modules/helper.md
+    - ImuControl: modules/imu_control.md
+    - IoControl: modules/io_control.md
+    - LcdControl: modules/lcd_control.md
+    - LedControl: modules/led_control.md
+    - ServoControl: modules/servo_control.md
+    - SoundControl: modules/sound_control.md
+    - TofControl: modules/tof_control.md
+    - TouchControl: modules/touch_control.md
+    - TtsControl: modules/tts_control.md
+- API Reference:
+  - Index: api/index.md
+  - ArmControl: api/arm_control.md
+  - Camera: api/camera.md
+  - Color: api/color.md
+  - DriveControl: api/drive_control.md
+  - EdgeControl: api/edge_control.md
+  - EyeControl: api/eye_control.md
+  - FanControl: api/fan_control.md
+  - Helper: api/helper.md
+  - ImuControl: api/imu_control.md
+  - IoControl: api/io_control.md
+  - LcdControl: api/lcd_control.md
+  - LedControl: api/led_control.md
+  - ServoControl: api/servo_control.md
+  - SoundControl: api/sound_control.md
+  - TofControl: api/tof_control.md
+  - TouchControl: api/touch_control.md
+  - TtsControl: api/tts_control.md
+  - VContent: api/vcontent.md
+- Troubleshooting:
+  - FAQ: troubleshooting/faq.md
+  - Permisions: troubleshooting/permissions.md
+- Changelog: changelog.md
+extra_css:
+- stylesheets/extra.css
