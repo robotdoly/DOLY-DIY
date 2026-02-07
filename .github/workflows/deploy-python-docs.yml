@@ -1,4 +1,4 @@
-name: Deploy Python Docs
+name: Deploy Docs (Landing + Python + C++)
 
 on:
   push:
@@ -20,28 +20,26 @@ jobs:
 
       - run: pip install mkdocs-material ghp-import
 
-      # Build from your folder, publish into /python/
-      - run: mkdocs build -f SDK/docs/python/mkdocs.yml -d "${GITHUB_WORKSPACE}/site/python" --clean
-      # Build from your folder, publish into /cpp/
+      # Clean output folder at repo root
+      - run: |
+          rm -rf site
+          mkdir -p site
+
+      # 1) Build Python MkDocs into /python/
+      - run: |
+          mkdocs build -f SDK/docs/python/mkdocs.yml -d "${GITHUB_WORKSPACE}/site/python" --clean
+          test -f site/python/index.html
+
+      # 2) Copy C++ HTML (Doxygen output) into /cpp/
       - run: |
           mkdir -p "${GITHUB_WORKSPACE}/site/cpp"
           cp -r SDK/docs/cpp/* "${GITHUB_WORKSPACE}/site/cpp/"
           test -f site/cpp/index.html
 
-      - run: ghp-import -n -p -f site
-
-      # Optional root landing page (prevents /DOLY-DIY/ from being blank/404)
+      # 3) Copy landing page into site root (/)
       - run: |
-          mkdir -p site
-          cat > site/index.html << 'EOF'
-          <!doctype html><meta charset="utf-8">
-          <title>DOLY Docs</title>
-          <h2>DOLY Documentation</h2>
-          <ul>
-            <li><a href="./python/">Python SDK Docs</a></li>
-            <li><a href="./cpp/">C++ SDK Docs</a></li>
-          </ul>
-          EOF
+          cp -r SDK/docs/landing/* "${GITHUB_WORKSPACE}/site/"
+          test -f site/index.html
 
-      # Publish to gh-pages branch
+      # Deploy everything to gh-pages
       - run: ghp-import -n -p -f site
