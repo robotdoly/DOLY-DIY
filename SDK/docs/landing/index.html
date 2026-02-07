@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Doly Docs</title>
+  <link rel="icon" type="image/png" href="./assets/doly_icon.png">
+  <link rel="apple-touch-icon" href="./assets/doly_icon.png">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div></div>
+      <a class="topbar__title" href="./">Doly SDK Docs</a>
+      <nav class="topbar__right">
+        <a class="navlink" href="./python/">Python</a>
+        <a class="navlink" href="./cpp/">C++</a>
+        <a class="navlink navlink--pill" href="https://doly.ai" target="_blank" rel="noreferrer">doly.ai</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ONE shared grid for hero + cards -->
+    <section class="layout">
+      <!-- Left column -->
+      <div class="left">
+        <div class="kicker">DOLY SDK DOCUMENTATION</div>
+        <h1>Build with Doly</h1>
+        <p class="lead">
+          Choose your SDK documentation below. Python for quick scripting, C++ for full performance.
+        </p>
+
+        <div class="cards">
+          <a class="card" href="./python/">
+            <div class="card__header">
+              <div class="card__icon">🐍</div>
+              <div class="card__title">Python SDK</div>
+            </div>
+            <p class="card__desc">
+              High-level API, fast iteration, examples, and full module reference.
+            </p>
+            <div class="card__cta">Go to Python docs →</div>
+          </a>
+
+          <a class="card" href="./cpp/">
+            <div class="card__header">
+              <div class="card__icon">⚙️</div>
+              <div class="card__title">C++ SDK</div>
+            </div>
+            <p class="card__desc">
+              Low-level control and performance. Doxygen-generated API pages.
+            </p>
+            <div class="card__cta">Go to C++ docs →</div>
+          </a>
+        </div>
+
+        <footer class="footer">
+          <div>© <span id="y"></span> Doly • <span class="made">Made with 💖 in Canada 🇨🇦</span></div>
+        </footer>
+      </div>
+
+      <!-- Right column -->
+      <div class="right">
+        <div class="hero-card">
+          <img class="hero-img" src="./assets/hero_doly.png" alt="Doly" />
+        </div>
+
+        <div class="footer-right">
+          <a href="./python/">Python</a>
+          <span class="dot">•</span>
+          <a href="./cpp/">C++</a>
+          <span class="dot">•</span>
+          <a href="https://github.com/robotdoly/DOLY-DIY" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
