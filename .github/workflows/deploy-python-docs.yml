@@ -35,8 +35,14 @@ jobs:
           mkdir -p "${GITHUB_WORKSPACE}/site/cpp"
           cp -r SDK/docs/cpp/* "${GITHUB_WORKSPACE}/site/cpp/"
           test -f site/cpp/index.html
+          
+      # 3) Copy Maker Guide HTML into /maker/
+      - run: |
+          mkdir -p "${GITHUB_WORKSPACE}/site/maker"
+          cp -r Guide/web/* "${GITHUB_WORKSPACE}/site/maker/"
+          test -f site/maker/index.html          
 
-      # 3) Copy landing page into site root (/)
+      # 4) Copy landing page into site root (/)
       - run: |
           cp -r SDK/docs/landing/* "${GITHUB_WORKSPACE}/site/"
           test -f site/index.html
