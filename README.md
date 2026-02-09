@@ -2,9 +2,9 @@
 ![Logo](https://doly.ai/wp-content/uploads/2023/04/doly_image_640.jpg)
 
 
-# DOLY-DIY 🤖
+# DOLY-DIY
 
-DIY Doly robot project repository including **hardware/design files + electronics + software (SDK, libraries, and examples)**.
+Doly robot project repository including **hardware/design files + electronics + software (SDK, libraries, and examples)**.
 
 This repo is meant to be an **all-in-one** place to **learn, remix, and build** the DOLY robot.
 
@@ -26,7 +26,7 @@ This repo is meant to be an **all-in-one** place to **learn, remix, and build** 
   - Example code (C++ & Python)
 
 - **Documentation**
-  - 3D printable Doly assembly guide
+  - [3D printable Doly assembly guide](https://robotdoly.github.io/DOLY-DIY/maker/)
   - [C++ API documentation](https://robotdoly.github.io/DOLY-DIY/cpp/)
   - [Python API documentation](https://robotdoly.github.io/DOLY-DIY/python/)
 
