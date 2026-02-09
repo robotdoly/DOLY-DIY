@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Doly Maker Edition Build Guide</title>
+  <link rel=\"stylesheet\" href=\"assets/styles.css\" />
+  <meta name="description" content="A step-by-step manual for building a 3D-printable Doly robot at home." />
+  <link rel="icon" href="assets/images/doly_icon_32x32.png" />
+  <!-- styles moved to assets/styles.css -->
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+  <div class="overlay" id="sidebarOverlay" hidden></div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="Go to top"><span class="dot"></span> Doly Docs</a>
+      <div class="badge">Maker Edition Build Guide</div>
+
+      <div class="topbar-spacer"></div>
+      <button class="icon-btn" id="sidebarToggle" aria-label="Open navigation" title="Menu">
+        <span class="icon-lines" aria-hidden="true"></span>
+      </button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Light / Dark">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2" />
+          <path
+            d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.9 5.1l-1.6 1.6M6.7 17.3l-1.6 1.6M18.9 18.9l-1.6-1.6M6.7 6.7 5.1 5.1"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 14.8A8.4 8.4 0 0 1 9.2 3.3a7.2 7.2 0 1 0 11.8 11.5Z" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <div class="sidebar-title">On this page</div>
+        <button class="icon-btn" id="sidebarClose" aria-label="Close navigation" title="Close">
+          <span class="icon-x" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="search">
+        <input id="tocSearch" type="search" placeholder="Search sections…" />
+      </div>
+      <ul class="toc">
+        <li><a href="#safety-disclaimers">Safety &amp; Disclaimers</a>
+        </li>
+        <li><a href="#project-overview">Project overview</a>
+        </li>
+        <li><a href="#required-3dprinted-parts">Required 3D‑printed parts</a>
+        </li>
+        <li><a href="#hardware-electronics">Hardware &amp; electronics</a>
+        </li>
+        <li><a href="#print-settings">Print settings</a>
+        </li>
+        <li><a href="#folder-file-organization-github-repo">Folders &amp; Files (GitHub repo)</a>
+        </li>
+        <li><a href="#step-by-step-assembly">Step-by-step Assembly</a>
+          <ul class="toc toc-sub">
+            <li><a href="#step-0-prep-quality-checks">Step 0 Prep &amp; quality checks</a></li>
+            <li><a href="#step-1-3dprint-body-parts">Step 1 3D‑print body parts</a></li>
+            <li><a href="#step-2-gluing-body-parts">Step 2 Gluing Body Parts</a></li>
+            <li><a href="#step-3-servo-installation">Step 3 Servo installation</a></li>
+            <li><a href="#step-4-motor-installation">Step 4 Motor Installation</a></li>
+            <li><a href="#step-5-installing-speakers">Step 5 Installing Speakers</a></li>
+            <li><a href="#step-6-battery-foam-installation">Step 6 Battery Foam Installation</a></li>
+            <li><a href="#step-7-battery-installation">Step 7 Battery Installation</a></li>
+            <li><a href="#step-8-io-pcb-installation">Step 8 I/O PCB Installation</a></li>
+            <li><a href="#step-9-fan-installation">Step 9 Fan Installation</a></li>
+            <li><a href="#step-10-servo-cover-installation">Step 10 Servo Cover Installation</a></li>
+            <li><a href="#step-11-front-bumper-sub-assembly">Step 11 Front Bumper Sub-assembly</a></li>
+            <li><a href="#step-12-head-pcb-installation">Step 12 Head PCB Installation</a></li>
+            <li><a href="#step-13-main-board-installation">Step 13 Main Board Installation</a></li>
+            <li><a href="#step-14-wheels-installation">Step 14 Wheels Installation</a></li>
+            <li><a href="#step-15-arm-installation">Step 15 Arm Installation</a></li>
+            <li><a href="#step-16-attaching-tracks-and-final-test">Step 16 Attaching tracks and Final test</a></li>
+            <li class="toc-divider"><span>Appendix</span></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#licensing-credits">Licensing &amp; Credits</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <div class="hero" id="top">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1>Doly Maker Edition Build Guide</h1>
+            <p>A step-by-step manual for building a 3D-printable Doly robot at home.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#step-by-step-assembly">Start assembly</a>
+              <a class="btn" href="#safety-disclaimers">Safety</a>
+              <a class="btn" href="#required-3dprinted-parts">Parts</a>
+              <a class="btn" href="https://www.youtube.com/watch?v=yAqsBN3BLHY" target="_blank"
+                rel="noopener noreferrer">Video</a>
+            </div>
+          </div>
+          <div class="hero-media">
+            <img src="assets/images/printable_doly.jpg" alt="Doly Maker Edition" />
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <section id="safety-disclaimers">
+          <h2>Safety &amp; Disclaimers</h2>
+          <ul class="doc-list">
+            <li>❗ Battery safety : Never short terminals. Charge with only Doly charger after assembly is completed on a
+              non-flammable surface.</li>
+            <li>❗ Small parts : Choking hazard; keep away from children. This kit is not a toy and is intended for
+              competent hobbyists.</li>
+            <li>❗ Tools: Wear eye protection when cutting/filing. Be cautious, especially using sharp cutters, if
+              needed.</li>
+            <li>❗ Electrostatic discharge : Ground yourself before handling electronic boards.</li>
+            <li>❗ Ventilation : Print and glue in ventilated spaces; follow material manufacturers guidance.</li>
+            <li>❗ Always verify polarity and connector orientation before plugging the battery.</li>
+          </ul>
+        </section>
+
+        <section id="project-overview">
+          <h2>Project overview</h2>
+          <ul class="doc-list">
+            <li>Doly Maker Edition : Doly is a AI-powered companion robot, with this project you will 3D‑print Doly
+              robot body parts and assemble the robot.</li>
+            <li>Electronic Boards: Raspberry Pi CM4 compatible mainboard, head PCB with LCDs, bumper PCB including ToF
+              proximity sensors, and microphones, arm PCBs for hand RGB LEDs and I/O PCB.</li>
+            <li>3D‑print Material : PETG or PLA.</li>
+            <li>What youll do : 3D‑print → post-process → sub-assemblies → wiring → assembly → testing.</li>
+          </ul>
+        </section>
+
+        <section id="required-3dprinted-parts">
+          <h2>Required 3D‑printed parts</h2>
+          <p>You could access the full list of parts from our GitHub /Printables/PLA-PETG folder.</p><a
+            href="https://github.com/robotdoly/DOLY-DIY/tree/main/Printables/PLA-PETG">https://github.com/robotdoly/DOLY-DIY/tree/main/Printables/PLA-PETG</a>
+        </section>
+
+        <section id="hardware-electronics">
+          <h2>Hardware &amp; electronics</h2>
+          <ul class="doc-list">
+            <li>[E01] Main board (Raspberry Pi CM4-based)</li>
+            <li>[E02] Head PCB (with LCDs, touch sensors and camera)</li>
+            <li>[E03] Arm PCBs (2 pcs)</li>
+            <li>[E04] Bumper PCB</li>
+            <li>[E05] I/O PCB</li>
+            <li>[E06] Li-ion Battery</li>
+            <li>[E07] Motor with 8-pin FPC cable (Left)</li>
+            <li>[E08] Motor with 8-pin FPC cable (Right)</li>
+            <li>[E09] Servo (Left)</li>
+            <li>[E10] Servo (Right)</li>
+            <li>[E11] Speakers (2pcs)</li>
+            <li>[E12] Fan</li>
+            <li>[C01] 45-pin FPC cable</li>
+            <li>[C02] 12‑pin FPC</li>
+            <li>[C03] 24-pin FPC</li>
+            <li>[S01] M1.6 x 3mm countersunk machine screws (4 pcs)</li>
+            <li>[S02] M1.7 x 3mm washer‑head self‑tapping screw</li>
+            <li>[S03] M1.7 x 7mm round‑head self‑tapping screw</li>
+            <li>[S04] M2 x 4mm countersunk self‑tapping screws (10 pcs)</li>
+            <li>[S05] M2 x 6 mm countersunk self‑tapping screws (2 pcs)</li>
+            <li>[S06] M2 x 18 mm countersunk self‑tapping screws (2 pcs)</li>
+            <li>[S07] M2 x 5mm round‑head self‑tapping screws (6 pcs)</li>
+            <li>[S08] M2 x 10mm round‑head self‑tapping screws (2 pcs)</li>
+            <li>[S09] M2.3 x 14 pan‑head self‑tapping screws (2 pcs)</li>
+            <li>[H01] M2.5 x 8mm hex spacer (2 pcs)</li>
+            <li>[H02] L8 x W8 mm round Stainless-Steel cap (2 pcs)</li>
+            <li>[H03] Stainless-Steel tweezers</li>
+            <li>[H04] Foam with self-adhesive tape</li>
+            <li>[H05] IR Filters (2 pcs)</li>
+            <li>[R01] Tracks (2 pcs)</li>
+            <li>[R02] Plastic bottom cover with power button</li>
+            <li>[R03] Plastic hand with magnet (Left)</li>
+            <li>[R04] Plastic hand with magnet (Right)</li>
+            <li>[R05] Charging Station with electronics</li>
+            <li>[R06] MicroSD card (ready to use)</li>
+          </ul>
+        </section>
+
+        <section id="print-settings">
+          <h2>Print settings</h2>
+          <p>These settings can differ based on your 3D printer. Note: We are not 3D‑printing experts; adjust as needed.
+            The following are baseline settings that work for us.</p>
+          <ul class="doc-list">
+            <li>Nozzle : 0.4 mm</li>
+            <li>Walls : 3 (≥1.2 mm)</li>
+            <li>Layer Height : 0.1 mm for better quality and accurate dimensions</li>
+            <li>Infill : 2030%</li>
+            <li>Temperature: Follow your filament manufacturer&#x27;s guidance.</li>
+            <li>Supports: Tree supports work well on most parts</li>
+            <li>Material: PLA works well for most body parts, but may deform over time on the bottom cover due to
+              processor heat. PETG performs better there. We strongly recommend using the original ABS+PC bottom cover
+              included with your robot. You can print the other body parts with your preferred filament.</li>
+          </ul>
+        </section>
+
+        <section id="folder-file-organization-github-repo">
+          <h2>Folder &amp; File Organization (GitHub repo)</h2>
+          <div class="folder-tree" role="tree">
+            <div class="folder-item lvl-0" role="treeitem"><span class="folder-label">Doly-DIY /</span></div>
+            <div class="folder-item lvl-1" role="treeitem"><span class="folder-label">Printables /</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">PLA-PETG/</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">TPU/</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">Resin/</span></div>
+            <div class="folder-item lvl-1" role="treeitem"><span class="folder-label">Images /</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">Printables/</span></div>
+            <div class="folder-item lvl-1" role="treeitem"><span class="folder-label">Electronics /</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">BOM/</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">Gerber/</span></div>
+            <div class="folder-item lvl-2" role="treeitem"><span class="folder-label">Schematic/</span></div>
+            <div class="folder-item lvl-1" role="treeitem"><span class="folder-label">SDK /</span></div>
+            <div class="folder-item lvl-1" role="treeitem"><span class="folder-label">Guide /</span></div>
+          </div>
+        </section>
+
+        <section id="step-by-step-assembly">
+          <h1>Step-by-step Assembly</h1>
+        </section>
+
+        <section id="step-0-prep-quality-checks" class="step">
+          <details open>
+            <summary>
+              <h2>Step 0 Prep &amp; quality checks</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Flush cutters, hobby knife, screwdriver set, tweezers, sandpaper between
+                  120240 grit, super glue.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Remove all parts from the package.</li>
+                <li>Verify all parts and electronics.</li>
+                <li>Unscrew the two screws from the bottom of the semi‑assembled unit. Remove the bottom cover, then the
+                  main PCB and battery. (Required for shipping regulations.)</li>
+                <li>Keep the bottom plastic cover with the power button [P02].</li>
+                <li><a href="https://www.youtube.com/watch?v=yAqsBN3BLHY" target="_blank"
+                    rel="noopener noreferrer">Watch the assembly video.</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-1-3dprint-body-parts" class="step">
+          <details open>
+            <summary>
+              <h2>Step 1 3D‑print body parts</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">3D printer, flush cutters, hobby knife, sandpaper between 120 and 240 grit.
+                </div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>3D‑print the parts listed below from the GitHub folder.</li>
+                <li>Verify all printed parts match quantities and dimensions.</li>
+                <li>
+                  <p>Sand/trim where necessary, especially at the pointed locations shown in the image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image002.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: Aligner, arm x 2, body, arm_cover x 2, bottom_cover , bumper_back , bumper_front , head,
+                servo_cover , side_cover_left , side_cover_right , Wheel_back x 2, Wheel_front x 2</p>
+              <div class="callout">
+                <div class="callout-title">❗ Safety:</div>
+                <div class="callout-body">Use proper protective equipment and take care when working with cutters and
+                  knives.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-2-gluing-body-parts" class="step">
+          <details open>
+            <summary>
+              <h2>Step 2 Gluing Body Parts</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Super glue.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Before gluing, ensure your print quality is good and parts fit together properly. Pay special
+                  attention
+                  that servos and motors fit well (see Steps 3 and 4). If you discover an issue after gluing, you may
+                  need
+                  to re‑print those parts. If you have snapped the servos in and need to remove one, use the linked
+                  image
+                  as a reference.</li>
+                <li>
+                  <p>Place the aligner part to the top as shown in the image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image004.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Check alignment and then apply super glue to the bottom of head part as shown in the following
+                    image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image006.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Then secure as shown in the following image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image008.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Let it dry for a few minutes.</li>
+                <li>
+                  <p>Check the alignment, and then apply super glue to the three contact locations of bumper_back part
+                    as shown in the image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image010.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Then secure as shown in the following image and hold for a short time.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image012.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Remove the aligner. After both glue cured you should have a full body as shown in the following
+                    image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image014.jpg" loading="lazy" alt="" /></figure>
+
+              <p>🧱 Parts: Aligner, body, head, bumper_back</p>
+              <div class="callout">
+                <div class="callout-title">❗ Safety:</div>
+                <div class="callout-body">Use proper equipment while working with super glue.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-3-servo-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 3 Servo installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">hobby knife.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">⚠️ Warning:</div>
+                <div class="callout-body">Remember, during assembly you are viewing it from the opposite side , there is
+                  no mistake in the visuals! Please place the indicated servo into the indicated housing.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <figure class="doc-figure">
+                <img src="assets/images/image016.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Pick servo [E09] (left‑side, labeled L) and insert it into the body housing as shown.</li>
+                <li>
+                  <p>Then push to snap it into place as shown.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image018.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>If the parts do not fit properly, check the housing print quality. If you see plastic residue or
+                  uneven surfaces, carefully trim with a hobby knife and try again.</li>
+                <li>
+                  <p>Repeat for the right‑side [E10] and make sure both servos snap into place as shown.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image020.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E09], [E10], full_body</p>
+              <div class="callout">
+                <div class="callout-title">❗ Safety:</div>
+                <div class="callout-body">Use proper protective equipment and take care when working with cutters and
+                  knives.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-4-motor-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 4 Motor Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">⚠️ Warning:</div>
+                <div class="callout-body">Remember, during assembly you are viewing it from the opposite side , there is
+                  no mistake in the visuals! Please place the indicated motor into the indicated housing.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>
+                  <p>Pick motor [E08] (right‑side, labeled R), place it into the housing as shown, and secure it using
+                    machine screws [S01].</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image022.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Repeat for the left‑side motor [E07] and secure with screws [S01].</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image024.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E07], [E08], [S01] x 4, full_body</p>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-5-installing-speakers" class="step">
+          <details open>
+            <summary>
+              <h2>Step 5 Installing Speakers</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Glue gun (may be required).</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>
+                  <p>Snap the speakers [E11] into the head housing as shown, ensuring the cable orientation matches the
+                    image.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image026.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>If the parts do not fit properly check the location print quality. If you see plastic residue or
+                  uneven surfaces, carefully trim with a hobby knife and try again.</li>
+                <li>
+                  <p>Due to limitations of 3D‑printed material, the speaker holders may not work or may break in some
+                    cases during installation. If needed, use a glue gun to apply a small amount of hot glue to the top
+                    and bottom to secure the speaker.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image028.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E11] x 2, full_body</p>
+              <div class="callout">
+                <div class="callout-title">❗ Safety:</div>
+                <div class="callout-body">If needed, be cautious while working with hot glue.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-6-battery-foam-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 6 Battery Foam Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Peel the protective film from the foam [H04]</li>
+                <li>
+                  <p>Align the foam tape [H04] to the bottom‑center of the back bumper and press firmly to adhere.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image030.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [H04], full_body</p>
+              <div class="callout">
+                <div class="callout-title">❗ Note:</div>
+                <div class="callout-body">Align to the bottom‑center of the curved surface; misalignment may cause
+                  issues when installing the battery.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-7-battery-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 7 Battery Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>
+                  <p>Push the battery [E06] into position as shown.</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image032.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E06], full_body</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Ensure the cable is positioned on the right‑side as shown in the image.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-8-io-pcb-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 8 I/O PCB Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Open the FPC connectors black latch, gently lift it up, and insert FPC cable [C03] with the metal
+                  contacts facing down; close the latch to secure it.</li>
+                <li>Bend cable [C03] upward near the connector to aid positioning.</li>
+                <li>
+                  <p>Place the PCB [E05] as shown in the image and secure with screws [S07] .</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image034.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [C03], [E05], [S07] x 4, full_body</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Avoid over‑tightening the screws.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-9-fan-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 9 Fan Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Place the servo cover part as shown in the image and secure the fan [E12] to the part
+                  with screws [S08] .</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image036.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Route the fan cable through the shown hole to the other side.</li>
+              </ul>
+              <p>🧱 Parts: [E12], [S08] x 2, servo_cover</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Verify fan orientation matches the previous image before continuing. Caution
+                  to avoid over‑tightening the screws.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-10-servo-cover-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 10 Servo Cover Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <figure class="doc-figure">
+                <img src="assets/images/image038.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Place the hex spacers [H01] into the housing as shown.</li>
+                <li>Route the servo cables through the hole to the other side.</li>
+                <li>Secure previously prepared servo cover part to its location with screws [S07] as shown in the image.
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image040.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [H01] x 2, [S07] x 2, servo_cover</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Avoid over‑tightening the screws.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-11-front-bumper-sub-assembly" class="step">
+          <details open>
+            <summary>
+              <h2>Step 11 Front Bumper Sub-assembly</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <figure class="doc-figure">
+                <img src="assets/images/image042.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Place the IR filters [H05] into their housings as shown.</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image044.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Secure the bumper PCB [E04] with screw [S02] as shown.</li>
+              </ul>
+              <p>🧱 Parts: [E04], [H05] x 2 , [S02], bumper_front</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Caution to avoid over‑tightening the screw.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-12-head-pcb-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 12 Head PCB Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver, tweezers.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>On the head PCB [E02], open the 45‑pin FPC connectors black latch, insert FPC cable [C01] with
+                  contacts facing down, and close the latch to secure it.</li>
+                <li>Repeat for the shown 12‑pin FPC connector and secure cable [C02].</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image046.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Move the part close to the body and plug in the speaker cables before positioning it.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image048.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>To place [E02], gently press on the touch contacts at the top side of the part. Insert the module
+                  starting from the top and working toward the bottom.</li>
+                <li>After a proper installation the module should look like the following image. FPC cables are not
+                  shown in the image but must be installed.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image050.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Now you have to secure head module with front bumper. But before that you have to link Head PCB
+                  [E02] and bumper PCB [E04] using the FPC cable [C02]. Open the connector located at bumper PCB [E04]
+                  and secure it as mentioned above. Using tweezers while inserting the FPC cable makes this easier.</li>
+                <li>Securing the head module with the front bumper requires attention and patience. Check all cables and
+                  camera positioned well before application. Place the bumper_front as shown in the following image. As
+                  shown, starting from the top and working to the bottom makes things easier.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image052.jpg" loading="lazy" alt="" /></figure>
+              <figure class="doc-figure">
+                <img src="assets/images/image054.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>After proper positioning the parts should be as shown in the following image.</li>
+                <li>Now secure the parts with screw [S04] from both sides as shown in the images.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image056.jpg" loading="lazy" alt="" /></figure>
+              <figure class="doc-figure"><img src="assets/images/image058.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E02], [E04], [C01], [C02], [S04] x 2, bumper_front</p>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-13-main-board-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 13 Main Board Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver, tweezers.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Before starting, check main PCB [E01] to ensure a Raspberry Pi is installed . If you purchased one
+                  from us it comes installed; otherwise install a compatible CM4 module before proceeding. See the FAQ
+                  at
+                  doly.ai for compatible models.</li>
+                <li>There are multiple connectors on both sides of PCB [E01]; connect each cable to its proper location.
+                  Please check following images for guidance.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image060.jpg" loading="lazy" alt="" /></figure>
+              <figure class="doc-figure"><img src="assets/images/image062.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Plug the battery [E06] socket to the battery connector located at main PCB [E01]</li>
+                <li>Plug the left servos [E09] socket to the proper connector located at main PCB [E01]</li>
+                <li>Plug the right servos [E10] socket to the proper connector located at main PCB [E01]</li>
+                <li>Plug the fans [E12] socket to the proper connector located at main PCB [E01]</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image064.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Place the main PCB [E01] as shown. Dont forget to route [C03] to the other side. </li>
+                <li>Secure the motors [E07] , [E08] FPC cables to the proper connector located at main PCB [E01]</li>
+                <li>Secure the head module FPC cable [C01] to the proper connector located at main PCB [E01]</li>
+                <li>Secure I/O FPC cable [C03] to the proper connector located at main PCB [E01]</li>
+                <li>Secure arm FPC cable from left servo to the proper connector located at main PCB [E01]</li>
+                <li>Secure arm FPC cable from right servo to the proper connector located at main PCB [E01]</li>
+                <li>After completing the wiring, close the bottom cover and secure all parts as shown. We strongly
+                  recommend using the injection‑molded bottom cover with the power button; CPU heat can make 3D‑printed
+                  bottom covers warp.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image066.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E01], [E06], [E07], [E08], [E09], [E10], [E12], [C01], [C03], bottom_cover</p>
+              <div class="callout">
+                <div class="callout-title">📝 Notes:</div>
+                <div class="callout-body">Wire everything correctly; otherwise Doly will not work. Maintain a minimum
+                  bend radius on ribbon/FPC cables; do not crease.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">❗ Safety:</div>
+                <div class="callout-body">If anything gets hot, immediately disconnect the battery connector and recheck
+                  polarities.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-14-wheels-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 14 Wheels Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Hobby Knife, sandpaper, screwdriver, tweezers.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Align and push the front wheels onto the D‑shafts of motors [E07], [E08] as shown. </li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image068.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Push the metal cap [H02] onto the rear 3D‑printed shafts on both sides.</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image070.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>If the parts do not fit properly, check the print quality at that location. If you see any plastic
+                  residue or an uneven surface, try to fix it with a hobby knife or sandpaper and try again.</li>
+                <li>Align and place the rear wheels onto the metal cap as shown. The rear wheels should
+                  rotate freely.</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image072.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Before securing the right‑side cover, ensure the FPC cable is routed through the hole to the other
+                  side and is not twisted.</li>
+                <li>Secure the right‑side cover with screws [S04] as shown in the images.</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image074.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Secure the left‑side cover with screws [S04] as in the previous step. Again, ensure the FPC cable is
+                  routed through the hole and is not twisted.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image076.jpg" loading="lazy" alt="" /></figure>
+              <figure class="doc-figure"><img src="assets/images/image078.jpg" loading="lazy" alt="" /></figure>
+              <p>🧱 Parts: [E07], [E08], [H02] x 2, [S04] x 6, side_cover_right , side_cover_left</p>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-15-arm-installation" class="step">
+          <details open>
+            <summary>
+              <h2>Step 15 Arm Installation</h2>
+            </summary>
+            <div class="step-body">
+              <div class="callout">
+                <div class="callout-title">🧰 Tools:</div>
+                <div class="callout-body">Screwdriver, super glue, tweezers.</div>
+              </div>
+              <div class="callout">
+                <div class="callout-title">✅ Do this:</div>
+                <div class="callout-body"></div>
+              </div>
+              <ul class="doc-list">
+                <li>Connect FPC cable coming from the servo to the arm PCB [E03] connector as shown in the
+                  image.</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image080.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Remove the temporary screw located at the servo shaft. This screw will not be used anymore; it only
+                  keeps the calibrated shaft in the correct position. Do NOT remove the servo shaftonly the screw. If
+                  you
+                  remove the shaft accidentally, do not follow the next steps. Complete these steps after the servo
+                  shaft
+                  is re‑positioned. See Troubleshooting for details.</li>
+                <li>Align and connect arm part with servo shaft and secure with screw [S09] .</li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image082.jpg" loading="lazy" alt="" />
+              </figure>
+              <ul class="doc-list">
+                <li>Now place the PCB [E03] to the arm module. This part of the assembly requires extra attention and
+                  patience. Do not pull the FPC cables; they can pop out of the connectors. Be patient and careful at
+                  this stage.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image084.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Close the arm with the cover part as shown in the following image and secure both parts with screw
+                  [S04] as shown in the image.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image086.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>Snap hand [R03] onto the arm with light pressure as shown. Before that, ensure all 3D‑print support
+                  material is removed. If fit is poor due to print quality, you may use a small amount of super glue to
+                  secure the parts.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image088.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>7. Repeat the same procedure for the other part to complete as shown in the following image.
+                </li>
+              </ul>
+              <figure class="doc-figure">
+                <img src="assets/images/image090.jpg" loading="lazy" alt="" />
+              </figure>
+              <p>🧱 Parts: , [E03], [R03], [R04] [S04]x 2,[ S09] x 2, arm, arm_cover</p>
+              <div class="callout">
+                <div class="callout-title">📝 Note:</div>
+                <div class="callout-body">Avoid over‑tightening the screws and avoid pulling on the FPC cables.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="step-16-attaching-tracks-and-final-test" class="step">
+          <details open>
+            <summary>
+              <h2>Step 16 Attaching tracks and Final test</h2>
+            </summary>
+            <div class="step-body">
+              <ul class="doc-list">
+                <li>
+                  <p>Attach the tracks [R01] .</p>
+                </li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image092.jpg" loading="lazy" alt="" /></figure>
+              <ul class="doc-list">
+                <li>
+                  <p>Perform a visual inspection before testing.</p>
+                </li>
+                <li>Run an arm movement test and let them rotate from end to end. If the FPC cables are connected
+                  correctly, movement should be smooth throughout. If the arms do not move smoothly, return to the
+                  relevant steps and check that the procedure was completed correctly.</li>
+                <li>Start the robot with the power button located on the bottom.</li>
+                <li>To shut down after startup, press the button twice within one second to start the shutdown process.
+                </li>
+                <li>To force a shutdown, press and hold the power button for more than 8 seconds. Important: Forcing a
+                  shutdown may damage the software; avoid doing this frequently.</li>
+              </ul>
+              <figure class="doc-figure"><img src="assets/images/image094.jpg" loading="lazy" alt="" /></figure>
+            </div>
+          </details>
+        </section>
+
+
+        <section id="troubleshooting">
+          <h2>Troubleshooting</h2>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Symptom</th>
+                  <th>Likely cause</th>
+                  <th>Fix</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>LCD black</td>
+                  <td>FPC not seated / wrong orientation</td>
+                  <td>Reseat, check latch; verify backlight power</td>
+                </tr>
+                <tr>
+                  <td>Wont power on</td>
+                  <td>Battery wiring issues / empty battery</td>
+                  <td>Charge battery; check battery connector</td>
+                </tr>
+                <tr>
+                  <td>Continuous blue light at power button</td>
+                  <td>Missing SD card / damaged SD card</td>
+                  <td>Reseat the SD card; replace it and reinstall if needed</td>
+                </tr>
+                <tr>
+                  <td>Removed servo shaft</td>
+                  <td>Accidentally removed</td>
+                  <td>Complete the assembly without arms, start Doly, say Hey Doly, hands up, then after the movement
+                    sound say Hey Doly, hands down, and shut down the robot. After that, plug the servo shaft in
+                    carefully, aligning the flat side toward the back of the robot. Then re‑follow Step 15.</td>
+                </tr>
+                <tr>
+                  <td>Overheating</td>
+                  <td>Short circuit / wrong polarity</td>
+                  <td>Power down and inspect the harness</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="licensing-credits">
+          <h2>Licensing &amp; Credits</h2>
+          <ul class="doc-list">
+            <li>All files and documentation are licensed under CC BY-NC-SA 4.0 except the software.</li>
+            <li>You may not copy, distribute, sell, sublicense, or modify the software.</li>
+          </ul>
+          <p>© 2026 Limitbit. All rights reserved. Doly and associated names, logos, and assets are owned by Limitbit .
+          </p>
+        </section>
+
+        <div class="footer">
+          <div>Made with 💖 in Canada 🇨🇦</div>
+          <div>© Doly — Maker Edition Documentation</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const tocLinks = Array.from(document.querySelectorAll('.toc a[href^="#"]'));
+
+      const HEADER_OFFSET = 88; // sticky topbar + spacing
+      const sections = tocLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+      const setActive = () => {
+        const y = window.scrollY + HEADER_OFFSET + 8;
+        let current = null;
+        for (const s of sections) {
+          if (s.offsetTop <= y) current = s;
+        }
+        tocLinks.forEach(a => a.classList.remove('active'));
+        if (current) {
+          const link = document.querySelector('.toc a[href="#' + current.id + '"]');
+          if (link) link.classList.add('active');
+        }
+      };
+      setActive();
+      window.addEventListener('scroll', setActive, { passive: true });
+
+      const search = document.getElementById('tocSearch');
+      if (search) {
+        search.addEventListener('input', () => {
+          const q = search.value.trim().toLowerCase();
+          const nodes = Array.from(document.querySelectorAll('.sidebar li'));
+          nodes.forEach(li => {
+            const a = li.querySelector(':scope > a');
+            if (!a) return;
+            const t = a.textContent.trim().toLowerCase();
+            const match = !q || t.includes(q);
+            const childMatches = Array.from(li.querySelectorAll('ul a')).some(x => x.textContent.toLowerCase().includes(q));
+            li.style.display = (match || childMatches) ? '' : 'none';
+          });
+        });
+      }
+
+      function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        // Ensure <details> parents are open so layout is stable
+        const details = el.querySelector('details');
+        if (details) details.open = true;
+
+        // First jump to element, then apply offset
+        el.scrollIntoView({ behavior: 'auto', block: 'start' });
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+        window.scrollTo({ top, behavior: 'auto' });
+      }
+
+      // Intercept in-page anchors to apply offset (TOC + buttons + any hash links)
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href');
+          if (!href || href === '#' || href.length < 2) return;
+          const id = href.slice(1);
+          const target = document.getElementById(id);
+          if (!target) return;
+          e.preventDefault();
+          // update URL hash without jump
+          history.pushState(null, '', href);
+          scrollToId(id);
+        });
+      });
+
+      // If loaded with a hash, apply offset after layout
+      if (location.hash && location.hash.length > 1) {
+        const id = location.hash.slice(1);
+        setTimeout(() => scrollToId(id), 50);
+      }
+
+      document.documentElement.style.scrollBehavior = 'auto';
+
+      // ===== Mobile sidebar drawer =====
+      const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+      const overlay = document.getElementById('sidebarOverlay');
+      const btnOpen = document.getElementById('sidebarToggle');
+      const btnClose = document.getElementById('sidebarClose');
+
+      const openSidebar = () => {
+        document.body.classList.add('nav-open');
+        if (overlay) { overlay.hidden = false; }
+        if (btnOpen) { btnOpen.setAttribute('aria-expanded', 'true'); }
+      };
+      const closeSidebar = () => {
+        document.body.classList.remove('nav-open');
+        if (overlay) { overlay.hidden = true; }
+        if (btnOpen) { btnOpen.setAttribute('aria-expanded', 'false'); }
+      };
+
+      if (btnOpen) {
+        btnOpen.addEventListener('click', () => {
+          if (!isMobile()) return;
+          document.body.classList.contains('nav-open') ? closeSidebar() : openSidebar();
+        });
+      }
+      if (btnClose) { btnClose.addEventListener('click', closeSidebar); }
+      if (overlay) { overlay.addEventListener('click', () => { if (isMobile()) closeSidebar(); }); }
+
+      document.querySelectorAll('.toc a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.matchMedia('(max-width: 980px)').matches) closeSidebar();
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMobile()) closeSidebar();
+      });
+      // ===== Theme toggle (light/dark) =====
+      const themeBtn = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('doly-docs-theme');
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+
+      const applyTheme = (mode) => {
+        document.body.classList.remove('theme-light', 'theme-dark');
+        document.body.classList.add(mode === 'light' ? 'theme-light' : 'theme-dark');
+        localStorage.setItem('doly-docs-theme', mode);
+      };
+
+      if (stored === 'light' || stored === 'dark') applyTheme(stored);
+      else applyTheme(prefersLight ? 'light' : 'dark');
+
+      if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+          const isLight = document.body.classList.contains('theme-light');
+          applyTheme(isLight ? 'dark' : 'light');
+        });
+      }
+
+    })();
+  </script>
+</body>
+
+</html>
