@@ -114,7 +114,7 @@ a:hover{text-decoration:underline}
   padding-left: 10px;
   border-left: 1px solid rgba(255,255,255,0.10);
 }
-.toc-sub a{font-size: 13px; padding: 6px 10px;}
+.toc-sub a{font-size: 14px; padding: 6px 10px;}
 
 .hero{
   border: 1px solid var(--border);
@@ -148,8 +148,8 @@ a:hover{text-decoration:underline}
 .hero-media{
   flex: 0 0 280px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.18);
+  /*border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.18);*/
   display:flex; align-items:center; justify-content:center;
   padding: 10px;
 }
@@ -737,4 +737,33 @@ body.theme-light .doc-figure{
     border-color: rgba(10,12,18,0.10) !important;
     backdrop-filter: blur(10px);
   }
+}
+
+/* ===== Mobile font size boost ===== */
+@media (max-width: 980px){
+
+  /* Base text */
+  body{
+    font-size: 17px;      /* was ~15–16 */
+    line-height: 1.65;
+  }
+
+  /* Main content text */
+  .main{
+    font-size: 17px;
+  }
+
+  /* Headings */
+  .main h2{ font-size: 22px; }
+  .main h3{ font-size: 18px; }
+
+  /* TOC / sidebar */
+  .toc a{ font-size: 15px; }
+
+  /* Lists */
+  .doc-list li{ font-size: 17px; }
+  .doc-list li p{ font-size: 17px; }
+
+  /* Step titles (the collapsible step headers) */
+  .step summary h2{ font-size: 18px; }
 }
