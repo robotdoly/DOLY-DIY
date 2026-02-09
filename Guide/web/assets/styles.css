@@ -442,7 +442,7 @@ body.theme-light .icon-x::after{
 /* Mobile: show them */
 @media (max-width: 980px){
   #sidebarToggle { display: inline-flex; }
-  .overlay { display: block; }
+  .overlay { display: none; }
   .sidebar-head { display: flex; }
 }
 
