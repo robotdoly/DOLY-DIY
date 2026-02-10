@@ -744,26 +744,26 @@ body.theme-light .doc-figure{
 
   /* Base text */
   body{
-    font-size: 17px;      /* was ~15–16 */
-    line-height: 1.65;
+    font-size: 18px;      /* was ~15–16 */
+    line-height: 1.7;
   }
 
   /* Main content text */
   .main{
-    font-size: 17px;
+    font-size: 18px;
   }
 
   /* Headings */
-  .main h2{ font-size: 22px; }
-  .main h3{ font-size: 18px; }
+  .main h2{ font-size: 24px; }
+  .main h3{ font-size: 20px; }
 
   /* TOC / sidebar */
-  .toc a{ font-size: 15px; }
+  .toc a{ font-size: 17px; }
 
   /* Lists */
-  .doc-list li{ font-size: 17px; }
-  .doc-list li p{ font-size: 17px; }
+  .doc-list li{ font-size: 19px; }
+  .doc-list li p{ font-size: 19px; }
 
   /* Step titles (the collapsible step headers) */
-  .step summary h2{ font-size: 18px; }
+  .step summary h2{ font-size: 20px; }
 }
