@@ -1,0 +1,2908 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python SDK documentation for Doly robot (Raspberry Pi OS Kernel 6.6.51, Python 3.11)">
+      
+      
+      
+        <link rel="canonical" href="https://robotdoly.github.io/DOLY-DIY/python/api/drive_control/">
+      
+      
+        <link rel="prev" href="../color/">
+      
+      
+        <link rel="next" href="../edge_control/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/doly_icon_32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>DriveControl - Doly Python SDK</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#drivecontrol-api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Doly Python SDK" class="md-header__button md-logo" aria-label="Doly Python SDK" data-md-component="logo">
+      
+  <img src="../../assets/doly_48h_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Doly Python SDK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DriveControl
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/install/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../modules/arm_control/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Python SDK
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/faq/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Doly Python SDK" class="md-nav__button md-logo" aria-label="Doly Python SDK" data-md-component="logo">
+      
+  <img src="../../assets/doly_48h_white.png" alt="logo">
+
+    </a>
+    Doly Python SDK
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python SDK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python SDK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/arm_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArmControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/camera/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/drive_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DriveControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/edge_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EdgeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/eye_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EyeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/fan_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FanControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/helper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/imu_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ImuControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/io_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/lcd_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LcdControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/led_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LedControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/servo_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ServoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/sound_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoundControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/tof_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TofControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/touch_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TouchControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/tts_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TtsControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arm_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArmControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../camera/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../color/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Color
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DriveControl
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DriveControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#driveerrortype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveErrorType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivemotorside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveMotorSide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveType
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#driveeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_listenerlistener_obj-driveeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_listener(listener_obj: DriveEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_listenerlistener_obj-driveeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_listener(listener_obj: DriveEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initimu_off_gx-int-0-imu_off_gy-int-0-imu_off_gz-int-0-imu_off_ax-int-0-imu_off_ay-int-0-imu_off_az-int-0-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init(imu_off_gx: int = 0, imu_off_gy: int = 0, imu_off_gz: int = 0, imu_off_ax: int = 0, imu_off_ay: int = 0, imu_off_az: int = 0) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disposedispose_imu-bool-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dispose(dispose_IMU: bool) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_active-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_active() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        abort() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free_drivespeed-int-is_left-bool-to_forward-bool-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        free_drive(speed: int, is_left: bool, to_forward: bool) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_xyid-int-x-int-y-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_xy(id: int, x: int, y: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_distanceid-int-mm-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_distance(id: int, mm: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_rotateid-int-rotate_angle-float-from_center-bool-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_rotate(id: int, rotate_angle: float, from_center: bool, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_position-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_position() -&gt; Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_position-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_position() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_state-drivestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_state() -&gt; DriveState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_rpmis_left-bool-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_rpm(is_left: bool) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_completecb_obj-voidoncompleteuint16_t-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_complete(cb_obj: void(onComplete)(uint16_t) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_errorcb_obj-voidonerroruint16_t-id-drivemotorside-side-driveerrortype-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_error(cb_obj: void(onError)(uint16_t id, DriveMotorSide side, DriveErrorType) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_state_changecb_obj-voidonchangedrivetype-drive_type-drivestate-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_state_change(cb_obj: void(onChange)(DriveType drive_type, DriveState) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_listeners-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clear_listeners() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EdgeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eye_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EyeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fan_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FanControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../helper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../imu_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ImuControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lcd_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LcdControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../led_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LedControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servo_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ServoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sound_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoundControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tof_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TofControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../touch_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TouchControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tts_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TtsControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vcontent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VContent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#driveerrortype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveErrorType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivemotorside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveMotorSide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveType
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#driveeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DriveEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_listenerlistener_obj-driveeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_listener(listener_obj: DriveEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_listenerlistener_obj-driveeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_listener(listener_obj: DriveEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initimu_off_gx-int-0-imu_off_gy-int-0-imu_off_gz-int-0-imu_off_ax-int-0-imu_off_ay-int-0-imu_off_az-int-0-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init(imu_off_gx: int = 0, imu_off_gy: int = 0, imu_off_gz: int = 0, imu_off_ax: int = 0, imu_off_ay: int = 0, imu_off_az: int = 0) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disposedispose_imu-bool-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dispose(dispose_IMU: bool) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_active-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_active() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        abort() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free_drivespeed-int-is_left-bool-to_forward-bool-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        free_drive(speed: int, is_left: bool, to_forward: bool) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_xyid-int-x-int-y-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_xy(id: int, x: int, y: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_distanceid-int-mm-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_distance(id: int, mm: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go_rotateid-int-rotate_angle-float-from_center-bool-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        go_rotate(id: int, rotate_angle: float, from_center: bool, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_position-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_position() -&gt; Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_position-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_position() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_state-drivestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_state() -&gt; DriveState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_rpmis_left-bool-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_rpm(is_left: bool) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_completecb_obj-voidoncompleteuint16_t-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_complete(cb_obj: void(onComplete)(uint16_t) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_errorcb_obj-voidonerroruint16_t-id-drivemotorside-side-driveerrortype-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_error(cb_obj: void(onError)(uint16_t id, DriveMotorSide side, DriveErrorType) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_state_changecb_obj-voidonchangedrivetype-drive_type-drivestate-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_state_change(cb_obj: void(onChange)(DriveType drive_type, DriveState) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_listeners-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clear_listeners() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="drivecontrol-api-reference">DriveControl API reference<a class="headerlink" href="#drivecontrol-api-reference" title="Permanent link">&para;</a></h1>
+<p>Import:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">doly_drive</span>
+</code></pre></div>
+<p>This page documents the public API exposed by the <code>doly_drive</code> Python module.</p>
+<h2 id="enums">Enums<a class="headerlink" href="#enums" title="Permanent link">&para;</a></h2>
+<h3 id="driveerrortype"><code>DriveErrorType</code><a class="headerlink" href="#driveerrortype" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Abort</code></li>
+<li><code>Force</code></li>
+<li><code>Rotate</code></li>
+<li><code>Motor</code></li>
+</ul>
+<h3 id="drivemotorside"><code>DriveMotorSide</code><a class="headerlink" href="#drivemotorside" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Both</code></li>
+<li><code>Left</code></li>
+<li><code>Right</code></li>
+</ul>
+<h3 id="drivestate"><code>DriveState</code><a class="headerlink" href="#drivestate" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Running</code></li>
+<li><code>Completed</code></li>
+<li><code>Error</code></li>
+</ul>
+<h3 id="drivetype"><code>DriveType</code><a class="headerlink" href="#drivetype" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Freestyle</code></li>
+<li><code>XY</code></li>
+<li><code>Distance</code></li>
+<li><code>Rotate</code></li>
+</ul>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<h3 id="driveeventlistener"><code>DriveEventListener</code><a class="headerlink" href="#driveeventlistener" title="Permanent link">&para;</a></h3>
+<p>Listener interface. Implement this class and register it with <code>add_listener()</code> to receive events.</p>
+<p><strong>Methods</strong></p>
+<ul>
+<li><code>on_drive_complete(id: int) -&gt; None</code></li>
+<li>Called when a drive command completes successfully.</li>
+<li><code>on_drive_error(id: int, side: DriveMotorSide, type: DriveErrorType) -&gt; None</code></li>
+<li>Called when a drive operation reports an error.</li>
+<li><code>on_drive_state_change(drive_type: DriveType, state: DriveState) -&gt; None</code></li>
+<li>Called when the state of a drive operation changes.</li>
+</ul>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<h3 id="add_listenerlistener_obj-driveeventlistener-none"><code>add_listener(listener_obj: DriveEventListener) -&gt; None</code><a class="headerlink" href="#add_listenerlistener_obj-driveeventlistener-none" title="Permanent link">&para;</a></h3>
+<p>Register a listener object to receive drive events.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>listener_obj</strong>: Pointer to a listener instance (must not be null).</li>
+</ul>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Callbacks are typically invoked from an internal worker/event thread.</li>
+</ul>
+<h3 id="remove_listenerlistener_obj-driveeventlistener-none"><code>remove_listener(listener_obj: DriveEventListener) -&gt; None</code><a class="headerlink" href="#remove_listenerlistener_obj-driveeventlistener-none" title="Permanent link">&para;</a></h3>
+<p>Unregister a listener object.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>listener_obj</strong>: Pointer previously passed to AddListener().</li>
+</ul>
+<h3 id="initimu_off_gx-int-0-imu_off_gy-int-0-imu_off_gz-int-0-imu_off_ax-int-0-imu_off_ay-int-0-imu_off_az-int-0-int"><code>init(imu_off_gx: int = 0, imu_off_gy: int = 0, imu_off_gz: int = 0, imu_off_ax: int = 0, imu_off_ay: int = 0, imu_off_az: int = 0) -&gt; int</code><a class="headerlink" href="#initimu_off_gx-int-0-imu_off_gy-int-0-imu_off_gz-int-0-imu_off_ax-int-0-imu_off_ay-int-0-imu_off_az-int-0-int" title="Permanent link">&para;</a></h3>
+<p>Initialize the drive control module.</p>
+<p>IMU offsets are calibration values stored by the platform.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>imu_off_gx</strong>: IMU gyro X offset (calibration). (default: <code>0</code>)</li>
+<li><strong>imu_off_gy</strong>: IMU gyro Y offset (calibration). (default: <code>0</code>)</li>
+<li><strong>imu_off_gz</strong>: IMU gyro Z offset (calibration). (default: <code>0</code>)</li>
+<li><strong>imu_off_ax</strong>: IMU accel X offset (calibration). (default: <code>0</code>)</li>
+<li><strong>imu_off_ay</strong>: IMU accel Y offset (calibration). (default: <code>0</code>)</li>
+<li><strong>imu_off_az</strong>: IMU accel Z offset (calibration). (default: <code>0</code>)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Status code: - 0 : success - 1 : already active / already initialized - -1 : motor setup failed - -2 : IMU init failed
+</code></pre></div>
+<h3 id="disposedispose_imu-bool-int"><code>dispose(dispose_IMU: bool) -&gt; int</code><a class="headerlink" href="#disposedispose_imu-bool-int" title="Permanent link">&para;</a></h3>
+<p>Dispose/shutdown drive module and release resources. Removes the call back functions.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>dispose_IMU</strong>: If <code>True</code>, shuts down the IMU module as well.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Status code: - 0 : success - 1 : not active / not initialized
+</code></pre></div>
+<h3 id="is_active-bool"><code>is_active() -&gt; bool</code><a class="headerlink" href="#is_active-bool" title="Permanent link">&para;</a></h3>
+<p>Check whether the module is initialized and active.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if active, false otherwise.
+</code></pre></div>
+<h3 id="abort-none"><code>abort() -&gt; None</code><a class="headerlink" href="#abort-none" title="Permanent link">&para;</a></h3>
+<p>Abort current drive operation immediately.</p>
+<p>Typically used as an emergency stop for autonomous movement. Completion/error events may still be emitted depending on implementation.</p>
+<h3 id="free_drivespeed-int-is_left-bool-to_forward-bool-bool"><code>free_drive(speed: int, is_left: bool, to_forward: bool) -&gt; bool</code><a class="headerlink" href="#free_drivespeed-int-is_left-bool-to_forward-bool-bool" title="Permanent link">&para;</a></h3>
+<p>Manual motor drive (low-level).</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>speed</strong>: Motor speed percent (0..100).</li>
+<li><strong>is_left</strong>: <code>True</code> = left motor, <code>False</code> = right motor.</li>
+<li><strong>to_forward</strong>: <code>True</code> = forward, <code>False</code> = backward.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if accepted.
+</code></pre></div>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Non-blocking; handled in another thread.</li>
+</ul>
+<h3 id="go_xyid-int-x-int-y-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool"><code>go_xy(id: int, x: int, y: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool</code><a class="headerlink" href="#go_xyid-int-x-int-y-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" title="Permanent link">&para;</a></h3>
+<p>Autonomous drive to an (x, y) target (high-level).</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id</strong>: User command id (returned in events/callbacks).</li>
+<li><strong>x</strong>: Target X in your Position coordinate system (units are application-defined).</li>
+<li><strong>y</strong>: Target Y in your Position coordinate system (same unit as x).</li>
+<li><strong>speed</strong>: Requested speed percent (0..100).</li>
+<li><strong>to_forward</strong>: Direction preference for the move.</li>
+<li><strong>with_brake</strong>: If <code>True</code>, brake at the end of motion. (default: <code>False</code>)</li>
+<li><strong>acceleration_interval</strong>: Acceleration step interval (0 = disabled). (default: <code>0</code>)</li>
+<li><strong>control_speed</strong>: Enable speed control dynamically. (default: <code>False</code>)</li>
+<li><strong>control_force</strong>: Enable force/traction control (default <code>True</code>). (default: <code>True</code>)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if command accepted.
+</code></pre></div>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Non-blocking; handled in another thread.</li>
+</ul>
+<h3 id="go_distanceid-int-mm-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool"><code>go_distance(id: int, mm: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool</code><a class="headerlink" href="#go_distanceid-int-mm-int-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" title="Permanent link">&para;</a></h3>
+<p>Autonomous drive for a fixed distance (high-level).</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id</strong>: User command id (returned in events/callbacks).</li>
+<li><strong>mm</strong>: Distance value (named "mm" in API; ensure your implementation uses millimeters).</li>
+<li><strong>speed</strong>: Requested speed percent (0..100).</li>
+<li><strong>to_forward</strong>: <code>True</code> forward / <code>False</code> backward.</li>
+<li><strong>with_brake</strong>: Brake at the end. (default: <code>False</code>)</li>
+<li><strong>acceleration_interval</strong>: Acceleration step interval (0 = disabled). (default: <code>0</code>)</li>
+<li><strong>control_speed</strong>: Enable speed control dynamically. (default: <code>False</code>)</li>
+<li><strong>control_force</strong>: Enable force/traction control. (default: <code>True</code>)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if command accepted.
+</code></pre></div>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Non-blocking; handled in another thread.</li>
+</ul>
+<h3 id="go_rotateid-int-rotate_angle-float-from_center-bool-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool"><code>go_rotate(id: int, rotate_angle: float, from_center: bool, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -&gt; bool</code><a class="headerlink" href="#go_rotateid-int-rotate_angle-float-from_center-bool-speed-int-to_forward-bool-with_brake-bool-false-acceleration_interval-int-0-control_speed-bool-false-control_force-bool-true-bool" title="Permanent link">&para;</a></h3>
+<p>Autonomous rotate (high-level).</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id</strong>: User command id (returned in events/callbacks).</li>
+<li><strong>rotate_angle</strong>: Rotation angle in degrees (sign convention is implementation-defined).</li>
+<li><strong>from_center</strong>: <code>True</code> = rotate around center, <code>False</code> = rotate around a wheel/edge (implementation-defined).</li>
+<li><strong>speed</strong>: Requested speed percent (0..100).</li>
+<li><strong>to_forward</strong>: Direction preference (implementation-defined for rotation).</li>
+<li><strong>with_brake</strong>: Brake at the end. (default: <code>False</code>)</li>
+<li><strong>acceleration_interval</strong>: Acceleration step interval (0 = disabled). (default: <code>0</code>)</li>
+<li><strong>control_speed</strong>: Enable speed control dynamically. (default: <code>False</code>)</li>
+<li><strong>control_force</strong>: Enable force/traction control. (default: <code>True</code>)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if command accepted.
+</code></pre></div>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Non-blocking; handled in another thread.</li>
+</ul>
+<h3 id="get_position-position"><code>get_position() -&gt; Position</code><a class="headerlink" href="#get_position-position" title="Permanent link">&para;</a></h3>
+<p>Get current estimated position.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Position</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Current Position estimate (see Helper.h for definition/units).
+</code></pre></div>
+<h3 id="reset_position-none"><code>reset_position() -&gt; None</code><a class="headerlink" href="#reset_position-none" title="Permanent link">&para;</a></h3>
+<p>Reset current position estimate to (0, 0, 0) (implementation-defined fields).</p>
+<h3 id="get_state-drivestate"><code>get_state() -&gt; DriveState</code><a class="headerlink" href="#get_state-drivestate" title="Permanent link">&para;</a></h3>
+<p>Get current drive state.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>DriveState</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Current DriveState.
+</code></pre></div>
+<h3 id="get_rpmis_left-bool-float"><code>get_rpm(is_left: bool) -&gt; float</code><a class="headerlink" href="#get_rpmis_left-bool-float" title="Permanent link">&para;</a></h3>
+<p>Get current motor RPM.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>is_left</strong>: <code>True</code> = left motor, <code>False</code> = right motor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>float</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>RPM value (units: revolutions per minute).
+</code></pre></div>
+<h3 id="on_completecb_obj-voidoncompleteuint16_t-none"><code>on_complete(cb_obj: void(onComplete)(uint16_t) -&gt; None</code><a class="headerlink" href="#on_completecb_obj-voidoncompleteuint16_t-none" title="Permanent link">&para;</a></h3>
+<p>Remove a previously registered “command complete” callback.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>cb_obj</strong>: Same function pointer passed to AddListenerOnComplete().</li>
+</ul>
+<h3 id="on_errorcb_obj-voidonerroruint16_t-id-drivemotorside-side-driveerrortype-none"><code>on_error(cb_obj: void(onError)(uint16_t id, DriveMotorSide side, DriveErrorType) -&gt; None</code><a class="headerlink" href="#on_errorcb_obj-voidonerroruint16_t-id-drivemotorside-side-driveerrortype-none" title="Permanent link">&para;</a></h3>
+<p>Remove a previously registered error callback.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>cb_obj</strong>: Same function pointer passed to AddListenerOnError().</li>
+</ul>
+<h3 id="on_state_changecb_obj-voidonchangedrivetype-drive_type-drivestate-none"><code>on_state_change(cb_obj: void(onChange)(DriveType drive_type, DriveState) -&gt; None</code><a class="headerlink" href="#on_state_changecb_obj-voidonchangedrivetype-drive_type-drivestate-none" title="Permanent link">&para;</a></h3>
+<p>Remove a previously registered state-change callback.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>cb_obj</strong>: Same function pointer passed to AddListenerOnStateChange().</li>
+</ul>
+<h3 id="clear_listeners-none"><code>clear_listeners() -&gt; None</code><a class="headerlink" href="#clear_listeners-none" title="Permanent link">&para;</a></h3>
+<p>Unregister all static callbacks and clear stored Python functions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

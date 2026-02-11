@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['servoabort_0',['ServoAbort',['../namespace_servo_event.html#a9100c1704e8514d7aa3a695caa4ef4bb',1,'ServoEvent']]],
+  ['servocomplete_1',['ServoComplete',['../namespace_servo_event.html#a5e9fd7a1e4a7545d9246ab1875d25d24',1,'ServoEvent']]],
+  ['servoerror_2',['ServoError',['../namespace_servo_event.html#a920c9a248f632bbf0fa05b1432fe73cf',1,'ServoEvent']]],
+  ['setangle_3',['setAngle',['../namespace_arm_control.html#a2f06908bf721f00224ed3a23786a5cb3',1,'ArmControl']]],
+  ['setanimation_4',['setAnimation',['../namespace_eye_control.html#a09729cdf6884ea7b70c5468da2cca67e',1,'EyeControl']]],
+  ['setawbenable_5',['SetAwbEnable',['../class_pi_camera.html#a82e1d3a6a5b226d229d1de9750250e42',1,'PiCamera']]],
+  ['setbackground_6',['setBackground',['../namespace_eye_control.html#abbf824fe85c5b6da130aa7b1572ec4e7',1,'EyeControl::setBackground(Color color)'],['../namespace_eye_control.html#afcd791ea7c1410e2499c128803f62837',1,'EyeControl::setBackground(VContent *bg_image, EyeSide side)']]],
+  ['setbrightness_7',['setBrightness',['../namespace_lcd_control.html#ae5f3c659fd34a4336bdb8da7014d4b1a',1,'LcdControl']]],
+  ['setexposure_8',['SetExposure',['../class_pi_camera.html#a9fef60de591eee3f95640028bd377075',1,'PiCamera']]],
+  ['seteyes_9',['setEyes',['../namespace_eye_control.html#aa94086315a571ed1f10d560062e7b512',1,'EyeControl']]],
+  ['setfanspeed_10',['setFanSpeed',['../namespace_fan_control.html#a091a5b2a5795c5e93b343bee276e5a74',1,'FanControl']]],
+  ['setiris_11',['setIris',['../namespace_eye_control.html#a4d5b7e431bb65ce0ca4495884b39aa9c',1,'EyeControl::setIris(IrisShape shape, ColorCode color, EyeSide side)'],['../namespace_eye_control.html#a79ff86b1d5f98a9f2d5caab848172391',1,'EyeControl::setIris(VContent *eye_image, EyeSide side)']]],
+  ['setlid_12',['setLid',['../namespace_eye_control.html#a340b03b371a3b0f794893607310b56a8',1,'EyeControl']]],
+  ['setposition_13',['setPosition',['../namespace_eye_control.html#adf1be77706b2701c92b6b432818a9efe',1,'EyeControl']]],
+  ['setservo_14',['setServo',['../namespace_servo_control.html#a5b18c8d3ccf58584c91c57c2b5e44140',1,'ServoControl']]],
+  ['setup_5fcontinuous_15',['setup_continuous',['../namespace_tof_control.html#a6b5545dd1a8c6ceb9d352febb7cf6998',1,'TofControl']]],
+  ['setvolume_16',['setVolume',['../namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13',1,'SoundControl']]],
+  ['startphoto_17',['startPhoto',['../class_pi_camera.html#a05b3c55e3e4a8e2daf1e870756eda6b8',1,'PiCamera']]],
+  ['startvideo_18',['startVideo',['../class_pi_camera.html#ae5752d7a94c41667397c409c94f59ca6',1,'PiCamera']]],
+  ['stopdolyservice_19',['stopDolyService',['../namespace_helper.html#a52099525bb7c9988b7b71fe9458ad539',1,'Helper']]],
+  ['stopphoto_20',['stopPhoto',['../class_pi_camera.html#a50db2a0a09c6d6ef233863c64d63b0e2',1,'PiCamera']]],
+  ['stopvideo_21',['stopVideo',['../class_pi_camera.html#a6d15690c851370432c9b8e22a27093f5',1,'PiCamera']]]
+];
