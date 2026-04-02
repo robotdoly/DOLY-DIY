@@ -1,0 +1,21 @@
+/* Move "PROJECT_NAME + PROJECT_NUMBER" to the center side of the top header area */
+#titlearea #projectalign {
+  width: 100%;
+  text-align: center;
+}
+
+#titlearea #projectname {
+  float: center;         /* pushes the name box to the center */
+}
+
+#titlearea #projectnumber {
+  display: inline-block;
+  margin-left: 6px;     /* small gap between name and version */
+}
+
+/* Add space around the logo in the top header */
+#titlearea #projectlogo {
+  padding: 10px 12px;      /* space around the logo block */
+}
+
+

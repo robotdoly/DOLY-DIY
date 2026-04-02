@@ -1,0 +1,27 @@
+var class_pi_camera =
+[
+    [ "PiCamera", "class_pi_camera.html#a669d5e9ac6b1fbae9860c3373be376ec", null ],
+    [ "~PiCamera", "class_pi_camera.html#a49858890fa83e87f13d72270fae6044d", null ],
+    [ "ApplyZoomOptions", "class_pi_camera.html#a6d8dad43d4f7eb16f4df5cd1f8662562", null ],
+    [ "capturePhoto", "class_pi_camera.html#a2fa68a70c8cdb52303aa7c64f6c10139", null ],
+    [ "getImage", "class_pi_camera.html#a57b0ce7900965e2c754592fa8fdb18af", null ],
+    [ "getVideoFrame", "class_pi_camera.html#af0bd4ffb0272123f4aaaa513d8628a12", null ],
+    [ "SetAwbEnable", "class_pi_camera.html#a82e1d3a6a5b226d229d1de9750250e42", null ],
+    [ "SetExposure", "class_pi_camera.html#a9fef60de591eee3f95640028bd377075", null ],
+    [ "startPhoto", "class_pi_camera.html#a05b3c55e3e4a8e2daf1e870756eda6b8", null ],
+    [ "startVideo", "class_pi_camera.html#ae5752d7a94c41667397c409c94f59ca6", null ],
+    [ "stopPhoto", "class_pi_camera.html#a50db2a0a09c6d6ef233863c64d63b0e2", null ],
+    [ "stopVideo", "class_pi_camera.html#a6d15690c851370432c9b8e22a27093f5", null ],
+    [ "app", "class_pi_camera.html#a8499782870c7bac9797a54d643dabf72", null ],
+    [ "camerastarted", "class_pi_camera.html#aa0685b902e8c5127b8ada983fe0cc88d", null ],
+    [ "framebuffer", "class_pi_camera.html#a7968d7f8d400382bf411820893464b5c", null ],
+    [ "frameready", "class_pi_camera.html#a6ec2d43803ba3cfccd4902c0cd92cc7e", null ],
+    [ "mtx", "class_pi_camera.html#a71e1289892b613c4d479c24af0e785b5", null ],
+    [ "options", "class_pi_camera.html#abd90cf29dbdd5284e6a002bb3e0e13bf", null ],
+    [ "running", "class_pi_camera.html#af57890cbcffc2871221898c3ca48c2ba", null ],
+    [ "still_flags", "class_pi_camera.html#aa8e625987122421ddca791bfff04b2a8", null ],
+    [ "vh", "class_pi_camera.html#afc17569a686b217ef3d066dab702c970", null ],
+    [ "videothread", "class_pi_camera.html#a4b267f6e21e656265dd730d577334106", null ],
+    [ "vstr", "class_pi_camera.html#af542775bd675c69456bcd17f7f1b3a47", null ],
+    [ "vw", "class_pi_camera.html#a92a0d4a1d0e2bb8e1ed144a9d75f9dbd", null ]
+];
