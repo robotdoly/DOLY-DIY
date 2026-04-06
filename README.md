@@ -38,7 +38,8 @@ This repo is meant to be an **all-in-one** place to **learn, remix, and build** 
 - `Electronics/` — schematics, PCB files, interactive BOMs  
 - `SDK/` — SDK, libraries, documents and examples 
 - `Guide/`  — 3D printable maker guide,  
-- `Images/` — project image files 
+- `Images/` — project image files
+- `Add-ons/` — add-on files 
 
 ---
 
