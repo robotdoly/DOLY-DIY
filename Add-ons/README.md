@@ -2,4 +2,6 @@
 
 For support, questions, or sharing your own designs, please visit the Doly [community](https://community.doly.ai/public/t/add-ons) forum.
 
-Doly servo model files can be found in [Add-ons/powered-addons/servo](https://github.com/robotdoly/DOLY-DIY/tree/main/Add-ons/powered-addons/servo).
+Base template design files for custom add-ons can be found in [Add-ons/helpers/base_template](https://github.com/robotdoly/DOLY-DIY/tree/main/Add-ons/helpers/base_template).
+
+Doly servo model files can be found in [Add-ons/helpers/servo](https://github.com/robotdoly/DOLY-DIY/tree/main/Add-ons/helpers/servo).
