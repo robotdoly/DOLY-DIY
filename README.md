@@ -29,6 +29,7 @@ This repo is meant to be an **all-in-one** place to **learn, remix, and build** 
   - [3D printable Doly assembly guide](https://robotdoly.github.io/DOLY-DIY/maker/)
   - [C++ API documentation](https://robotdoly.github.io/DOLY-DIY/cpp/)
   - [Python API documentation](https://robotdoly.github.io/DOLY-DIY/python/)
+  - [AI Integration Developer FAQ](https://github.com/robotdoly/DOLY-DIY/blob/main/SDK/docs/AI_Integration_Developer_FAQ.md)
 
 ---
 
