@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['b_0',['b',['../struct_color.html#a78ede410fb277ade36fbb157f0235d6f',1,'Color']]],
+  ['back_1',['BACK',['../group__doly__edgecontrol.html#ggadee55047e574e20c58ce882761c9f186a1dd26f1f1790f0b56d5752fb0fbecef0',1,'BACK:&#160;EdgeEventListener.h'],['../group__doly__imucontrol.html#gga826c304fa96281f2fb0bd79f3c912285a1dd26f1f1790f0b56d5752fb0fbecef0',1,'BACK:&#160;ImuEventListener.h']]],
+  ['back_5fleft_2',['BACK_LEFT',['../group__doly__edgecontrol.html#ggadee55047e574e20c58ce882761c9f186a312668bcc143fd3778c68442f6c3e32f',1,'BACK_LEFT:&#160;EdgeEventListener.h'],['../group__doly__edgecontrol.html#gga9c46e4bf805adf84add6728a5afb5319a312668bcc143fd3778c68442f6c3e32f',1,'BACK_LEFT:&#160;EdgeEventListener.h']]],
+  ['back_5fright_3',['BACK_RIGHT',['../group__doly__edgecontrol.html#ggadee55047e574e20c58ce882761c9f186a7e77482f99baeaa96a02f36b2f99f387',1,'BACK_RIGHT:&#160;EdgeEventListener.h'],['../group__doly__edgecontrol.html#gga9c46e4bf805adf84add6728a5afb5319a7e77482f99baeaa96a02f36b2f99f387',1,'BACK_RIGHT:&#160;EdgeEventListener.h']]],
+  ['battery_5flow_4',['BATTERY_LOW',['../namespace_eye_expressions.html#aacb50beee674895c27eb4c69688c3607',1,'EyeExpressions']]],
+  ['black_5',['BLACK',['../group__doly__sdk__common.html#gga728b1ab015aa05cbb32cd286819130b9a08d0012388564e95c3b4a7407cf04965',1,'Color.h']]],
+  ['blink_6',['BLINK',['../namespace_eye_expressions.html#a1d80a70028550c6d4ce0c15e0ccff919',1,'EyeExpressions']]],
+  ['blink_5fbig_7',['BLINK_BIG',['../namespace_eye_expressions.html#a0bda93e0d36aeace14e780c6d43e000b',1,'EyeExpressions']]],
+  ['blink_5fl_8',['BLINK_L',['../namespace_eye_expressions.html#a5715c8eb3fee2f2da65d211c8c60d5c7',1,'EyeExpressions']]],
+  ['blink_5fonly_9',['BLINK_ONLY',['../namespace_eye_expressions.html#a21dc3dbeea07e195ab72618318bd3bdf',1,'EyeExpressions']]],
+  ['blink_5fr_10',['BLINK_R',['../namespace_eye_expressions.html#a96e3ca2e567f0769ee1c999e082a7f23',1,'EyeExpressions']]],
+  ['blink_5fslow_11',['BLINK_SLOW',['../namespace_eye_expressions.html#aaecf126796e86d95621d57144dc4db6b',1,'EyeExpressions']]],
+  ['blue_12',['BLUE',['../namespace_eye_expressions.html#aa2c770b8d55a7955976d3be27e1ec63e',1,'EyeExpressions::BLUE'],['../group__doly__sdk__common.html#gga728b1ab015aa05cbb32cd286819130b9a1b3e1ee9bff86431dea6b181365ba65f',1,'BLUE:&#160;Color.h']]],
+  ['both_13',['BOTH',['../group__doly__armcontrol.html#gga274f6db3f5a49a3ac2201741d8e9ebbfa6328e5e3186c227a021ef2ff77e40197',1,'BOTH:&#160;ArmEventListener.h'],['../group__doly__drivecontrol.html#ggad500360cd297851de444b7a2ff057114a6328e5e3186c227a021ef2ff77e40197',1,'BOTH:&#160;DriveEventListener.h'],['../_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8a6328e5e3186c227a021ef2ff77e40197',1,'BOTH:&#160;EyeControl.h'],['../group__doly__ledcontrol.html#gga889a635ae84c20461ac4c52b849b47d3a6328e5e3186c227a021ef2ff77e40197',1,'BOTH:&#160;LedEventListener.h'],['../group__doly__touchcontrol.html#gga764c7e9542086cbe6f82ce19d9627412a6328e5e3186c227a021ef2ff77e40197',1,'BOTH:&#160;TouchEventListener.h']]],
+  ['brown_14',['BROWN',['../group__doly__sdk__common.html#gga728b1ab015aa05cbb32cd286819130b9a493cacf6f6a2ae4798b319b8b9ba9488',1,'Color.h']]],
+  ['buffer_15',['buffer',['../struct_lcd_data.html#ad91f0c62b8029d00beca4a4350dbb7a8',1,'LcdData']]],
+  ['bugged_16',['BUGGED',['../namespace_eye_expressions.html#ade45f34b64fca3feec6534bac9ab4353',1,'EyeExpressions']]],
+  ['bump_17',['BUMP',['../namespace_eye_expressions.html#a370be8f0fb1239f6882d4070f4be931b',1,'EyeExpressions']]],
+  ['burned_5fup_18',['BURNED_UP',['../namespace_eye_expressions.html#afa15f743088993ad445b676c328f04c8',1,'EyeExpressions']]]
+];

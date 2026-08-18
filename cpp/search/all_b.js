@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['magenta_0',['MAGENTA',['../group__doly__sdk__common.html#gga728b1ab015aa05cbb32cd286819130b9ac634ffea7195608364671ac52ee59a61',1,'Color.h']]],
+  ['maincolor_1',['mainColor',['../struct_led_activity.html#a6306550a5a54def01563ff6bb6df1fed',1,'LedActivity']]],
+  ['mainpage_2edox_2',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
+  ['max_5fconvergence_3',['Max_Convergence',['../group__doly__tofcontrol.html#gga20bb9d362a75c16307b8cd2582473b03ad104723acfcd8106f6d4f1cb73b191c1',1,'TofEventListener.h']]],
+  ['max_5fsignal_5fto_5fnoise_5fratio_4',['Max_Signal_To_Noise_Ratio',['../group__doly__tofcontrol.html#gga20bb9d362a75c16307b8cd2582473b03a3aaee50a1f3d2a03eb30fe3246f60b23',1,'TofEventListener.h']]],
+  ['melancholy_5',['MELANCHOLY',['../namespace_eye_expressions.html#a6a2c3ade6404588fe91ea63d2ae8d730',1,'EyeExpressions']]],
+  ['mid_5fdown_6',['MID_DOWN',['../namespace_eye_expressions.html#a08442fad083c39f35baa7102dbeb93f0',1,'EyeExpressions']]],
+  ['mid_5fup_7',['MID_UP',['../namespace_eye_expressions.html#a56fbc5f40c9fd19e35470557cde610bf',1,'EyeExpressions']]],
+  ['mid_5fup_5fl_8',['MID_UP_L',['../namespace_eye_expressions.html#a0337a8348033efc531b8aba6fefd23b0',1,'EyeExpressions']]],
+  ['mid_5fup_5fr_9',['MID_UP_R',['../namespace_eye_expressions.html#a084d04fdbb40509d06d06639aefb1eac',1,'EyeExpressions']]],
+  ['mixed_5fup_10',['MIXED_UP',['../namespace_eye_expressions.html#ad6981f6330191e45f932370168925d57',1,'EyeExpressions']]],
+  ['model_5f1_11',['MODEL_1',['../group__doly__ttscontrol.html#ggafb5c5a07185506cf72e69fc518bd2303a41ea0067bf681eff0787b05b80e70293',1,'TtsControl.h']]],
+  ['model_5f2_12',['MODEL_2',['../group__doly__ttscontrol.html#ggafb5c5a07185506cf72e69fc518bd2303a0757140e5e8018d379626a1db14ca749',1,'TtsControl.h']]],
+  ['model_5f3_13',['MODEL_3',['../group__doly__ttscontrol.html#ggafb5c5a07185506cf72e69fc518bd2303a9e0e088a8c3a7b5718b7972e3f9b512f',1,'TtsControl.h']]],
+  ['modern_14',['MODERN',['../_eye_control_8h.html#a06bf421c6bb03b81192df0cb69bb2f93ad120ba8110833fb5fb3da80a4cbf21f6',1,'EyeControl.h']]],
+  ['modules_15',['Modules',['../index.html#autotoc_md2',1,'']]],
+  ['moody_5flr_16',['MOODY_LR',['../namespace_eye_expressions.html#a066169a6ad3f344f474bcb6df4915312',1,'EyeExpressions']]],
+  ['moody_5frl_17',['MOODY_RL',['../namespace_eye_expressions.html#a8f2afe393729b5d78d0bb39217ab90c6',1,'EyeExpressions']]],
+  ['motor_18',['MOTOR',['../group__doly__armcontrol.html#ggaefd689d26d68ccdd7c59ff16b6722c10a5e4c01f166d4563e75575db113664c8a',1,'MOTOR:&#160;ArmEventListener.h'],['../group__doly__drivecontrol.html#ggaa359ce55c338e18dd04323249fdb53e8a5e4c01f166d4563e75575db113664c8a',1,'MOTOR:&#160;DriveEventListener.h']]],
+  ['move_19',['MOVE',['../group__doly__imucontrol.html#gga8682f3f85d2ba8443c20738680694b9aaf7f93635f8e193a924ae4a691bb66b8f',1,'ImuEventListener.h']]],
+  ['mtx_20',['mtx',['../class_pi_camera.html#a71e1289892b613c4d479c24af0e785b5',1,'PiCamera']]]
+];

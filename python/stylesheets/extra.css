@@ -1,0 +1,85 @@
+/* ================================
+   Doly brand + typography tweaks
+   ================================ */
+
+/* Brand color */
+/*:root {
+  --md-primary-fg-color: #007acc;
+  --md-accent-fg-color: #fc5603;
+}*/
+
+/* Light mode */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #007acc;
+   /*--md-accent-fg-color: #fc5603;*/
+}
+
+/* Dark mode */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #1f8ad6;
+  /*--md-accent-fg-color: #fc5603;*/
+}
+
+/* Smaller typography overall */
+.md-typeset {
+  font-size: 0.75rem;            /* smaller body text */
+  line-height: 1.55;
+}
+
+/* Reduce bold text weight (markdown **text**) */
+.md-typeset strong {
+  font-weight: 500;   /* try 500 or 450 */
+}
+
+.md-typeset code,
+.md-typeset pre code {
+  font-size: 0.8em;             /* smaller code text */
+}
+
+/* Page title + headings: smaller and tighter */
+.md-typeset h1 {
+  font-size: 1.45em;
+  font-weight: 520;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6em;
+  color: #007acc;
+}
+
+.md-typeset h2 {
+  font-size: 1.25em;
+  margin-top: 1.4em;
+  font-weight: 500;
+  color: #fc5603;
+}
+
+.md-typeset h3 {
+  font-size: 1.08em;
+  margin-top: 1.1em;
+}
+
+/* Wider content area (less empty space) */
+.md-grid {
+  max-width: 1400px;
+}
+
+/* Nicer code blocks */
+.md-typeset pre {
+  border-radius: 10px;
+}
+
+/* Softer inline code */
+.md-typeset code {
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+}
+
+/* Default mode: slightly stronger hover background */
+[data-md-color-scheme="default"] .md-nav__link:hover {
+  color: #fc5603;
+}
+
+/* Dark mode: slightly stronger hover background */
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: #fc5603;
+}
+
