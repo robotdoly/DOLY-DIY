@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['getbuffersize_0',['getBufferSize',['../namespace_lcd_control.html#a2d2a004b6faccd62dd96bccd6bca44da',1,'LcdControl']]],
+  ['getcolor_1',['getColor',['../struct_color.html#a8548ec44324d7fc2d1cffa551b72309c',1,'Color::getColor(uint8_t r, uint8_t g, uint8_t b)'],['../struct_color.html#afbf2d7a656ee2711ad9ab14defae88dd',1,'Color::getColor(ColorCode code)']]],
+  ['getcolordepth_2',['getColorDepth',['../namespace_lcd_control.html#a6a0aea0badd98f8a8d4532f4d0a6a922',1,'LcdControl']]],
+  ['getcolorname_3',['getColorName',['../struct_color.html#af99120037965c3c2add751e282013fd8',1,'Color']]],
+  ['getcurrentangle_4',['getCurrentAngle',['../namespace_arm_control.html#a277483bb7c8984cdfe8caf6581135454',1,'ArmControl']]],
+  ['getdirectionstr_5',['getDirectionStr',['../namespace_imu_event.html#af5c61eb9d487d11b5d2ddb50d3d468a6',1,'ImuEvent']]],
+  ['getgesturestr_6',['getGestureStr',['../namespace_imu_event.html#a26747ec82beae5c3a2e076a4385b9f14',1,'ImuEvent']]],
+  ['getimage_7',['getImage',['../class_pi_camera.html#a57b0ce7900965e2c754592fa8fdb18af',1,'PiCamera::getImage()'],['../class_v_content.html#a297d85cc253a0f4285a61032519ad5a9',1,'VContent::getImage()']]],
+  ['getimudata_8',['getImuData',['../namespace_imu_control.html#a41b35209a6d15a843297faf34eaab9fd',1,'ImuControl']]],
+  ['getimuoffsets_9',['getImuOffsets',['../namespace_helper.html#aa8d71d1c44ea2e41b6d64cdfc14edb3e',1,'Helper']]],
+  ['getirisposition_10',['getIrisPosition',['../namespace_eye_control.html#ac2bb9296f2a7b5c63b21fc3b3579db39',1,'EyeControl']]],
+  ['getledcolor_11',['getLEDColor',['../struct_color.html#ae50f21eff7c97fbb7249cbcc252b8b91',1,'Color']]],
+  ['getmaxangle_12',['getMaxAngle',['../namespace_arm_control.html#acf14034ea85c090e35dca82f8c15eccf',1,'ArmControl']]],
+  ['getposition_13',['getPosition',['../namespace_drive_control.html#a57d079aedaea2374fd0232f99cb0d58a',1,'DriveControl']]],
+  ['getrpm_14',['getRPM',['../namespace_drive_control.html#a5b5dacdaa5a04251178acffa8f865efa',1,'DriveControl']]],
+  ['getsensors_15',['getSensors',['../namespace_edge_control.html#a7578bb547a0b404fad8ba2163906bfda',1,'EdgeControl::getSensors()'],['../namespace_edge_control.html#af7adca80dff6bc6644b575f5fbcbe8e3',1,'EdgeControl::getSensors(GpioState state)']]],
+  ['getsensorsdata_16',['getSensorsData',['../namespace_tof_control.html#aa9424ce2a7577d988212e7958ba03b2b',1,'TofControl']]],
+  ['getstate_17',['getState',['../namespace_arm_control.html#ad87ea9ebb113ad92fe30ea6c230c41e3',1,'ArmControl::getState()'],['../namespace_drive_control.html#a8e4645c8ecf711ac80c758abd4bc2140',1,'DriveControl::getState()'],['../namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541',1,'SoundControl::getState()']]],
+  ['gettemperature_18',['getTemperature',['../namespace_imu_control.html#a00731c88d7d2fa29493105f1e8a91488',1,'ImuControl']]],
+  ['getversion_19',['getVersion',['../namespace_arm_control.html#abf430c97aee6bbbec8fe931cd59b7b03',1,'ArmControl::getVersion()'],['../namespace_drive_control.html#ab62a2feb34a3b7764072c23bfd824745',1,'DriveControl::getVersion()'],['../namespace_edge_control.html#a022fd9274fdea0becf402abd99fea7f8',1,'EdgeControl::getVersion()'],['../namespace_eye_control.html#a373d46c79b5714adff35b468050db22e',1,'EyeControl::getVersion()'],['../namespace_fan_control.html#ae1c7f2f907f632dd2689bbff3100efbc',1,'FanControl::getVersion()'],['../namespace_imu_control.html#a98ae36cc9a1738483c1604c61397d986',1,'ImuControl::getVersion()'],['../namespace_io_control.html#a87806b741b3d06a5ca38217ef51d68b1',1,'IoControl::getVersion()'],['../namespace_lcd_control.html#aeba0c244a3daa81fc17387c7ed6090e3',1,'LcdControl::getVersion()'],['../namespace_led_control.html#a0bdc70f43a529d5d317c11bb56c76509',1,'LedControl::getVersion()'],['../namespace_servo_control.html#ab173f6e6fd918943b1d8bbb81ed928e9',1,'ServoControl::getVersion()'],['../namespace_sound_control.html#a5198c3af1aab8ac0fc3d1d72bf9d8936',1,'SoundControl::getVersion()'],['../namespace_tof_control.html#a81daf869d1d7dc6571021c815df2f5e3',1,'TofControl::getVersion()'],['../namespace_touch_control.html#a9f7c7da9ef169346b8b92d773bfb1781',1,'TouchControl::getVersion()'],['../namespace_tts_control.html#a3eafa5cb99e06ad928611617dd4e572b',1,'TtsControl::getVersion()']]],
+  ['getvideoframe_20',['getVideoFrame',['../class_pi_camera.html#af0bd4ffb0272123f4aaaa513d8628a12',1,'PiCamera']]],
+  ['godistance_21',['goDistance',['../namespace_drive_control.html#afb34b74607c7c9c0db8eaae4774909bc',1,'DriveControl']]],
+  ['gorotate_22',['goRotate',['../namespace_drive_control.html#af4a8bd624a226dd75d9e69c2b824406b',1,'DriveControl']]],
+  ['goxy_23',['goXY',['../namespace_drive_control.html#a1eca69e50682a9c0a6d892ab93149066',1,'DriveControl']]]
+];
