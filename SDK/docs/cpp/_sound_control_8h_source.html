@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -95,45 +95,46 @@ $(function(){initNavTree('_sound_control_8h_source.html','',''); });
 </div><!--header-->
 <div class="contents">
 <a href="_sound_control_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_sound_event_8h.html">SoundEvent.h</a>&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">   28</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a> :uint8_t</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">   30</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">SET</a>,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">   31</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">STOP</a>,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">   32</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">PLAY</a></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_sound_event_8h.html">SoundEvent.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">   29</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a> :uint8_t</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">   31</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">SET</a>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">   32</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">STOP</a>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">   33</a></span>    <a class="code hl_enumvalue" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">PLAY</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespace_sound_control.html">   35</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_sound_control.html">SoundControl</a></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ad4af2adfec746e28ddad0d5bac7e557c">   45</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#ad4af2adfec746e28ddad0d5bac7e557c">init</a>();</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ac68bb23fd57a0e9e1f7a37a133850539">   54</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#ac68bb23fd57a0e9e1f7a37a133850539">dispose</a>();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#af1d91275ef6e3745a66381c303bcf66c">   69</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#af1d91275ef6e3745a66381c303bcf66c">play</a>(std::string file_name, uint16_t <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ae6d519db2b945e411e2dd00dd8446f99">   74</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespace_sound_control.html#ae6d519db2b945e411e2dd00dd8446f99">Abort</a>();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541">   80</a></span>    <a class="code hl_enumeration" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a> <a class="code hl_function" href="namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541">getState</a>();</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a516aa30fed06087dd55800eac860f2cc">   86</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_sound_control.html#a516aa30fed06087dd55800eac860f2cc">isActive</a>();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13">   94</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13">setVolume</a>(uint8_t volume);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a5198c3af1aab8ac0fc3d1d72bf9d8936">  103</a></span>    <span class="keywordtype">float</span> <a class="code hl_function" href="namespace_sound_control.html#a5198c3af1aab8ac0fc3d1d72bf9d8936">getVersion</a>();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespace_sound_control.html">   36</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_sound_control.html">SoundControl</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ad4af2adfec746e28ddad0d5bac7e557c">   46</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#ad4af2adfec746e28ddad0d5bac7e557c">init</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ac68bb23fd57a0e9e1f7a37a133850539">   55</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#ac68bb23fd57a0e9e1f7a37a133850539">dispose</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#af1d91275ef6e3745a66381c303bcf66c">   70</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#af1d91275ef6e3745a66381c303bcf66c">play</a>(std::string file_name, uint16_t <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#ae6d519db2b945e411e2dd00dd8446f99">   75</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespace_sound_control.html#ae6d519db2b945e411e2dd00dd8446f99">Abort</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541">   81</a></span>    <a class="code hl_enumeration" href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a> <a class="code hl_function" href="namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541">getState</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a516aa30fed06087dd55800eac860f2cc">   87</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_sound_control.html#a516aa30fed06087dd55800eac860f2cc">isActive</a>();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13">   95</a></span>    int8_t <a class="code hl_function" href="namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13">setVolume</a>(uint8_t volume);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="namespace_sound_control.html#a5198c3af1aab8ac0fc3d1d72bf9d8936">  104</a></span>    <span class="keywordtype">float</span> <a class="code hl_function" href="namespace_sound_control.html#a5198c3af1aab8ac0fc3d1d72bf9d8936">getVersion</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
 </div>
-<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a></div><div class="ttdeci">SoundState</div><div class="ttdoc">Sound activity state.</div><div class="ttdef"><b>Definition</b> SoundControl.h:29</div></div>
-<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">SoundState::STOP</a></div><div class="ttdeci">@ STOP</div><div class="ttdef"><b>Definition</b> SoundControl.h:31</div></div>
-<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">SoundState::PLAY</a></div><div class="ttdeci">@ PLAY</div><div class="ttdef"><b>Definition</b> SoundControl.h:32</div></div>
-<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">SoundState::SET</a></div><div class="ttdeci">@ SET</div><div class="ttdef"><b>Definition</b> SoundControl.h:30</div></div>
+<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3">SoundState</a></div><div class="ttdeci">SoundState</div><div class="ttdoc">Sound activity state.</div><div class="ttdef"><b>Definition</b> SoundControl.h:30</div></div>
+<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a615a46af313786fc4e349f34118be111">SoundState::STOP</a></div><div class="ttdeci">@ STOP</div><div class="ttdef"><b>Definition</b> SoundControl.h:32</div></div>
+<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a6a216efc529825c60a4a4c0bc99ad77f">SoundState::PLAY</a></div><div class="ttdeci">@ PLAY</div><div class="ttdef"><b>Definition</b> SoundControl.h:33</div></div>
+<div class="ttc" id="a_sound_control_8h_html_a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164"><div class="ttname"><a href="_sound_control_8h.html#a43bbed058dcc0dcdb01213f239d7a6b3a8c52684db8f49511e9b44471716bf164">SoundState::SET</a></div><div class="ttdeci">@ SET</div><div class="ttdef"><b>Definition</b> SoundControl.h:31</div></div>
 <div class="ttc" id="a_sound_event_8h_html"><div class="ttname"><a href="_sound_event_8h.html">SoundEvent.h</a></div><div class="ttdoc">Event registration helpers for the sound subsystem.</div></div>
-<div class="ttc" id="anamespace_sound_control_html"><div class="ttname"><a href="namespace_sound_control.html">SoundControl</a></div><div class="ttdef"><b>Definition</b> SoundControl.h:36</div></div>
+<div class="ttc" id="anamespace_sound_control_html"><div class="ttname"><a href="namespace_sound_control.html">SoundControl</a></div><div class="ttdef"><b>Definition</b> SoundControl.h:37</div></div>
 <div class="ttc" id="anamespace_sound_control_html_a313f970383ef9cb1374789b1e351ce13"><div class="ttname"><a href="namespace_sound_control.html#a313f970383ef9cb1374789b1e351ce13">SoundControl::setVolume</a></div><div class="ttdeci">int8_t setVolume(uint8_t volume)</div><div class="ttdoc">Set playback volume as a percentage.</div></div>
 <div class="ttc" id="anamespace_sound_control_html_a344916d7720b3eac7b05e4b9f4871541"><div class="ttname"><a href="namespace_sound_control.html#a344916d7720b3eac7b05e4b9f4871541">SoundControl::getState</a></div><div class="ttdeci">SoundState getState()</div><div class="ttdoc">Get current sound playback state.</div></div>
 <div class="ttc" id="anamespace_sound_control_html_a516aa30fed06087dd55800eac860f2cc"><div class="ttname"><a href="namespace_sound_control.html#a516aa30fed06087dd55800eac860f2cc">SoundControl::isActive</a></div><div class="ttdeci">bool isActive()</div><div class="ttdoc">Check whether the sound subsystem is active (initialized).</div></div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['colorcode_0',['ColorCode',['../group__doly__sdk__common.html#ga728b1ab015aa05cbb32cd286819130b9',1,'Color.h']]]
+  ['batterystatus_0',['BatteryStatus',['../group__doly__batterycontrol.html#ga054ae4c22f13634a760abd7d456874b8',1,'BatteryEventListener.h']]]
 ];

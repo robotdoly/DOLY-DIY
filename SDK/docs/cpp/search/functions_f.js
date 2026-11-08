@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['writelcd_0',['writeLcd',['../namespace_lcd_control.html#ae733bd8c6a5517cf93d38beac8b657aa',1,'LcdControl']]],
-  ['writepin_1',['writePin',['../namespace_io_control.html#a31e09d81905ef26b987dc88476565857',1,'IoControl']]]
+  ['unlock_0',['unlock',['../class_metadata.html#aef45671e79e2badb8db4b4f09c207cbb',1,'Metadata']]]
 ];

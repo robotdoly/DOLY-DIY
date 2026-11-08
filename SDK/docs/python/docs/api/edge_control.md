@@ -12,6 +12,8 @@ This page documents the public API exposed by the `doly_edge` Python module.
 
 ### `GpioState`
 
+Alias of [doly_io.GpioState](io_control.md#gpiostate), not a separate enum type.
+
 Values:
 
 - `Low`
@@ -46,14 +48,17 @@ Values:
 
 ### `IrSensor`
 
+`IrSensor()` creates a record with writable fields. `__repr__() -> str` returns
+`<IrSensor id=… state=…>` using numeric enum values.
+
 **Fields**
 
-- **id**
-- **state**
+- **id: SensorId**: Sensor location.
+- **state: GpioState**: Current ground-detection state.
 
 ### `EdgeEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`EdgeEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
@@ -64,49 +69,43 @@ Listener interface. Implement this class and register it with `add_listener()` t
 
 ## Functions
 
-### `add_listener(listener: EdgeEventListener, priority: bool = False) -> None`
+### `add_listener(listener: Optional[EdgeEventListener], priority: bool = False) -> None`
 
-Register an EdgeEventListener instance.
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `EdgeEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener**: Listener object pointer.
-- **priority**: If `True`, the listener may be inserted with higher priority (implementation-defined ordering). (default: `False`)
-
+Duplicate object registrations are permitted; each has a distinct native proxy.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
 ### `remove_listener(listener: EdgeEventListener) -> None`
 
-Unregister an EdgeEventListener instance.
+Unregister one matching object registration. **listener** is the Python object
+previously passed to `add_listener()`. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.
 
-**Parameters**
+### `on_change(cb: Optional[Callable[[list[IrSensor]], None]]) -> None`
 
-- **listener**: Listener object pointer previously registered.
+Set the change function callback, replacing any previous callable.
 
+- **cb**: Called as `cb(sensors)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-### `clear_listeners() -> None`
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-Unregister all static callbacks and class-based listeners tracked by the binding.
+### `on_gap_detect(cb: Optional[Callable[[GapDirection], None]]) -> None`
 
+Set the gap detect function callback, replacing any previous callable.
 
-### `on_change(cb: py::function) -> None`
+- **cb**: Called as `cb(gap_type)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-Set a static on-change callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
-
-### `on_gap_detect(cb: py::function) -> None`
-
-Set a static gap-detect callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `init() -> int`
 
@@ -119,25 +118,37 @@ Must be called before enabling control or reading sensors.
 - `int`:
 
 ```text
-Status code: - 0 : success - <0 : error (implementation-defined)
+0: success
+1: already initialized
+-1: enable GPIO initialization failed
+-2: drive GPIO initialization failed
+-3: front-left GPIO initialization failed
+-4: front-right GPIO initialization failed
+-5: back-left GPIO initialization failed
+-6: back-right GPIO initialization failed
 ```
 
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
-
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
 
 ### `dispose() -> int`
 
-Dispose edge sensor control and release resources. Removes the call back functions.
+Dispose edge sensor control and release resources. Accepted disposal also cleans
+up this component's Python registrations.
 
 **Returns**
 
 - `int`:
 
 ```text
-Status code: - 0 : success - 1 : not initialized - -1..-6 : GPIO release failed (specific code indicates which GPIO failed)
+0: success
+1: not initialized
+-1..-6: GPIO release failed after drainage; Python callback cleanup accepted
+-7: callback-context rejection; registrations retained
 ```
 
 
@@ -184,6 +195,10 @@ Status code: - 0 : success - 1 : not running - -1 : not initialized
 ```
 
 
+### `get_sensors() -> list[IrSensor]`
+
+Return all current sensor records without filtering.
+
 ### `get_sensors(state: GpioState) -> list[IrSensor]`
 
 Get IR sensors filtered by GPIO state.
@@ -197,7 +212,7 @@ Get IR sensors filtered by GPIO state.
 - `list[IrSensor]`:
 
 ```text
-Vector containing sensors matching the specified state.
+List containing sensors matching the specified state.
 ```
 
 
@@ -214,3 +229,21 @@ Original note: format 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+
+### `clear_callbacks() -> None`
+
+Remove this component's function callbacks only, preserving object listeners.
+Unlike `clear_listeners()`, this does not remove class-based registrations.
+Neither operation waits for already executing callbacks to finish.
+
+## Lifecycle contract
+
+`init()` and `disable_control()` raise `RuntimeError` from any wrapper callback.
+`dispose()` returns `-7` there without changing registrations. Native outcomes
+`0`, `1` and post-drain GPIO errors `-1` through `-6` permit Python cleanup;
+resource errors remain errors even when callback targets have been released.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+
+

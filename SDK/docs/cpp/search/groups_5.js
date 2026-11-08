@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['imucontrol_0',['ImuControl',['../group__doly__imucontrol.html',1,'']]],
-  ['iocontrol_1',['IoControl',['../group__doly__iocontrol.html',1,'']]]
+  ['fancontrol_0',['FanControl',['../group__doly__fancontrol.html',1,'']]]
 ];

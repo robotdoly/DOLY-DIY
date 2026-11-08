@@ -1,7 +1,5 @@
 # ArmControl (Python)
 
-
-
 ## Import
 
 ```python
@@ -10,7 +8,7 @@ import doly_arm
 
 ## Minimal working example
 
-Below is the module’s `example.py` as a starting point.
+Below is the module’s `examples/python/ArmControl/example.py` as a starting point.
 
 ```python
 """
@@ -26,12 +24,10 @@ It demonstrates:
 - Registering the listener instance (non-static / object-based)
 - Sending a movement command using set_angle()
 - Reading back the current angle(s)
-- Cleaning up (remove_listener + dispose)
+- Cleaning up (dispose)
 
-Important notes about python wrapper:
-- You MUST keep a Python reference to the listener object while it is registered.
-  If the listener is garbage-collected, the C++ side may still hold a pointer to it,
-  which can cause a crash.
+The wrapper retains registered Python listeners. This example also keeps a local
+reference; component disposal owns callback cleanup.
 """
 
 
@@ -62,17 +58,11 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-    
-    # *** IMPORTANT *** 
+
+    # *** IMPORTANT ***
     # Read settings for servo calibration data, otherwise arm control won't work.
-    # one time read is sufficient for the lifetime of the application	
-    if helper.read_settings() < 0: 
+    # one time read is sufficient for the lifetime of the application
+    if helper.read_settings() < 0:
         print("[error] Read settings failed")
         return -2
 
@@ -80,33 +70,48 @@ def main():
     rc = arm.init()
     if rc < 0:
         print(f"[error] ArmControl.init failed rc={rc}")
-        return -2  
+        return -2
 
-    # add event listener
-    listener = MyListener()
-    arm.add_listener(listener, priority=False)
+    result = 0
+    try:
+        # add event listener
+        listener = MyListener()
+        arm.add_listener(listener, priority=False)
 
 
-    # Example command
-    cmd_id = 1
-    rc = arm.set_angle(cmd_id, arm.ArmSide.Both, speed=30, angle=90, with_brake=False)
-    if rc < 0:
-        print(f"[error] set_angle failed rc={rc}")
-        return -3
+        # Example command
+        cmd_id = 1
+        rc = arm.set_angle(cmd_id, arm.ArmSide.Both, speed=30, angle=90, with_brake=False)
+        if rc < 0:
+            print(f"[error] set_angle failed rc={rc}")
+            return -3
 
-    # Wait until done (simple polling example)
-    while arm.get_state(arm.ArmSide.Both) != arm.ArmState.Completed:
-        time.sleep(0.05)
+        # Wait until done (simple polling example)
+        while True:
+            state = arm.get_state(arm.ArmSide.Both)
+            if state == arm.ArmState.Error:
+                print("[error] Arm movement ended in Error")
+                return -3
+            if state == arm.ArmState.Completed:
+                break
+            time.sleep(0.05)
 
-    angles = arm.get_current_angle(arm.ArmSide.Both)
-    for a in angles:
-        print(f"angle: side={a.side} angle={a.angle}")    
-
-    # Cleanup     
-    arm.dispose()       
+        angles = arm.get_current_angle(arm.ArmSide.Both)
+        for a in angles:
+            print(f"angle: side={a.side} angle={a.angle}")
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = arm.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] arm.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] arm.dispose raised: {exc}")
+            result = 1
     time.sleep(0.2)
 
-    return 0
+    return result
 
 
 if __name__ == "__main__":
@@ -122,12 +127,8 @@ if __name__ == "__main__":
 - **Read state / values**
 - **Dispose / cleanup**
 
-## Notes
-
-- **Platform:** Raspberry Pi OS
-- **Python:** 3.11
-- **Installed on robot:** Yes (preinstalled)
 
 ## API reference
 
 See: [API reference](../api/arm_control.md)
+

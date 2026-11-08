@@ -40,84 +40,90 @@ Values:
 
 ### `VectorFloat`
 
+`VectorFloat()` creates a record. Fields are writable.
+
 **Fields**
 
-- **x**
-- **y**
-- **z**
+- **x: float**
+- **y: float**
+- **z: float**
 
 ### `YawPitchRoll`
 
+`YawPitchRoll()` creates a record. Fields are writable.
+
 **Fields**
 
-- **yaw**
-- **pitch**
-- **roll**
+- **yaw: float**
+- **pitch: float**
+- **roll: float**
 
 ### `ImuData`
 
+`ImuData()` creates a record. Fields are writable.
+
 **Fields**
 
-- **ypr**
-- **linear_accel**
-- **temperature**
+- **ypr: YawPitchRoll**
+- **linear_accel: VectorFloat**
+- **temperature: float**
 
 ### `ImuEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`ImuEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
 - `onImuUpdate(data: ImuData) -> None`
   - Called when a new IMU sample/update is available.
-- `onImuGesture(type: ImuGesture, from: GestureDirection) -> None`
+- `onImuGesture(type: ImuGesture, direction: GestureDirection) -> None`
   - Called when a gesture is detected.
 
 ## Functions
 
-### `add_listener(listener: ImuEventListener, priority: bool = False) -> None`
+### `add_listener(listener: Optional[ImuEventListener], priority: bool = False) -> None`
 
-Register an ImuEventListener instance.
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `ImuEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener**: Listener object to register.
-- **priority**: If `True`, the listener is inserted with higher priority (called earlier). (default: `False`)
-
+Duplicate object registrations are permitted; each has a distinct native proxy.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
 ### `remove_listener(listener: ImuEventListener) -> None`
 
-Unregister a previously registered ImuEventListener instance.
+Unregister one matching object registration. **listener** is the Python object
+previously passed to `add_listener()`. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.
 
-**Parameters**
+### `on_update(cb: Optional[Callable[[ImuData], None]]) -> None`
 
-- **listener**: Listener object to unregister.
+Set the update function callback, replacing any previous callable.
 
+- **cb**: Called as `cb(data)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-### `on_update(cb: py::function) -> None`
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-Set a static IMU update callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
+### `on_gesture(cb: Optional[Callable[[ImuGesture, GestureDirection], None]]) -> None`
 
-**Parameters**
+Set the gesture function callback, replacing any previous callable.
 
-- **cb**:
+- **cb**: Called as `cb(type, direction)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-
-### `on_gesture(cb: py::function) -> None`
-
-Set a static IMU gesture callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
-
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
 
 ### `init(delay: int = 0, gx: int = 0, gy: int = 0, gz: int = 0, ax: int = 0, ay: int = 0, az: int = 0) -> int`
 
@@ -127,13 +133,13 @@ This must be called once before reading IMU data or receiving events.
 
 **Parameters**
 
-- **delay**: Optional delay (milliseconds) before processing events. (default: `0`)
-- **gx**: Gyroscope X offset. (default: `0`)
-- **gy**: Gyroscope Y offset. (default: `0`)
-- **gz**: Gyroscope Z offset. (default: `0`)
-- **ax**: Accelerometer X offset. (default: `0`)
-- **ay**: Accelerometer Y offset. (default: `0`)
-- **az**: Accelerometer Z offset. (default: `0`)
+- **delay**: Startup delay in seconds before normal motion processing. (default: `0`)
+- **gx**: Gyroscope X offset in millidegrees per second (mdps). (default: `0`)
+- **gy**: Gyroscope Y offset in millidegrees per second (mdps). (default: `0`)
+- **gz**: Gyroscope Z offset in millidegrees per second (mdps). (default: `0`)
+- **ax**: Accelerometer X offset in milligravity units (mg, 1/1000 g). (default: `0`)
+- **ay**: Accelerometer Y offset in milligravity units (mg, 1/1000 g). (default: `0`)
+- **az**: Accelerometer Z offset in milligravity units (mg, 1/1000 g). (default: `0`)
 
 **Returns**
 
@@ -145,7 +151,13 @@ Status code: - 0 : success - 1 : already active - -1 : init failed
 
 **Notes**
 
-- Sampling rate 104hz (accel + gyro), 1Hz (temperature)
+- Nominal sampling rate is 104 Hz for accelerometer/gyro and 1 Hz for temperature;
+  this is not a guarantee of Python callback delivery rate.
+- `delay` is measured in seconds.
+- All six supplied offsets apply only when initializing an inactive IMU and at
+  least one of `gx`, `gy`, or `gz` is nonzero. Nonzero accelerometer offsets
+  alone are ignored by this initialization path. An already-active result of
+  `1` does not replace offsets.
 
 
 ### `dispose() -> int`
@@ -161,29 +173,18 @@ Status code: - 0 : success - 1 : not active - -1 : dispose failed
 ```
 
 
-### `calculate_offsets(gx: int, gy: int, gz: int, ax: int, ay: int, az: int) -> int`
+### `calculate_offsets() -> tuple[int, int, int, int, int, int, int]`
 
-Calculate and output sensor offsets.
-
-Typically used to perform a calibration routine and retrieve offsets that can be passed to init() on later boots.
-
-**Parameters**
-
-- **gx**: Output gyroscope X offset.
-- **gy**: Output gyroscope Y offset.
-- **gz**: Output gyroscope Z offset.
-- **ax**: Output accelerometer X offset.
-- **ay**: Output accelerometer Y offset.
-- **az**: Output accelerometer Z offset.
+Calculate sensor offsets using a blocking hardware calibration routine. This
+function takes no arguments. The offsets can be passed to `init()` on later boots.
 
 **Returns**
 
-- `int`:
-
-```text
-Status code: - 0 : success - -1 : init failed - -2 : calculation failed
-```
-
+`(result, gx, gy, gz, ax, ay, az)`: status followed by gyro X/Y/Z and accelerometer
+X/Y/Z offsets. `result` is `0` on success, `-1` for initialization failure, or
+`-2` for calculation failure. Check the status before using offsets; failure
+placeholders are not valid calibration. In a wrapper callback this raises
+`RuntimeError` instead of entering blocking native work.
 
 ### `get_imu_data() -> ImuData`
 
@@ -228,3 +229,28 @@ Original note: format 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+
+### `get_gesture_str(type: ImuGesture) -> str`
+
+Return the native display string for the gesture enum.
+
+### `get_direction_str(from: GestureDirection) -> str`
+
+Return the native display string for the direction enum. The binding argument
+name is `from`, which is a Python keyword. Call positionally, for example
+`doly_imu.get_direction_str(doly_imu.GestureDirection.Left)`; do not write `from=...`.
+
+## Lifecycle contract
+
+`init()` and `calculate_offsets()` raise `RuntimeError` from any wrapper
+callback. `dispose()` instead returns `-1` there. Native disposal `0/1` accepts
+callback cleanup; `-1` may represent callback rejection or resource failure, so
+the wrapper conservatively retains registrations. Perform cleanup on the control
+thread. `YawPitchRoll` angles are degrees and temperature is degrees Celsius;
+linear acceleration uses milligravity units (mg, 1/1000 g). These units describe
+the numeric scaling, not calibration accuracy.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+
+

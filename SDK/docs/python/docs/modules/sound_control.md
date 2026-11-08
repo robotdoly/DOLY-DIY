@@ -1,16 +1,14 @@
 # SoundControl (Python)
 
-
-
 ## Import
 
 ```python
-import doly_helper
+import doly_sound
 ```
 
 ## Minimal working example
 
-Below is the module’s `example.py` as a starting point.
+Below is the module’s `examples/python/SoundControl/example.py` as a starting point.
 
 ```python
 """
@@ -19,19 +17,19 @@ example.py
 It demonstrates:
 - Initializing the Sound controller
 - Registering the static event listener
-- Seting volume
-- Playin sound
+- Setting volume
+- Playing sound
 - Cleaning up (dispose)
 
 """
 
 import time
-import doly_helper as helper
+from pathlib import Path
 import doly_sound as snd
 
 
 def on_snd_begin(id: int, volume):
-    print(f"[info] Sound begin id={id} side={volume:.3f}")
+    print(f"[info] Sound begin id={id} volume={volume:.3f}")
 
 def on_snd_complete(id: int):
     print(f"[info] Sound completed id={id}")
@@ -46,48 +44,55 @@ def main():
 
     # Version
     try:
-        print(f"[info] LedControl Version: {snd.get_version():.3f}")
+        print(f"[info] SoundControl Version: {snd.get_version():.3f}")
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-        
+
 
     # Initialize sound controler
     rc = snd.init()
     if rc < 0:
         print(f"[error] SoundControl.init failed rc={rc}")
         return -2
-    
-    # Register static event listeners if required
-    snd.on_begin(on_snd_begin)
-    snd.on_complete(on_snd_complete)
-    snd.on_abort(on_snd_error)
-    snd.on_error(on_snd_error)
 
-	# Set volume to 80%
-    snd.set_volume(80)
+    result = 0
+    try:
+        # Register static event listeners if required
+        snd.on_begin(on_snd_begin)
+        snd.on_complete(on_snd_complete)
+        snd.on_abort(on_snd_abort)
+        snd.on_error(on_snd_error)
 
-    # Play sound
-    rc = snd.play("sound_test.wav", 1) < 0
-    if rc < 0:
-        print(f"[error] Play failed rc={rc}")
-        return -3
+        # Set volume to 80%
+        rc = snd.set_volume(80)
+        if rc < 0:
+            print(f"[error] Set volume failed rc={rc}")
+            return -3
 
-    # Wait until done (simple polling example)
-    while snd.get_state() != snd.SoundState.Stop:
-        time.sleep(0.1)
+        # Play sound
+        sound_path = Path(__file__).with_name("sound_test.wav")
+        rc = snd.play(str(sound_path), 1)
+        if rc < 0:
+            print(f"[error] Play failed rc={rc}")
+            return -3
 
-    # Cleanup
-    snd.dispose()    
-    time.sleep(0.2) 
+        # Wait until done (simple polling example)
+        while snd.get_state() != snd.SoundState.Stop:
+            time.sleep(0.1)
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = snd.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] snd.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] snd.dispose raised: {exc}")
+            result = 1
+    time.sleep(0.2)
 
-    return 0
+    return result
 
 
 if __name__ == "__main__":
@@ -103,12 +108,8 @@ if __name__ == "__main__":
 - **Read state / values**
 - **Dispose / cleanup**
 
-## Notes
-
-- **Platform:** Raspberry Pi OS
-- **Python:** 3.11
-- **Installed on robot:** Yes (preinstalled)
 
 ## API reference
 
 See: [API reference](../api/sound_control.md)
+

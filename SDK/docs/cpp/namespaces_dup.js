@@ -23,6 +23,20 @@ var namespaces_dup =
       [ "RemoveListenerOnMovement", "namespace_arm_event.html#a7bd18a86cb0fc73e38e3ee74e681f522", null ],
       [ "RemoveListenerOnStateChange", "namespace_arm_event.html#a502de6ae5263284bc90a0497f04f996f", null ]
     ] ],
+    [ "BatteryControl", "namespace_battery_control.html", [
+      [ "dispose", "namespace_battery_control.html#afc0a424fe10cfb78f756db39cde1bfbb", null ],
+      [ "getCapacity", "namespace_battery_control.html#a46b7b82889b0c9bd6992010dbbb9876e", null ],
+      [ "getVersion", "namespace_battery_control.html#ad05609710889343f3fa6bbe22b93de42", null ],
+      [ "init", "namespace_battery_control.html#a8ff597390deebcadcdf378c32dad87cd", null ],
+      [ "isActive", "namespace_battery_control.html#a9192867d402095aa4154179948cafd8d", null ],
+      [ "SetAlarmThreshold", "namespace_battery_control.html#a5f102b45a27fbf39e0571738b3507542", null ]
+    ] ],
+    [ "BatteryEvent", "namespace_battery_event.html", [
+      [ "AddListener", "namespace_battery_event.html#a04d2961ce266e22dbae2a4f46c5fb131", null ],
+      [ "AddListenerOnAlarm", "namespace_battery_event.html#a0feb872186223bcd903eee3f9815a4c2", null ],
+      [ "RemoveListener", "namespace_battery_event.html#a1077130c4901eff9289b23f39ffe887d", null ],
+      [ "RemoveListenerOnAlarm", "namespace_battery_event.html#a409409bc86e464785b866bd3a8fc9024", null ]
+    ] ],
     [ "DriveControl", "namespace_drive_control.html", [
       [ "Abort", "namespace_drive_control.html#ab19f6180373fc032e00fc81e2140a391", null ],
       [ "dispose", "namespace_drive_control.html#a1be88ad092ce7b7cc3bb710a8ae2c9e1", null ],
@@ -79,8 +93,8 @@ var namespaces_dup =
       [ "setEyes", "namespace_eye_control.html#aa94086315a571ed1f10d560062e7b512", null ],
       [ "setIris", "namespace_eye_control.html#a4d5b7e431bb65ce0ca4495884b39aa9c", null ],
       [ "setIris", "namespace_eye_control.html#a79ff86b1d5f98a9f2d5caab848172391", null ],
-      [ "setLid", "namespace_eye_control.html#a340b03b371a3b0f794893607310b56a8", null ],
-      [ "setPosition", "namespace_eye_control.html#adf1be77706b2701c92b6b432818a9efe", null ]
+      [ "setIrisPosition", "namespace_eye_control.html#ad8af49aea1ca9157272c0648d1685cb6", null ],
+      [ "setLid", "namespace_eye_control.html#a340b03b371a3b0f794893607310b56a8", null ]
     ] ],
     [ "EyeEvent", "namespace_eye_event.html", [
       [ "AddListener", "namespace_eye_event.html#aa8377360a263f76693a6f0b7762fc03f", null ],

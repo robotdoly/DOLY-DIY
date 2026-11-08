@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a809eea0dd62d326dcb9f00f63872e885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when an activity completes.  <br /></td></tr>
 <tr class="memitem:a61fee6a9ab44e4cae6773aff067a521e" id="r_a61fee6a9ab44e4cae6773aff067a521e"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a61fee6a9ab44e4cae6773aff067a521e">onLedError</a> (uint16_t id, <a class="el" href="group__doly__ledcontrol.html#ga889a635ae84c20461ac4c52b849b47d3">LedSide</a> side, <a class="el" href="group__doly__ledcontrol.html#ga3ef6c2452012721d580de0990a0f8303">LedErrorType</a> type)</td></tr>
 <tr class="memdesc:a61fee6a9ab44e4cae6773aff067a521e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when an activity fails or is aborted.  <br /></td></tr>
+<tr class="memitem:a5b8d2264bb7cf3812b9c4590846e1877" id="r_a5b8d2264bb7cf3812b9c4590846e1877"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a5b8d2264bb7cf3812b9c4590846e1877">onLedAnimationComplete</a> (uint16_t id)</td></tr>
+<tr class="memitem:a03dfccb69319fb989581204498f0f0ff" id="r_a03dfccb69319fb989581204498f0f0ff"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a03dfccb69319fb989581204498f0f0ff">onLedAnimationError</a> (uint16_t id, <a class="el" href="group__doly__ledcontrol.html#ga3ef6c2452012721d580de0990a0f8303">LedErrorType</a> type)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Observer interface for receiving LED completion and error events. </p>
@@ -139,6 +141,60 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5b8d2264bb7cf3812b9c4590846e1877" name="a5b8d2264bb7cf3812b9c4590846e1877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8d2264bb7cf3812b9c4590846e1877">&#9670;&#160;</a></span>onLedAnimationComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void LedEventListener::onLedAnimationComplete </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03dfccb69319fb989581204498f0f0ff" name="a03dfccb69319fb989581204498f0f0ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03dfccb69319fb989581204498f0f0ff">&#9670;&#160;</a></span>onLedAnimationError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void LedEventListener::onLedAnimationError </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__doly__ledcontrol.html#ga3ef6c2452012721d580de0990a0f8303">LedErrorType</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a809eea0dd62d326dcb9f00f63872e885" name="a809eea0dd62d326dcb9f00f63872e885"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a809eea0dd62d326dcb9f00f63872e885">&#9670;&#160;</a></span>onLedComplete()</h2>
 

@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -99,62 +99,7 @@ $(function(){initNavTree('_io_control_2main_8cpp-example.html','',''); });
 <li>Controlling digital and analog IO</li>
 <li>Handling IO-related events</li>
 </ul>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;chrono&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;spdlog/spdlog.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_io_control_8h.html">IoControl.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_helper_8h.html">Helper.h</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">    <span class="comment">// Setup spdlog</span></div>
-<div class="line">    spdlog::set_level(spdlog::level::info); <span class="comment">// Set as needed</span></div>
-<div class="line">    spdlog::flush_on(spdlog::level::trace); <span class="comment">// flush everything</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// *** IMPORTANT *** </span></div>
-<div class="line">    <span class="comment">// Stop doly service if running,</span></div>
-<div class="line">    <span class="comment">// otherwise instance of libraries cause conflict   </span></div>
-<div class="line">    <span class="keywordflow">if</span> (<a id="_a0" name="_a0"></a><a class="code hl_function" href="namespace_helper.html#a52099525bb7c9988b7b71fe9458ad539">Helper::stopDolyService</a>() &lt; 0) {</div>
-<div class="line">        spdlog::error(<span class="stringliteral">&quot;Doly service stop failed&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> -1;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Get IoControl version</span></div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;IoControl Version:{:.3f}&quot;</span>, <a id="_a1" name="_a1"></a><a class="code hl_function" href="namespace_io_control.html#a87806b741b3d06a5ca38217ef51d68b1">IoControl::getVersion</a>());</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// INFORMATION</span></div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;Before testing, connect IO port 0 and port 1 (pin_0 &lt;-&gt; pin_1).&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// write pin state =&gt; HIGH </span></div>
-<div class="line">    uint8_t io_0 = 0; <span class="comment">// IO port pin_0</span></div>
-<div class="line">    <a id="a2" name="a2"></a><a class="code hl_function" href="namespace_io_control.html#a31e09d81905ef26b987dc88476565857">IoControl::writePin</a>(1, 0, <a id="_a3" name="_a3"></a><a class="code hl_enumvalue" href="group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411ab89de3b4b81c4facfac906edf29aec8c">GpioState::HIGH</a>);</div>
-<div class="line">    <span class="comment">// read IO pin state</span></div>
-<div class="line">    uint8_t io_1 = 1; <span class="comment">// IO port pin_1</span></div>
-<div class="line">    <a id="_a4" name="_a4"></a><a class="code hl_enumeration" href="group__doly__sdk__common.html#ga17626f307aca09deb70d5dc95f1a8411">GpioState</a> state = <a id="a5" name="a5"></a><a class="code hl_function" href="namespace_io_control.html#a9da65ce897323e54d0c586951bab46ac">IoControl::readPin</a>(2, io_1);</div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;Read Pin:{} State:{}&quot;</span>, io_1, <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(state));</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// write pin state =&gt; LOW </span></div>
-<div class="line">    <a class="code hl_function" href="namespace_io_control.html#a31e09d81905ef26b987dc88476565857">IoControl::writePin</a>(1, 0, <a id="_a6" name="_a6"></a><a class="code hl_enumvalue" href="group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411a41bc94cbd8eebea13ce0491b2ac11b88">GpioState::LOW</a>);</div>
-<div class="line">    <span class="comment">// read IO pin state</span></div>
-<div class="line">    state = <a class="code hl_function" href="namespace_io_control.html#a9da65ce897323e54d0c586951bab46ac">IoControl::readPin</a>(2, io_1);</div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;Read Pin:{} State:{}&quot;</span>, io_1, <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(state));</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="a_helper_8h_html"><div class="ttname"><a href="_helper_8h.html">Helper.h</a></div><div class="ttdoc">Shared helper utilities and common types used across the Doly SDK.</div></div>
-<div class="ttc" id="a_io_control_8h_html"><div class="ttname"><a href="_io_control_8h.html">IoControl.h</a></div><div class="ttdoc">Public API for Doly IO control (IO Port GPIO pin read/write).</div></div>
-<div class="ttc" id="agroup__doly__sdk__common_html_ga17626f307aca09deb70d5dc95f1a8411"><div class="ttname"><a href="group__doly__sdk__common.html#ga17626f307aca09deb70d5dc95f1a8411">GpioState</a></div><div class="ttdeci">GpioState</div><div class="ttdoc">Represents the digital logic level of a GPIO pin.</div><div class="ttdef"><b>Definition</b> GpioPin.h:47</div></div>
-<div class="ttc" id="agroup__doly__sdk__common_html_gga17626f307aca09deb70d5dc95f1a8411a41bc94cbd8eebea13ce0491b2ac11b88"><div class="ttname"><a href="group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411a41bc94cbd8eebea13ce0491b2ac11b88">GpioState::LOW</a></div><div class="ttdeci">@ LOW</div><div class="ttdef"><b>Definition</b> GpioPin.h:49</div></div>
-<div class="ttc" id="agroup__doly__sdk__common_html_gga17626f307aca09deb70d5dc95f1a8411ab89de3b4b81c4facfac906edf29aec8c"><div class="ttname"><a href="group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411ab89de3b4b81c4facfac906edf29aec8c">GpioState::HIGH</a></div><div class="ttdeci">@ HIGH</div><div class="ttdef"><b>Definition</b> GpioPin.h:52</div></div>
-<div class="ttc" id="anamespace_helper_html_a52099525bb7c9988b7b71fe9458ad539"><div class="ttname"><a href="namespace_helper.html#a52099525bb7c9988b7b71fe9458ad539">Helper::stopDolyService</a></div><div class="ttdeci">int8_t stopDolyService()</div><div class="ttdoc">Stop the background Doly service (if running).</div></div>
-<div class="ttc" id="anamespace_io_control_html_a31e09d81905ef26b987dc88476565857"><div class="ttname"><a href="namespace_io_control.html#a31e09d81905ef26b987dc88476565857">IoControl::writePin</a></div><div class="ttdeci">int8_t writePin(uint16_t id, uint8_t io_pin, GpioState state)</div><div class="ttdoc">Write a GPIO state to an IO port pin.</div></div>
-<div class="ttc" id="anamespace_io_control_html_a87806b741b3d06a5ca38217ef51d68b1"><div class="ttname"><a href="namespace_io_control.html#a87806b741b3d06a5ca38217ef51d68b1">IoControl::getVersion</a></div><div class="ttdeci">float getVersion()</div><div class="ttdoc">Get current library version.</div></div>
-<div class="ttc" id="anamespace_io_control_html_a9da65ce897323e54d0c586951bab46ac"><div class="ttname"><a href="namespace_io_control.html#a9da65ce897323e54d0c586951bab46ac">IoControl::readPin</a></div><div class="ttdeci">GpioState readPin(uint16_t id, uint8_t io_pin)</div><div class="ttdoc">Read the current GPIO state of an IO port pin.</div></div>
-</div><!-- fragment --> </div><!-- contents -->
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->

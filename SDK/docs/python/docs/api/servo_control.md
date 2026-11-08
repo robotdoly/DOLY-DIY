@@ -21,7 +21,7 @@ Values:
 
 ### `ServoEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`ServoEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
@@ -34,59 +34,59 @@ Listener interface. Implement this class and register it with `add_listener()` t
 
 ## Functions
 
-### `add_listener(listener: ServoEventListener, priority: bool = False) -> None`
+### `add_listener(listener: Optional[ServoEventListener], priority: bool = False) -> None`
 
-Register a class-based listener (kept alive by the binding until removed/cleared).
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `ServoEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener**:
-- **priority**:  (default: `False`)
-
+Duplicate object registrations are permitted; each has a distinct native proxy.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
 ### `remove_listener(listener: ServoEventListener) -> None`
 
-Unregister a class-based listener.
+Unregister one matching object registration. **listener** is the Python object
+previously passed to `add_listener()`. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.
 
-**Parameters**
+### `on_complete(cb: Optional[Callable[[int, ServoId], None]]) -> None`
 
-- **listener**:
+Set the complete function callback, replacing any previous callable.
 
+- **cb**: Called as `cb(id, channel)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-### `on_complete(cb: py::function) -> None`
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-Set a static servo complete callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
+### `on_abort(cb: Optional[Callable[[int, ServoId], None]]) -> None`
 
-**Parameters**
+Set the abort function callback, replacing any previous callable.
 
-- **cb**:
+- **cb**: Called as `cb(id, channel)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-### `on_abort(cb: py::function) -> None`
+### `on_error(cb: Optional[Callable[[int, ServoId], None]]) -> None`
 
-Set a static servo abort callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
+Set the error function callback, replacing any previous callable.
 
-**Parameters**
+- **cb**: Called as `cb(id, channel)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-- **cb**:
-
-
-### `on_error(cb: py::function) -> None`
-
-Set a static servo error callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
-
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
 
 ### `init() -> int`
 
@@ -97,20 +97,25 @@ Initialize the servo subsystem.
 - `int`:
 
 ```text
-Status code: - 0 : success - -1 : SERVO_0 setup failed - -2 : SERVO_1 setup failed
+0: success
+1: already initialized
+-1: ServoMotor initialization failed
+-2: Servo0 setup failed
+-3: Servo1 setup failed
 ```
 
 
 ### `set_servo(id: int, channel: ServoId, angle: float, speed: int = 100, invert: bool = False) -> int`
 
-Set a servo target angle.
+Submit a servo target angle. Motion runs asynchronously, but submission may wait
+for previous work on the channel. A zero result means accepted, not completed.
 
 **Parameters**
 
 - **id**: User-defined action identifier (forwarded to event callbacks).
 - **channel**: Servo channel to control.
 - **angle**: Target angle (degrees).
-- **speed**: Speed percentage (valid range: 0..100). (default: `100`)
+- **speed**: Speed percentage (valid range: 1..100). (default: `100`)
 - **invert**: If `True`, invert the direction/orientation for the given channel. (default: `False`)
 
 **Returns**
@@ -118,9 +123,16 @@ Set a servo target angle.
 - `int`:
 
 ```text
-Status code: - 0 : success - -1 : max angle exceed error - -2 : speed range error (0..100) - -3 : undefined channel - -4 : not initialized
+0: command accepted
+-1: angle exceeds the configured motor maximum
+-2: speed or lower-level motor parameter/channel failure
+-3: undefined channel or unavailable motor
+-4: controller inactive, preceding work could not finish, or movement worker could not start
 ```
 
+
+The controller can forward lower-level motor errors, so these codes do not uniquely
+identify a failure's cause.
 
 ### `abort(channel: ServoId) -> int`
 
@@ -152,7 +164,9 @@ Release servo hold (disable holding torque) for a channel.
 - `int`:
 
 ```text
-Status code: - 0 : success - -1 : failed - -2 : busy/running
+0: hold released
+-1: undefined channel or servo
+-2: channel still active or PWM release failed
 ```
 
 
@@ -165,7 +179,10 @@ Dispose/stop the servo subsystem and release resources.
 - `int`:
 
 ```text
-Status code (implementation-defined).
+0: success
+1: not initialized
+-4: callback-context rejection; registrations retained
+-5: resource release error after teardown; Python callback cleanup accepted
 ```
 
 
@@ -182,3 +199,36 @@ Original note: format 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+
+### `servo_complete(id: int, channel: ServoId) -> None`
+
+Dispatch the corresponding servo completion event with the action **id** and servo
+**channel**. This is event dispatch, not a motor command or proof of physical
+completion.
+
+### `servo_abort(id: int, channel: ServoId) -> None`
+
+Dispatch the corresponding servo abort event with the action **id** and servo
+**channel**. This is event dispatch, not a motor command or proof of physical
+completion.
+
+`servo_abort` dispatches an event; `abort(channel)` cancels a motor action.
+
+### `servo_error(id: int, channel: ServoId) -> None`
+
+Dispatch the corresponding servo error event with the action **id** and servo
+**channel**. This is event dispatch, not a motor command or proof of physical
+completion.
+
+## Lifecycle contract
+
+`init()`, `abort(channel)` and `release(channel)` raise `RuntimeError` from any
+wrapper callback. `dispose()` returns `-4` there and retains registrations.
+Disposal outcomes `0`, `1` and `-5` accept component callback cleanup.
+A timed dwell is not proof that a servo finished. `release()` can report `-2`
+for either a running channel or a PWM release failure.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+
+

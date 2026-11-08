@@ -39,24 +39,35 @@ Values:
 
 ### `Color`
 
+`Color()` creates a color with all channels initially zero. The shared Python type
+is reused by Eye and LED. Channels are writable integers in 0–255.
+
 **Fields**
 
-- **r**: Return string representation.
-- **g**: Return string representation.
-- **b**: Return string representation.
+- **r: int**: Red channel, default 0.
+- **g: int**: Green channel, default 0.
+- **b: int**: Blue channel, default 0.
 
-**Methods**
+**Instance methods**
 
 - `toString() -> str`
   - Return string representation.
+
+`__repr__() -> str` produces `Color(r=…, g=…, b=…)`.
+
+**Static methods**
+
 - `get_color(r: int, g: int, b: int) -> Color`
   - Create a Color from r,g,b.
 - `hex_to_rgb(hex: str) -> Color`
-  - Convert hex string to Color.
+  - Convert a hex string to Color using the native parser. Malformed input may
+    raise translated exceptions such as `ValueError` or `IndexError`; the binding
+    does not enforce strict six-digit syntax or guarantee a black fallback.
 - `from_code(code: ColorCode) -> Color`
   - Get a Color from ColorCode.
 - `get_led_color(code: ColorCode) -> Color`
   - Get closest color tone for LEDs.
 - `get_color_name(code: ColorCode) -> str`
   - Get color name from ColorCode.
+
 

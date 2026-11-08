@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -98,65 +98,7 @@ $(function(){initNavTree('_fan_control_2main_8cpp-example.html','',''); });
 <li>Initializing <a class="el" href="namespace_fan_control.html">FanControl</a></li>
 <li>setting fan speed</li>
 </ul>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;chrono&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;spdlog/spdlog.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_fan_control_8h.html">FanControl.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_helper_8h.html">Helper.h</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">    <span class="comment">// Setup spdlog</span></div>
-<div class="line">    spdlog::set_level(spdlog::level::info); <span class="comment">// Set as needed</span></div>
-<div class="line">    spdlog::flush_on(spdlog::level::trace); <span class="comment">// flush everything</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// *** IMPORTANT *** </span></div>
-<div class="line">    <span class="comment">// Stop doly service if running,</span></div>
-<div class="line">    <span class="comment">// otherwise instance of libraries cause conflict   </span></div>
-<div class="line">    <span class="keywordflow">if</span> (<a id="_a0" name="_a0"></a><a class="code hl_function" href="namespace_helper.html#a52099525bb7c9988b7b71fe9458ad539">Helper::stopDolyService</a>() &lt; 0) {</div>
-<div class="line">        spdlog::error(<span class="stringliteral">&quot;Doly service stop failed&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> -1;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Initialize Tempreture Control</span></div>
-<div class="line">    <span class="comment">// auto_control = false: we will control fan speed manually in this example</span></div>
-<div class="line">    <span class="comment">// auto_control = true: automatic temperature control will try to manage CPU temperature under 70 degree Celsius    </span></div>
-<div class="line">    <span class="keywordflow">if</span> (<a id="_a1" name="_a1"></a><a class="code hl_function" href="namespace_fan_control.html#aee044f4bdd00f4d6ff75945eabe4ff33">FanControl::init</a>(<span class="keyword">false</span>) &lt; 0)</div>
-<div class="line">    {</div>
-<div class="line">        spdlog::error(<span class="stringliteral">&quot;FanControl init failed&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> -2;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// get FanControl version</span></div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;FanControl Version:{:.3f}&quot;</span>, <a id="_a2" name="_a2"></a><a class="code hl_function" href="namespace_fan_control.html#ae1c7f2f907f632dd2689bbff3100efbc">FanControl::getVersion</a>());</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Set fan speed to 100%</span></div>
-<div class="line">    <a id="a3" name="a3"></a><a class="code hl_function" href="namespace_fan_control.html#a091a5b2a5795c5e93b343bee276e5a74">FanControl::setFanSpeed</a>(100);</div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;Fan speed set to 100%&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Keep running for 7 seconds</span></div>
-<div class="line">    std::this_thread::sleep_for(std::chrono::seconds(7));</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Turn off fan</span></div>
-<div class="line">    <a class="code hl_function" href="namespace_fan_control.html#a091a5b2a5795c5e93b343bee276e5a74">FanControl::setFanSpeed</a>(0);</div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;Fan turned off&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Cleanup</span></div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="namespace_fan_control.html#af21003f43e74ad7a7b6c82c842e5b49e">FanControl::dispose</a>();</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="a_fan_control_8h_html"><div class="ttname"><a href="_fan_control_8h.html">FanControl.h</a></div><div class="ttdoc">Public API for Doly fan control.</div></div>
-<div class="ttc" id="a_helper_8h_html"><div class="ttname"><a href="_helper_8h.html">Helper.h</a></div><div class="ttdoc">Shared helper utilities and common types used across the Doly SDK.</div></div>
-<div class="ttc" id="anamespace_fan_control_html_a091a5b2a5795c5e93b343bee276e5a74"><div class="ttname"><a href="namespace_fan_control.html#a091a5b2a5795c5e93b343bee276e5a74">FanControl::setFanSpeed</a></div><div class="ttdeci">int8_t setFanSpeed(uint8_t percentage)</div><div class="ttdoc">Set fan speed as a percentage.</div></div>
-<div class="ttc" id="anamespace_fan_control_html_ae1c7f2f907f632dd2689bbff3100efbc"><div class="ttname"><a href="namespace_fan_control.html#ae1c7f2f907f632dd2689bbff3100efbc">FanControl::getVersion</a></div><div class="ttdeci">float getVersion()</div><div class="ttdoc">Get current library version.</div></div>
-<div class="ttc" id="anamespace_fan_control_html_aee044f4bdd00f4d6ff75945eabe4ff33"><div class="ttname"><a href="namespace_fan_control.html#aee044f4bdd00f4d6ff75945eabe4ff33">FanControl::init</a></div><div class="ttdeci">int8_t init(bool auto_control)</div><div class="ttdoc">Initialize the Fan Control module.</div></div>
-<div class="ttc" id="anamespace_fan_control_html_af21003f43e74ad7a7b6c82c842e5b49e"><div class="ttname"><a href="namespace_fan_control.html#af21003f43e74ad7a7b6c82c842e5b49e">FanControl::dispose</a></div><div class="ttdeci">int8_t dispose()</div><div class="ttdoc">Dispose the Fan Control module and release resources.</div></div>
-<div class="ttc" id="anamespace_helper_html_a52099525bb7c9988b7b71fe9458ad539"><div class="ttname"><a href="namespace_helper.html#a52099525bb7c9988b7b71fe9458ad539">Helper::stopDolyService</a></div><div class="ttdeci">int8_t stopDolyService()</div><div class="ttdoc">Stop the background Doly service (if running).</div></div>
-</div><!-- fragment --> </div><!-- contents -->
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->

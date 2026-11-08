@@ -9,8 +9,10 @@ var searchData=
   ['blink_5fr_6',['BLINK_R',['../namespace_eye_expressions.html#a96e3ca2e567f0769ee1c999e082a7f23',1,'EyeExpressions']]],
   ['blink_5fslow_7',['BLINK_SLOW',['../namespace_eye_expressions.html#aaecf126796e86d95621d57144dc4db6b',1,'EyeExpressions']]],
   ['blue_8',['BLUE',['../namespace_eye_expressions.html#aa2c770b8d55a7955976d3be27e1ec63e',1,'EyeExpressions']]],
-  ['buffer_9',['buffer',['../struct_lcd_data.html#ad91f0c62b8029d00beca4a4350dbb7a8',1,'LcdData']]],
-  ['bugged_10',['BUGGED',['../namespace_eye_expressions.html#ade45f34b64fca3feec6534bac9ab4353',1,'EyeExpressions']]],
-  ['bump_11',['BUMP',['../namespace_eye_expressions.html#a370be8f0fb1239f6882d4070f4be931b',1,'EyeExpressions']]],
-  ['burned_5fup_12',['BURNED_UP',['../namespace_eye_expressions.html#afa15f743088993ad445b676c328f04c8',1,'EyeExpressions']]]
+  ['brightness_9',['brightness',['../class_options.html#a74430c6e1ded7b7737a614ea5dfe9db1',1,'Options']]],
+  ['buffer_10',['buffer',['../struct_lcd_data.html#ad91f0c62b8029d00beca4a4350dbb7a8',1,'LcdData']]],
+  ['buffers_11',['buffers',['../struct_completed_request.html#ae54f2a278fb8f8a0050ad64950a662d7',1,'CompletedRequest']]],
+  ['bugged_12',['BUGGED',['../namespace_eye_expressions.html#ade45f34b64fca3feec6534bac9ab4353',1,'EyeExpressions']]],
+  ['bump_13',['BUMP',['../namespace_eye_expressions.html#a370be8f0fb1239f6882d4070f4be931b',1,'EyeExpressions']]],
+  ['burned_5fup_14',['BURNED_UP',['../namespace_eye_expressions.html#afa15f743088993ad445b676c328f04c8',1,'EyeExpressions']]]
 ];

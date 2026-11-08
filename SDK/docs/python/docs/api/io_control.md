@@ -25,7 +25,7 @@ Write a GPIO state to an IO port pin.
 
 **Parameters**
 
-- **id**: User-defined identifier used for internal tracking/logging (can be any value).
+- **id**: User-defined identifier used for internal tracking/logging (unsigned 16-bit, 0..65535).
 - **io_pin**: IO port pin number (valid range: 0..5).
 - **state**: Desired GPIO output state.
 
@@ -44,7 +44,7 @@ Read the current GPIO state of an IO port pin.
 
 **Parameters**
 
-- **id**: User-defined identifier used for internal tracking/logging (can be any value).
+- **id**: User-defined identifier used for internal tracking/logging (unsigned 16-bit, 0..65535).
 - **io_pin**: IO port pin number (valid range: 0..5).
 
 **Returns**
@@ -52,9 +52,14 @@ Read the current GPIO state of an IO port pin.
 - `GpioState`:
 
 ```text
-Current GPIO state. If @p io_pin is invalid or a read error occurs, the returned value is implementation-defined (see underlying GPIO layer).
+Current GPIO state. Native invalid-pin, missing-pin, invalid-descriptor and
+read-failure paths return GpioState.Low, indistinguishable from a valid LOW input.
+There is no separate error status.
 ```
 
+
+Physical pins 0..5 are supported. Native pin values 6..255 return `GpioState.Low`;
+values outside the unsigned 8-bit range fail Python conversion before the read.
 
 ### `get_version() -> float`
 
@@ -69,3 +74,4 @@ Original note: format 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+

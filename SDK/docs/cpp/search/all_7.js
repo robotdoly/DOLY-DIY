@@ -5,10 +5,11 @@ var searchData=
   ['hearts_2',['HEARTS',['../namespace_eye_expressions.html#a44bb30873db467838c5c9aa8243c6036',1,'EyeExpressions']]],
   ['heated_3',['HEATED',['../namespace_eye_expressions.html#a67cec10211f5498a19d8d6911f10f145',1,'EyeExpressions']]],
   ['height_4',['height',['../class_v_content.html#a37aed33475a5e3c044ce187665852e20',1,'VContent']]],
-  ['helper_5',['Helper',['../namespace_helper.html',1,'']]],
-  ['helper_2eh_6',['Helper.h',['../_helper_8h.html',1,'']]],
-  ['hextorgb_7',['hexToRgb',['../struct_color.html#af962ea76998c8e8bcc8d7fd698a9fbeb',1,'Color']]],
-  ['high_8',['HIGH',['../group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411ab89de3b4b81c4facfac906edf29aec8c',1,'GpioPin.h']]],
-  ['hopeless_9',['HOPELESS',['../namespace_eye_expressions.html#a21be6de6809cb61b1dad4123fdd13842',1,'EyeExpressions']]],
-  ['hostile_10',['HOSTILE',['../namespace_eye_expressions.html#a98d1c04ec083d5360b22ae8a88a16808',1,'EyeExpressions']]]
+  ['help_5',['help',['../class_options.html#a11ff7e822575781f10e4256db9232f12',1,'Options']]],
+  ['helper_6',['Helper',['../namespace_helper.html',1,'']]],
+  ['helper_2eh_7',['Helper.h',['../_helper_8h.html',1,'']]],
+  ['hextorgb_8',['hexToRgb',['../struct_color.html#af962ea76998c8e8bcc8d7fd698a9fbeb',1,'Color']]],
+  ['high_9',['HIGH',['../group__doly__sdk__common.html#gga17626f307aca09deb70d5dc95f1a8411ab89de3b4b81c4facfac906edf29aec8c',1,'GpioPin.h']]],
+  ['hopeless_10',['HOPELESS',['../namespace_eye_expressions.html#a21be6de6809cb61b1dad4123fdd13842',1,'EyeExpressions']]],
+  ['hostile_11',['HOSTILE',['../namespace_eye_expressions.html#a98d1c04ec083d5360b22ae8a88a16808',1,'EyeExpressions']]]
 ];

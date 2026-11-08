@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['servocontrol_0',['ServoControl',['../group__doly__servocontrol.html',1,'']]],
-  ['soundcontrol_1',['SoundControl',['../group__doly__soundcontrol.html',1,'']]]
+  ['lcdcontrol_0',['LcdControl',['../group__doly__lcdcontrol.html',1,'']]],
+  ['ledcontrol_1',['LedControl',['../group__doly__ledcontrol.html',1,'']]]
 ];

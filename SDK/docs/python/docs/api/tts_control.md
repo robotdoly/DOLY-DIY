@@ -27,7 +27,7 @@ Initialize the TTS system.
 **Parameters**
 
 - **model**: Voice model to use.
-- **output_path**: Optional output directory/path used by the implementation. (default: `""`)
+- **output_path**: Optional output audio file path used by the implementation, not a directory. (default: `""`)
 
 **Returns**
 
@@ -51,7 +51,8 @@ Dispose the TTS system and release resources.
 - `int`:
 
 ```text
-Status code (implementation-defined).
+0: success
+1: not initialized
 ```
 
 
@@ -73,7 +74,7 @@ Status code: - 0 : success - -1 : TTS not active (init() not called or failed) -
 
 **Notes**
 
-- This operation blocking the thread.
+- This operation blocks the calling thread.
 
 
 ### `get_version() -> float`
@@ -87,3 +88,11 @@ Get the TTS subsystem/library version.
 ```text
 Version number.
 ```
+
+## Lifecycle restrictions
+
+`init()`, `produce()` and `dispose()` raise `RuntimeError` from any wrapper
+callback. Run them on the application control thread. Native work releases the
+GIL but still blocks the calling thread; this is not asynchronous synthesis.
+The selected model and configuration assets must already be available.
+

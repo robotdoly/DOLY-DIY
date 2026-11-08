@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['driveeventlistener_0',['DriveEventListener',['../class_drive_event_listener.html',1,'']]]
+  ['color_0',['Color',['../struct_color.html',1,'']]],
+  ['completedrequest_1',['CompletedRequest',['../struct_completed_request.html',1,'']]]
 ];

@@ -10,13 +10,12 @@ It demonstrates:
 """
 
 import time
-import doly_helper as helper
 import doly_lcd as lcd
 
 def fill_buffer_example():
     # Allocate the exact buffer size required by the LCD
     size = lcd.get_buffer_size()
-    buf = bytearray([0xFF]) * size 
+    buf = bytearray([0xFF]) * size
 
     # write_lcd(side, buffer) accepts bytes/bytearray/memoryview/numpy uint8
     r1 = lcd.write_lcd(lcd.LcdSide.Left, buf)
@@ -41,40 +40,51 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-        
 
-    # Initialize ToF sensor controler
+
+    # Initialize LCD controller (exclusive access; do not run alongside Eye)
     rc = lcd.init(lcd.LcdColorDepth.L12BIT)
-    if rc != 0:
+    if rc < 0:
         print(f"[error] LcdControl.init failed rc={rc}")
         return -2
-    
-    # brightness 0-10
-    lcd.set_brightness(10)
 
-    # read back current depth
-    depth = lcd.get_color_depth()
-    print(f"[info] Lcd Color Depth: {depth}")
+    result = 0
+    try:
+        # brightness 0-10
+        rc = lcd.set_brightness(10)
+        if rc < 0:
+            print(f"[error] Set brightness failed rc={rc}")
+            return -3
 
-    # Demo 1: fill by buffer
-    fill_buffer_example()
+        # read back current depth
+        depth = lcd.get_color_depth()
+        print(f"[info] Lcd Color Depth: {depth}")
 
-    time.sleep(3)
+        if depth != lcd.LcdColorDepth.L12BIT:
+            print("[error] LCD is not in the requested 12-bit mode")
+            return -3
 
-    # Demo 2: fill by color
-    fill_color_example()
+        # Demo 1: fill by buffer
+        if fill_buffer_example() < 0:
+            return -3
 
-    # Cleanup
-    lcd.dispose()    
-    time.sleep(0.2) 
+        time.sleep(3)
 
-    return 0
+        # Demo 2: fill by color
+        fill_color_example()
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = lcd.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] lcd.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] lcd.dispose raised: {exc}")
+            result = 1
+    time.sleep(0.2)
+
+    return result
 
 
 if __name__ == "__main__":

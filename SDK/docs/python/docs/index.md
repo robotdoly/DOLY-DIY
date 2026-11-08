@@ -15,7 +15,6 @@ The Doly Python SDK is a collection of small, focused modules (one per capabilit
 Each module usually contains:
 
 - `example.py` — a minimal working usage example
-- `source/` — build system (CMake + pyproject) and pybind11 bindings
 
 ## Documentation style
 

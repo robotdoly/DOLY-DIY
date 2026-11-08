@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['drivecontrol_0',['DriveControl',['../namespace_drive_control.html',1,'']]],
-  ['driveevent_1',['DriveEvent',['../namespace_drive_event.html',1,'']]]
+  ['batterycontrol_0',['BatteryControl',['../namespace_battery_control.html',1,'']]],
+  ['batteryevent_1',['BatteryEvent',['../namespace_battery_event.html',1,'']]]
 ];

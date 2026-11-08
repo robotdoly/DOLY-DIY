@@ -5,6 +5,7 @@ var searchData=
   ['hearts_2',['HEARTS',['../namespace_eye_expressions.html#a44bb30873db467838c5c9aa8243c6036',1,'EyeExpressions']]],
   ['heated_3',['HEATED',['../namespace_eye_expressions.html#a67cec10211f5498a19d8d6911f10f145',1,'EyeExpressions']]],
   ['height_4',['height',['../class_v_content.html#a37aed33475a5e3c044ce187665852e20',1,'VContent']]],
-  ['hopeless_5',['HOPELESS',['../namespace_eye_expressions.html#a21be6de6809cb61b1dad4123fdd13842',1,'EyeExpressions']]],
-  ['hostile_6',['HOSTILE',['../namespace_eye_expressions.html#a98d1c04ec083d5360b22ae8a88a16808',1,'EyeExpressions']]]
+  ['help_5',['help',['../class_options.html#a11ff7e822575781f10e4256db9232f12',1,'Options']]],
+  ['hopeless_6',['HOPELESS',['../namespace_eye_expressions.html#a21be6de6809cb61b1dad4123fdd13842',1,'EyeExpressions']]],
+  ['hostile_7',['HOSTILE',['../namespace_eye_expressions.html#a98d1c04ec083d5360b22ae8a88a16808',1,'EyeExpressions']]]
 ];

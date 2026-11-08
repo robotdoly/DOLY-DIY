@@ -37,14 +37,16 @@ Values:
 
 ### `ArmData`
 
+`ArmData()` creates a record with writable fields.
+
 **Fields**
 
-- **side**
-- **angle**
+- **side: ArmSide**: Arm side.
+- **angle: float**: Current angle in degrees.
 
 ### `ArmEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`ArmEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
@@ -59,70 +61,69 @@ Listener interface. Implement this class and register it with `add_listener()` t
 
 ## Functions
 
-### `add_listener(listener: ArmEventListener, priority: bool = False) -> None`
+### `add_listener(listener: Optional[ArmEventListener], priority: bool = False) -> None`
 
-Register a listener object to receive arm events.
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `ArmEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener**: Pointer to a listener instance (must not be null).
-- **priority**: If `True`, the listener is inserted with priority ordering (implementation-defined). (default: `False`)
-
-**Notes**
-
-- Callbacks are typically invoked from an internal worker/event thread.
-
+Duplicate object registrations are permitted; each has a distinct native proxy.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
 ### `remove_listener(listener: ArmEventListener) -> None`
 
-Unregister a listener object.
+Unregister one matching object registration. **listener** is the Python object
+previously passed to `add_listener()`. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.
 
-**Parameters**
+### `on_complete(cb: Optional[Callable[[int, ArmSide], None]]) -> None`
 
-- **listener**: Pointer previously passed to AddListener().
+Set the complete function callback, replacing any previous callable.
 
+- **cb**: Called as `cb(id, side)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-### `on_complete(cb: py::function) -> None`
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-Set a static complete callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
+### `on_error(cb: Optional[Callable[[int, ArmSide, ArmErrorType], None]]) -> None`
 
-**Parameters**
+Set the error function callback, replacing any previous callable.
 
-- **cb**:
+- **cb**: Called as `cb(id, side, error_type)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-### `on_error(cb: py::function) -> None`
+### `on_state_change(cb: Optional[Callable[[ArmSide, ArmState], None]]) -> None`
 
-Set a static error callback (replaces any previous one). Tip: If you want multiple handlers, use a Python dispatcher function.
+Set the state change function callback, replacing any previous callable.
 
-**Parameters**
+- **cb**: Called as `cb(side, state)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-- **cb**:
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
+### `on_movement(cb: Optional[Callable[[ArmSide, float], None]]) -> None`
 
-### `on_state_change(cb: py::function) -> None`
+Set the movement function callback, replacing any previous callable.
 
-Set a static state change callback (replaces any previous one). Tip: If you want multiple handlers, use a Python dispatcher function.
+- **cb**: Called as `cb(side, degree_change)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-**Parameters**
-
-- **cb**:
-
-
-### `on_movement(cb: py::function) -> None`
-
-Set a static movement callback (replaces any previous one). Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
-
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
 
 ### `init() -> int`
 
@@ -135,24 +136,34 @@ This must be called once before other control functions.
 - `int`:
 
 ```text
-Status code: - 0 : success - 1 : already initialized - -1 : left servo enable pin set failed - -2 : right servo enable pin set failed
+0: success
+1: already initialized
+-1: left servo enable pin failed
+-2: right servo enable pin failed
+-3: ServoMotor initialization failed
+-4: channel setup failed
+-5: initial release failed
 ```
 
 **Notes**
 
-- After successful init(), isActive() should return true.
+- After successful init(), is_active() should return true.
 
 
 ### `dispose() -> int`
 
-Dispose/stop the arm subsystem and release resources. Removes the call back functions.
+Dispose/stop the arm subsystem and release resources. Accepted disposal also
+cleans up Arm Python callbacks; rejection retains registrations.
 
 **Returns**
 
 - `int`:
 
 ```text
-Status code: - 0 : success - 1 : not initialized
+0: success
+1: not initialized
+-3: callback-context rejection; registrations retained
+-5: resource release error after teardown; Python callback cleanup accepted
 ```
 
 
@@ -177,7 +188,7 @@ This is intended as an emergency/stop action.
 
 **Parameters**
 
-- **side**: Arm side to abort (LEFT/RIGHT/BOTH).
+- **side**: Arm side to abort (ArmSide.Left/ArmSide.Right/ArmSide.Both).
 
 
 ### `get_max_angle() -> int`
@@ -197,14 +208,17 @@ Maximum angle (degrees).
 
 Command the arm to move to an angle.
 
-The operation is handled asynchronously (non-blocking). Results are reported via: - ArmEventListener::onArmComplete() - ArmEventListener::onArmError() - ArmEventListener::onArmStateChange()
+Motion runs asynchronously, but command submission may wait for previous work or
+motor readiness. A zero result means the command was accepted, not completed.
+Use state and `ArmEventListener.onArmComplete()`, `onArmError()`, and
+`onArmStateChange()` to observe the outcome.
 
 **Parameters**
 
 - **id**: User-defined command identifier (echoed back in completion/error callbacks).
-- **side**: Arm side to move (LEFT/RIGHT/BOTH).
+- **side**: Arm side to move (ArmSide.Left/ArmSide.Right/ArmSide.Both).
 - **speed**: Speed percentage in range [1..100].
-- **angle**: Target angle in degrees in range [0..getMaxAngle()].
+- **angle**: Target angle in degrees in range [0..get_max_angle()].
 - **with_brake**: If `True`, apply brake/hold behavior at target (implementation-defined). (default: `False`)
 
 **Returns**
@@ -212,9 +226,16 @@ The operation is handled asynchronously (non-blocking). Results are reported via
 - `int`:
 
 ```text
-Status code: - 0 : success (command accepted) - -1 : not active (init() not called or subsystem not running) - -2 : speed out of range - -3 : angle out of range
+0: command accepted
+-1: controller inactive or lower-level motor angle failure
+-2: speed or lower-level motor parameter/channel failure
+-3: angle/side validation or motor availability failure
+-4: movement worker could not start
 ```
 
+
+Motion error codes can overlap between controller validation and forwarded motor
+failures; a code does not uniquely identify the cause.
 
 ### `get_state(side: ArmSide) -> ArmState`
 
@@ -239,14 +260,14 @@ Get the current angle(s) for the requested side(s).
 
 **Parameters**
 
-- **side**: Requested side (LEFT/RIGHT/BOTH).
+- **side**: Requested side (ArmSide.Left/ArmSide.Right/ArmSide.Both).
 
 **Returns**
 
 - `list[ArmData]`:
 
 ```text
-Vector of ArmData entries. If side == BOTH, the vector may contain 2 elements.
+List of ArmData entries. If side == ArmSide.Both, the list may contain 2 elements.
 ```
 
 
@@ -263,3 +284,14 @@ Format note from original header: 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+
+## Lifecycle contract
+
+`init()` and `abort(side)` raise `RuntimeError` from any wrapper callback.
+`dispose()` instead returns `-3` there. Call lifecycle operations on the control
+thread. Disposal outcomes `0`, `1` and `-5` accept Python callback cleanup; a
+negative status must still be reported as an operation failure.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+

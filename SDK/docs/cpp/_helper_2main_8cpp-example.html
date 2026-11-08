@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -98,43 +98,7 @@ $(function(){initNavTree('_helper_2main_8cpp-example.html','',''); });
 <li>Using common helper utilities</li>
 <li>Working with shared SDK helper types</li>
 </ul>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_helper_8h.html">Helper.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;spdlog/spdlog.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">    <span class="comment">// Setup spdlog</span></div>
-<div class="line">    spdlog::set_level(spdlog::level::info); <span class="comment">// Set as needed</span></div>
-<div class="line">    spdlog::flush_on(spdlog::level::trace); <span class="comment">// flush everything</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Read settings</span></div>
-<div class="line">    <span class="comment">// one time read is sufficient for the lifetime of the application</span></div>
-<div class="line">    int8_t res = <a id="a0" name="a0"></a><a class="code hl_function" href="namespace_helper.html#a9c5575c2ca00250ab514b7699515105a">Helper::readSettings</a>();</div>
-<div class="line">    <span class="keywordflow">if</span> (res &lt; 0)</div>
-<div class="line">    {</div>
-<div class="line">        spdlog::error(<span class="stringliteral">&quot;Read settings failed with code: {}&quot;</span>, res);</div>
-<div class="line">        <span class="keywordflow">return</span> -1;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Get IMU offsets</span></div>
-<div class="line">    int16_t gx, gy, gz, ax, ay, az;</div>
-<div class="line">    res = <a id="a1" name="a1"></a><a class="code hl_function" href="namespace_helper.html#aa8d71d1c44ea2e41b6d64cdfc14edb3e">Helper::getImuOffsets</a>(gx, gy, gz, ax, ay, az);</div>
-<div class="line">    <span class="keywordflow">if</span> (res &lt; 0)</div>
-<div class="line">    {</div>
-<div class="line">        spdlog::error(<span class="stringliteral">&quot;Get IMU offsets failed with code: {}&quot;</span>, res);</div>
-<div class="line">        <span class="keywordflow">return</span> -1;</div>
-<div class="line">    }</div>
-<div class="line">    spdlog::info(<span class="stringliteral">&quot;IMU Offsets - Gx:{} Gy:{} Gz:{} Ax:{} Ay:{} Az:{}&quot;</span>, gx, gy, gz, ax, ay, az);</div>
-<div class="line">    <span class="comment">// end of IMU offsets</span></div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="a_helper_8h_html"><div class="ttname"><a href="_helper_8h.html">Helper.h</a></div><div class="ttdoc">Shared helper utilities and common types used across the Doly SDK.</div></div>
-<div class="ttc" id="anamespace_helper_html_a9c5575c2ca00250ab514b7699515105a"><div class="ttname"><a href="namespace_helper.html#a9c5575c2ca00250ab514b7699515105a">Helper::readSettings</a></div><div class="ttdeci">int8_t readSettings()</div><div class="ttdoc">Read default settings from the platform settings file.</div></div>
-<div class="ttc" id="anamespace_helper_html_aa8d71d1c44ea2e41b6d64cdfc14edb3e"><div class="ttname"><a href="namespace_helper.html#aa8d71d1c44ea2e41b6d64cdfc14edb3e">Helper::getImuOffsets</a></div><div class="ttdeci">int8_t getImuOffsets(int16_t &amp;gx, int16_t &amp;gy, int16_t &amp;gz, int16_t &amp;ax, int16_t &amp;ay, int16_t &amp;az)</div><div class="ttdoc">Retrieve IMU calibration offsets (gyro/accel).</div></div>
-</div><!-- fragment --> </div><!-- contents -->
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->

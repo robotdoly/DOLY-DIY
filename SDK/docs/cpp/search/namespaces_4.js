@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['helper_0',['Helper',['../namespace_helper.html',1,'']]]
+  ['fancontrol_0',['FanControl',['../namespace_fan_control.html',1,'']]]
 ];

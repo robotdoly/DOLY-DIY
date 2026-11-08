@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['edgecontrol_0',['EdgeControl',['../group__doly__edgecontrol.html',1,'']]],
-  ['eyecontrol_1',['EyeControl',['../group__doly__eyecontrol.html',1,'']]]
+  ['drivecontrol_0',['DriveControl',['../group__doly__drivecontrol.html',1,'']]]
 ];

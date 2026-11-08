@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['common_0',['Common',['../group__doly__sdk__common.html',1,'']]]
+  ['batterycontrol_0',['BatteryControl',['../group__doly__batterycontrol.html',1,'']]]
 ];

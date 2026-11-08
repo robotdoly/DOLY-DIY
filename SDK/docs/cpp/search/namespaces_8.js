@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['tofcontrol_0',['TofControl',['../namespace_tof_control.html',1,'']]],
-  ['tofevent_1',['TofEvent',['../namespace_tof_event.html',1,'']]],
-  ['touchcontrol_2',['TouchControl',['../namespace_touch_control.html',1,'']]],
-  ['touchevent_3',['TouchEvent',['../namespace_touch_event.html',1,'']]],
-  ['ttscontrol_4',['TtsControl',['../namespace_tts_control.html',1,'']]]
+  ['servocontrol_0',['ServoControl',['../namespace_servo_control.html',1,'']]],
+  ['servoevent_1',['ServoEvent',['../namespace_servo_event.html',1,'']]],
+  ['soundcontrol_2',['SoundControl',['../namespace_sound_control.html',1,'']]],
+  ['soundevent_3',['SoundEvent',['../namespace_sound_event.html',1,'']]]
 ];

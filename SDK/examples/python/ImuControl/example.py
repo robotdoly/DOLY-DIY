@@ -27,50 +27,53 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-    
-    # For better performance provide actual calibrated IMU offsets or calculate them once after initialization
-	# and use them for next initializations.
-	# in this example we will use Helper to get previously saved offsets 
 
-	# Read settings
-	# one time read is sufficient for the lifetime of the application
-    if helper.read_settings() < 0: 
-        print("[error] Doly service stop failed")
+    # For better performance provide actual calibrated IMU offsets or calculate them once after initialization
+    # and use them for next initializations.
+    # in this example we will use Helper to get previously saved offsets
+
+    # Read settings
+    # one time read is sufficient for the lifetime of the application
+    if helper.read_settings() < 0:
+        print("[error] Read settings failed")
         return -1
-    
-    # Get pre defined IMU offsets    
+
+    # Get pre defined IMU offsets
     rc, gx, gy, gz, ax, ay, az = helper.get_imu_offsets()
     if rc < 0:
         print(f"[error] Get IMU offsets failed rc={rc}")
         return -2
-    
+
     print(f"[info] gx:{gx} gy:{gy} gz:{gz} ax:{ax} ay:{ay} az:{az}")
-    
+
     # Initialize IMU controler
     # delay 1 second before processing events
     rc = imu.init(1, gx, gy, gz, ax, ay, az)
     if rc < 0:
         print(f"[error] ImuControl.init failed rc={rc}")
         return -3
-    
-    # register static event call backs
-    imu.on_update(on_imu_update)
-    imu.on_gesture(on_imu_gesture)
 
-    # wait for a while before exiting
-    time.sleep(10)
+    result = 0
+    try:
+        # register static event call backs
+        imu.on_update(on_imu_update)
+        imu.on_gesture(on_imu_gesture)
 
-    # Cleanup
-    imu.dispose() 
-    time.sleep(0.2) 
+        # wait for a while before exiting
+        time.sleep(10)
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = imu.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] imu.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] imu.dispose raised: {exc}")
+            result = 1
+    time.sleep(0.2)
 
-    return 0
+    return result
 
 
 if __name__ == "__main__":

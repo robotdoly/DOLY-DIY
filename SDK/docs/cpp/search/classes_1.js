@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['color_0',['Color',['../struct_color.html',1,'']]]
+  ['batteryeventlistener_0',['BatteryEventListener',['../class_battery_event_listener.html',1,'']]]
 ];

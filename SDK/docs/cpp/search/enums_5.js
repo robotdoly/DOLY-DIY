@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['imugesture_0',['ImuGesture',['../group__doly__imucontrol.html#ga8682f3f85d2ba8443c20738680694b9a',1,'ImuEventListener.h']]],
-  ['irisshape_1',['IrisShape',['../_eye_control_8h.html#a06bf421c6bb03b81192df0cb69bb2f93',1,'EyeControl.h']]]
+  ['gapdirection_0',['GapDirection',['../group__doly__edgecontrol.html#gadee55047e574e20c58ce882761c9f186',1,'EdgeEventListener.h']]],
+  ['gesturedirection_1',['GestureDirection',['../group__doly__imucontrol.html#ga826c304fa96281f2fb0bd79f3c912285',1,'ImuEventListener.h']]],
+  ['gpiostate_2',['GpioState',['../group__doly__sdk__common.html#ga17626f307aca09deb70d5dc95f1a8411',1,'GpioPin.h']]],
+  ['gpiotype_3',['GpioType',['../group__doly__sdk__common.html#ga0a0b5f01d2d230e85519965100ed17bd',1,'GpioPin.h']]]
 ];

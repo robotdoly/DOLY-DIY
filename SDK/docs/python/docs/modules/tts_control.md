@@ -1,16 +1,14 @@
 # TtsControl (Python)
 
-
-
 ## Import
 
 ```python
-import doly_helper
+import doly_tts
 ```
 
 ## Minimal working example
 
-Below is the module’s `example.py` as a starting point.
+Below is the module’s `examples/python/TtsControl/example.py` as a starting point.
 
 ```python
 """
@@ -20,13 +18,12 @@ It demonstrates:
 - Initializing the TTS (text to speech) controller
 - Produce sound
 - Initializing the sound controller
-- Playin sound
+- Playing sound
 - Cleaning up (dispose)
 
 """
 
 import time
-import doly_helper as helper
 import doly_sound as snd
 import doly_tts as tts
 
@@ -38,42 +35,61 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-    
+
     # Initialize tts controler
     print("[info] Initialize and load voice model...")
     rc = tts.init(tts.VoiceModel.Model1, "output.wav")
     if rc < 0:
         print(f"[error] TtsControl.init failed rc={rc}")
         return -2
-    
-    # Generate speech sound file from text
-    print("[info] Produce Text to Speech")
-    tts.produce("Hello, this is a text to speech test example.")
-    
-    # Initialize sound controler to test sound file
-    rc = snd.init()
-    if rc < 0:
-        print(f"[error] SoundControl.init failed rc={rc}")
-        return -3
-    
-    # Play sound
-    snd.play("output.wav", 1)
 
-    # wait for sound to complete
-    time.sleep(5)
+    result = 0
+    sound_initialized = False
+    try:
+        # Generate speech sound file from text
+        print("[info] Produce Text to Speech")
+        rc = tts.produce("Hello, this is a text to speech test example.")
+        if rc < 0:
+            print(f"[error] Produce speech failed rc={rc}")
+            return -3
 
-    # Cleanup
-    tts.dispose()
-    snd.dispose()    
-    time.sleep(0.2) 
+        # Initialize sound controler to test sound file
+        rc = snd.init()
+        if rc < 0:
+            print(f"[error] SoundControl.init failed rc={rc}")
+            return -3
+        sound_initialized = True
 
-    return 0
+        # Play sound
+        rc = snd.play("output.wav", 1)
+        if rc < 0:
+            print(f"[error] Play failed rc={rc}")
+            return -3
+
+        # Preserve the original five-second playback interval; completion is not polled.
+        time.sleep(5)
+    finally:
+        # Preserve TTS-before-Sound cleanup; attempt both even if one fails.
+        try:
+            cleanup_rc = tts.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] tts.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] tts.dispose raised: {exc}")
+            result = 1
+        if sound_initialized:
+            try:
+                cleanup_rc = snd.dispose()
+                if cleanup_rc < 0:
+                    print(f"[error] snd.dispose failed rc={cleanup_rc}")
+                    result = 1
+            except Exception as exc:
+                print(f"[error] snd.dispose raised: {exc}")
+                result = 1
+    time.sleep(0.2)
+
+    return result
 
 
 if __name__ == "__main__":
@@ -88,12 +104,7 @@ if __name__ == "__main__":
 - **Play sound**
 - **Dispose / cleanup**
 
-## Notes
-
-- **Platform:** Raspberry Pi OS
-- **Python:** 3.11
-- **Installed on robot:** Yes (preinstalled)
-
 ## API reference
 
 See: [API reference](../api/tts_control.md)
+

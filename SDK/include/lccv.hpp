@@ -42,6 +42,7 @@
 
 #include <mutex>
 #include <atomic>
+#include <condition_variable>
 #include <pthread.h>
 #include <opencv2/opencv.hpp>
 
@@ -82,6 +83,10 @@ protected:
 	std::atomic<bool> running, frameready;
 	uint8_t* framebuffer;
 	std::mutex mtx;
+	std::mutex lifecycle_mtx;
+	std::condition_variable lifecycle_cv;
+	std::atomic<bool> photo_capture_active;
+	bool video_thread_created;
 	bool camerastarted;
 };
 

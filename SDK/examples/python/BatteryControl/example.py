@@ -1,6 +1,7 @@
 """
 example.py
 
+
 It demonstrates:
 - Initializing the battery controller
 - Registering the static event listener
@@ -12,7 +13,6 @@ It demonstrates:
 
 import time
 import doly_battery as battery
-import doly_helper as helper
 
 
 def on_alarm(capacity:int):
@@ -26,38 +26,47 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
 
-    # Register static event listeners 
-    battery.on_alarm(on_alarm)
+    result = 0
+    initialized = False
+    registered = []
+    try:
+        # Register static event listeners
+        battery.on_alarm(on_alarm)
+        registered.append(battery.on_alarm)
 
-    # Initialize BatteryControl
-    rc = battery.init()
-    if rc != 0:
-        print("[error] BatteryControl init failed")
-        return -2
+        # Initialize BatteryControl
+        rc = battery.init()
+        if rc < 0:
+            print("[error] BatteryControl init failed")
+            return -2
+        initialized = True
 
-    # Get battery capacity after a short delay following initialization.
-    time.sleep(0.5)
-    val = battery.get_capacity()
-    print(f"[info] Battery capacity={val}")
+        # Get battery capacity after a short delay following initialization.
+        time.sleep(0.5)
+        val = battery.get_capacity()
+        print(f"[info] Battery capacity={val}")
 
-    # Set alarm threshold to 20% 
-    battery.set_alarm_threshold(20)
+        # Set alarm threshold to 100%, will be trigger at %99
+        battery.set_alarm_threshold(100)
 
-    # Wait alarm event
-    print("[info] Wait for alarm event for 15 seconds")
-    time.sleep(15)
+        # Wait alarm event
+        print("[info] Wait for alarm event for 15 seconds")
+        time.sleep(15)
+        
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = battery.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] battery.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] battery.dispose raised: {exc}")
+            result = 1
+    time.sleep(0.2)
 
-    # Cleanup
-    battery.dispose()   
-
-    return 0
+    return result
 
 
 if __name__ == "__main__":

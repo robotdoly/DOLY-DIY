@@ -1,16 +1,14 @@
 # LedControl (Python)
 
-
-
 ## Import
 
 ```python
-import doly_helper
+import doly_led
 ```
 
 ## Minimal working example
 
-Below is the module’s `example.py` as a starting point.
+Below is the module’s `examples/python/LedControl/example.py` as a starting point.
 
 ```python
 """
@@ -26,7 +24,6 @@ It demonstrates:
 """
 
 import time
-import doly_helper as helper
 import doly_led as led
 from doly_color import Color, ColorCode
 
@@ -34,7 +31,7 @@ def on_led_complete(cmd_id: int, side):
     print(f"[info] Led complete id={cmd_id} side={side}")
 
 def on_led_error(cmd_id: int, side, err_type):
-    print(f"[info] Led complete id={cmd_id} side={side} error={err_type}")
+    print(f"[error] Led error id={cmd_id} side={side} error={err_type}")
 
 def main():
 
@@ -44,49 +41,52 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-        
 
-    # Initialize ToF sensor controler
+
+    # Initialize LED controller
     rc = led.init()
-    if rc != 0:
-        print(f"[error] LcdControl.init failed rc={rc}")
+    if rc < 0:
+        print(f"[error] LedControl.init failed rc={rc}")
         return -2
-    
-    # Register static event listeners if required
-    led.on_complete(on_led_complete)
-    led.on_error(on_led_error)
 
-    # fade effect example
-    activity1 = led.LedActivity()
-    activity1.mainColor = Color.from_code(ColorCode.Red)
-    activity1.fadeColor = Color.from_code(ColorCode.Blue)
-    activity1.fade_time = 2000  # 2 seconds (milliseconds)
+    result = 0
+    try:
+        # Register static event listeners if required
+        led.on_complete(on_led_complete)
+        led.on_error(on_led_error)
 
-    led.process_activity(1, led.LedSide.Both, activity1)
-    # Let the activity run for a while on another thread
-    time.sleep(2.5)
+        # fade effect example
+        activity1 = led.LedActivity()
+        activity1.mainColor = Color.from_code(ColorCode.Red)
+        activity1.fadeColor = Color.from_code(ColorCode.Blue)
+        activity1.fade_time = 2000  # 2 seconds (milliseconds)
 
-    # instant color change example
-    activity2 = led.LedActivity()
-    activity2.mainColor = Color.from_code(ColorCode.Orange)
-    activity1.fade_time = 0  
+        led.process_activity(1, led.LedSide.Both, activity1)
+        # Let the activity run for a while on another thread
+        time.sleep(2.5)
 
-    led.process_activity(2, led.LedSide.Right, activity2)
+        # instant color change example
+        activity2 = led.LedActivity()
+        activity2.mainColor = Color.from_code(ColorCode.Orange)
+        activity2.fade_time = 0
 
-    # wait activity event completion before dispose
+        led.process_activity(2, led.LedSide.Right, activity2)
+
+        # wait activity event completion before dispose
+        time.sleep(0.2)
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = led.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] led.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] led.dispose raised: {exc}")
+            result = 1
     time.sleep(0.2)
 
-    # Cleanup
-    led.dispose()    
-    time.sleep(0.2) 
-
-    return 0
+    return result
 
 
 if __name__ == "__main__":
@@ -102,12 +102,8 @@ if __name__ == "__main__":
 - **Read state / values**
 - **Dispose / cleanup**
 
-## Notes
-
-- **Platform:** Raspberry Pi OS
-- **Python:** 3.11
-- **Installed on robot:** Yes (preinstalled)
 
 ## API reference
 
 See: [API reference](../api/led_control.md)
+

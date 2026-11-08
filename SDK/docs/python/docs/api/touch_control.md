@@ -36,7 +36,7 @@ Values:
 
 ### `TouchEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`TouchEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
@@ -47,49 +47,49 @@ Listener interface. Implement this class and register it with `add_listener()` t
 
 ## Functions
 
-### `add_listener(listener: TouchEventListener, priority: bool = False) -> None`
+### `add_listener(listener: Optional[TouchEventListener], priority: bool = False) -> None`
 
-Register a TouchEventListener instance.
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `TouchEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener**: Listener object to register.
-- **priority**: If `True`, the listener is inserted with higher priority (called earlier). (default: `False`)
-
+Duplicate object registrations are permitted; each has a distinct native proxy.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
 ### `remove_listener(listener: TouchEventListener) -> None`
 
-Unregister a previously registered TouchEventListener instance.
+Unregister one matching object registration. **listener** is the Python object
+previously passed to `add_listener()`. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.
 
-**Parameters**
+### `on_touch(cb: Optional[Callable[[TouchSide, TouchState], None]]) -> None`
 
-- **listener**: Listener object to unregister.
+Set the touch function callback, replacing any previous callable.
 
+- **cb**: Called as `cb(side, state)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-### `on_touch(cb: py::function) -> None`
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-Set a static touch callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
+### `on_touch_activity(cb: Optional[Callable[[TouchSide, TouchActivity], None]]) -> None`
 
-**Parameters**
+Set the touch activity function callback, replacing any previous callable.
 
-- **cb**:
+- **cb**: Called as `cb(side, activity)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-
-### `on_touch_activity(cb: py::function) -> None`
-
-Set a static touch-activity callback (replaces any previous one).
-Tip: If you want multiple handlers, use a Python dispatcher function.
-
-**Parameters**
-
-- **cb**:
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
-
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
 
 ### `init() -> int`
 
@@ -113,7 +113,8 @@ Stop the worker thread and release resources.
 - `int`:
 
 ```text
-Status code: - 0 : success - -1 : left sensor GPIO release failed - -2 : right sensor GPIO release failed
+0: normal disposal result; GPIO release failures are not reported
+-3: callback-context rejection; registrations retained
 ```
 
 
@@ -132,7 +133,8 @@ true if active; false otherwise.
 
 ### `is_touched(side: TouchSide) -> bool`
 
-Check whether the given side is currently touched.
+Check whether the given side is currently touched. With `TouchSide.Both`, the
+result is true only when both sides are touched, not when either side is touched.
 
 **Parameters**
 
@@ -160,3 +162,16 @@ Original note: format 0.XYZ (3 digits after major).
 ```text
 Version as float.
 ```
+
+## Lifecycle contract
+
+`init()` raises `RuntimeError` from any wrapper callback. `dispose()` returns
+`-3` there and retains registrations. A normal result of `0` permits Python
+callback cleanup. The wrapper also accepts `1/-1/-2` for compatibility, but
+these are not emitted by the current native disposal path. GPIO release failures
+are not reported by that path, so `0` does not prove successful resource release.
+Perform lifecycle work on the application control thread.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+

@@ -100,6 +100,8 @@ public:
 	 * @param type Error type.
 	 */
 	virtual void onLedError(uint16_t id, LedSide side, LedErrorType type);
+	virtual void onLedAnimationComplete(uint16_t id);
+	virtual void onLedAnimationError(uint16_t id, LedErrorType type);
 };
 
 /** @} */ // end of group doly_ledcontrol

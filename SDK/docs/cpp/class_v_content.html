@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -126,9 +126,9 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a37aed33475a5e3c044ce187665852e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame height in pixels.  <br /></td></tr>
 <tr class="memitem:a3de363351c15561787a92af823df27c8" id="r_a3de363351c15561787a92af823df27c8"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a3de363351c15561787a92af823df27c8">path</a></td></tr>
 <tr class="memdesc:a3de363351c15561787a92af823df27c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source path of the image/animation.  <br /></td></tr>
-<tr class="memitem:a6b3713ea9fbd3d87340d155421d591c3" id="r_a6b3713ea9fbd3d87340d155421d591c3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6b3713ea9fbd3d87340d155421d591c3">alpha</a></td></tr>
+<tr class="memitem:a6b3713ea9fbd3d87340d155421d591c3" id="r_a6b3713ea9fbd3d87340d155421d591c3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6b3713ea9fbd3d87340d155421d591c3">alpha</a> = false</td></tr>
 <tr class="memdesc:a6b3713ea9fbd3d87340d155421d591c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the source image has an alpha channel.  <br /></td></tr>
-<tr class="memitem:a8f90edf96a1d69fb6a598040cc2ad0f7" id="r_a8f90edf96a1d69fb6a598040cc2ad0f7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8f90edf96a1d69fb6a598040cc2ad0f7">color12Bit</a></td></tr>
+<tr class="memitem:a8f90edf96a1d69fb6a598040cc2ad0f7" id="r_a8f90edf96a1d69fb6a598040cc2ad0f7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8f90edf96a1d69fb6a598040cc2ad0f7">color12Bit</a> = false</td></tr>
 <tr class="memdesc:a8f90edf96a1d69fb6a598040cc2ad0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if image color depth is 12-bit.  <br /></td></tr>
 <tr class="memitem:adf84d9a91288ef20e3f28c05d4870db0" id="r_adf84d9a91288ef20e3f28c05d4870db0"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#adf84d9a91288ef20e3f28c05d4870db0">ratio</a> = 1</td></tr>
 <tr class="memdesc:adf84d9a91288ef20e3f28c05d4870db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame rate divider.  <br /></td></tr>
@@ -137,8 +137,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Container class for visual (image/animation) content. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#_a15">EyeControl/main.cpp</a>.</dd>
-</dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a853c334a45154bf6b4e36aa6df4f7ef9" name="a853c334a45154bf6b4e36aa6df4f7ef9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a853c334a45154bf6b4e36aa6df4f7ef9">&#9670;&#160;</a></span>VContent()</h2>
@@ -240,8 +238,6 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_v_content.html" title="Container class for visual (image/animation) content.">VContent</a> instance containing the loaded image data.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="struct_color.html" title="Simple 8-bit RGB color container and conversion helpers.">Color</a> depth conversion does not change buffer size; data remains 8-bit per channel. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a16">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -262,8 +258,6 @@ Public Attributes</h2></td></tr>
 
 <p>Check whether the visual content is loaded and ready. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if content was loaded successfully; false otherwise. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a17">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -291,7 +285,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool VContent::alpha</td>
+          <td class="memname">bool VContent::alpha = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -307,7 +301,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool VContent::color12Bit</td>
+          <td class="memname">bool VContent::color12Bit = false</td>
         </tr>
       </table>
 </div><div class="memdoc">

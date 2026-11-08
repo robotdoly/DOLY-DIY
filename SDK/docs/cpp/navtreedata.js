@@ -38,15 +38,18 @@ var NAVTREE =
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ]
       ] ]
@@ -58,9 +61,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_arm_control_2main_8cpp-example.html",
-"group__doly__ledcontrol.html#gga889a635ae84c20461ac4c52b849b47d3a21507b40c80068eda19865706fdc2403",
-"namespace_eye_expressions.html#a7a139418acf2cdab6f912b3935d77fc2",
-"struct_tof_data.html#a6906f3bb82f7279fc24b57b6b6df95ec"
+"class_touch_event_listener.html#a0ff7e729e6defec90444d98e80725a44",
+"libcamera__app__options_8hpp.html#aad4f43b32e48e90240db190c4f1431fea1e0e4a508573d85411056847c89ea439",
+"namespace_fan_control.html#a489953430d8630170bb8dcc391aeac82"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

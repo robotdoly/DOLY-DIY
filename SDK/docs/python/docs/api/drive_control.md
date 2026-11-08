@@ -44,11 +44,23 @@ Values:
 - `Distance`
 - `Rotate`
 
+The enum members are also exported directly on `doly_drive`:
+
+| Module-level aliases | Enum |
+|---|---|
+| `Abort`, `Force`, `Motor` | `DriveErrorType` |
+| `Both`, `Left`, `Right` | `DriveMotorSide` |
+| `Running`, `Completed`, `Error` | `DriveState` |
+| `Freestyle`, `XY`, `Distance`, `Rotate` | `DriveType` |
+
+Prefer qualified enum names. `doly_drive.Rotate` refers to `DriveType.Rotate`;
+use `DriveErrorType.Rotate` for the error value.
+
 ## Classes
 
 ### `DriveEventListener`
 
-Listener interface. Implement this class and register it with `add_listener()` to receive events.
+`DriveEventListener()` constructs the listener base. Subclass it and register it with `add_listener()` to receive events.
 
 **Methods**
 
@@ -59,35 +71,38 @@ Listener interface. Implement this class and register it with `add_listener()` t
 - `on_drive_state_change(drive_type: DriveType, state: DriveState) -> None`
   - Called when the state of a drive operation changes.
 
+The proxy also recognizes legacy Python overrides `onDriveComplete`,
+`onDriveError` and `onDriveStateChange`. Override-name selection occurs once at
+registration. These aliases are not additional bound base-class methods; prefer
+the snake_case methods above.
+
 ## Functions
 
-### `add_listener(listener_obj: DriveEventListener) -> None`
+### `add_listener(listener: Optional[DriveEventListener], priority: bool = False) -> None`
 
-Register a listener object to receive drive events.
+Register a listener object to receive events. `None` does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.
 
-**Parameters**
+- **listener**: An instance of `DriveEventListener` or a subclass, or `None`.
+- **priority**: Insert with priority ordering (default `False`).
 
-- **listener_obj**: Pointer to a listener instance (must not be null).
+Repeated registration of the same object is ignored.
+See [callback ordering and lifetime](index.md#callbacks-and-listeners).
 
-**Notes**
+### `remove_listener(listener: DriveEventListener) -> None`
 
-- Callbacks are typically invoked from an internal worker/event thread.
-
-
-### `remove_listener(listener_obj: DriveEventListener) -> None`
-
-Unregister a listener object.
-
-**Parameters**
-
-- **listener_obj**: Pointer previously passed to AddListener().
-
+Unregister the object's registration. **listener** is the Python object previously
+passed to `add_listener()`. Removal does not wait for already executing callbacks
+to finish.
 
 ### `init(imu_off_gx: int = 0, imu_off_gy: int = 0, imu_off_gz: int = 0, imu_off_ax: int = 0, imu_off_ay: int = 0, imu_off_az: int = 0) -> int`
 
 Initialize the drive control module.
 
-IMU offsets are calibration values stored by the platform.
+IMU offsets are calibration values stored by the platform. They apply only when
+the IMU is inactive and at least one supplied gyro offset is nonzero; an
+already-active IMU keeps its offsets. See [IMU initialization](imu_control.md)
+for the offset conditions and units.
 
 **Parameters**
 
@@ -107,22 +122,17 @@ Status code: - 0 : success - 1 : already active / already initialized - -1 : mot
 ```
 
 
-### `dispose(dispose_IMU: bool) -> int`
+### `dispose(dispose_IMU: bool) -> None`
 
-Dispose/shutdown drive module and release resources. Removes the call back functions.
+Dispose/shutdown the drive module and release resources.
 
-**Parameters**
+- **dispose_IMU**: Required boolean, with no default. `True` also requests native
+  IMU shutdown; Python IMU registrations are not cleared as a side effect.
 
-- **dispose_IMU**: If `True`, shuts down the IMU module as well.
-
-**Returns**
-
-- `int`:
-
-```text
-Status code: - 0 : success - 1 : not active / not initialized
-```
-
+Python returns `None`, not the native integer status. Native `0/1` permit Drive
+callback cleanup; native `-1` retains surviving registrations. Rejected native
+outcomes are reported to stderr. From a wrapper callback, this function returns
+`None` immediately without cleanup. A `None` result is not proof of shutdown.
 
 ### `is_active() -> bool`
 
@@ -139,9 +149,9 @@ true if active, false otherwise.
 
 ### `abort() -> None`
 
-Abort current drive operation immediately.
-
-Typically used as an emergency stop for autonomous movement. Completion/error events may still be emitted depending on implementation.
+Request cancellation of the current drive operation. This call may wait for
+previous work to stop; it does not provide an immediate emergency-stop guarantee.
+Completion/error events may still be emitted.
 
 
 ### `free_drive(speed: int, is_left: bool, to_forward: bool) -> bool`
@@ -150,7 +160,7 @@ Manual motor drive (low-level).
 
 **Parameters**
 
-- **speed**: Motor speed percent (0..100).
+- **speed**: Motor speed percent (0..100); zero stops the selected motor.
 - **is_left**: `True` = left motor, `False` = right motor.
 - **to_forward**: `True` = forward, `False` = backward.
 
@@ -164,7 +174,7 @@ true if accepted.
 
 **Notes**
 
-- Non-blocking; handled in another thread.
+- Directly update the selected motor. Replacing autonomous work may wait for it to stop.
 
 
 ### `go_xy(id: int, x: int, y: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -> bool`
@@ -174,12 +184,12 @@ Autonomous drive to an (x, y) target (high-level).
 **Parameters**
 
 - **id**: User command id (returned in events/callbacks).
-- **x**: Target X in your Position coordinate system (units are application-defined).
-- **y**: Target Y in your Position coordinate system (same unit as x).
-- **speed**: Requested speed percent (0..100).
+- **x**: Target X in the Position coordinate system, in signed integer millimetres.
+- **y**: Target Y in the Position coordinate system, in signed integer millimetres.
+- **speed**: Requested speed percent; use 1..100. Zero is rejected. Values above 100 are not consistently rejected by the controller and should not be used.
 - **to_forward**: Direction preference for the move.
 - **with_brake**: If `True`, brake at the end of motion. (default: `False`)
-- **acceleration_interval**: Acceleration step interval (0 = disabled). (default: `0`)
+- **acceleration_interval**: Acceleration step interval in milliseconds, an unsigned 8-bit value (0..255); 0 disables acceleration. (default: `0`)
 - **control_speed**: Enable speed control dynamically. (default: `False`)
 - **control_force**: Enable force/traction control (default `True`). (default: `True`)
 
@@ -193,7 +203,7 @@ true if command accepted.
 
 **Notes**
 
-- Non-blocking; handled in another thread.
+- Motion runs asynchronously, but submission may wait for previous work. A `True` result means accepted, not completed.
 
 
 ### `go_distance(id: int, mm: int, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -> bool`
@@ -203,11 +213,11 @@ Autonomous drive for a fixed distance (high-level).
 **Parameters**
 
 - **id**: User command id (returned in events/callbacks).
-- **mm**: Distance value (named "mm" in API; ensure your implementation uses millimeters).
-- **speed**: Requested speed percent (0..100).
+- **mm**: Distance in millimeters.
+- **speed**: Requested speed percent; use 1..100. Zero is rejected. Values above 100 are not consistently rejected by the controller and should not be used.
 - **to_forward**: `True` forward / `False` backward.
 - **with_brake**: Brake at the end. (default: `False`)
-- **acceleration_interval**: Acceleration step interval (0 = disabled). (default: `0`)
+- **acceleration_interval**: Acceleration step interval in milliseconds, an unsigned 8-bit value (0..255); 0 disables acceleration. (default: `0`)
 - **control_speed**: Enable speed control dynamically. (default: `False`)
 - **control_force**: Enable force/traction control. (default: `True`)
 
@@ -221,7 +231,7 @@ true if command accepted.
 
 **Notes**
 
-- Non-blocking; handled in another thread.
+- Motion runs asynchronously, but submission may wait for previous work. A `True` result means accepted, not completed.
 
 
 ### `go_rotate(id: int, rotate_angle: float, from_center: bool, speed: int, to_forward: bool, with_brake: bool = False, acceleration_interval: int = 0, control_speed: bool = False, control_force: bool = True) -> bool`
@@ -233,10 +243,10 @@ Autonomous rotate (high-level).
 - **id**: User command id (returned in events/callbacks).
 - **rotate_angle**: Rotation angle in degrees (sign convention is implementation-defined).
 - **from_center**: `True` = rotate around center, `False` = rotate around a wheel/edge (implementation-defined).
-- **speed**: Requested speed percent (0..100).
+- **speed**: Requested speed percent; use 1..100. Zero is rejected. Values above 100 are not consistently rejected by the controller and should not be used.
 - **to_forward**: Direction preference (implementation-defined for rotation).
 - **with_brake**: Brake at the end. (default: `False`)
-- **acceleration_interval**: Acceleration step interval (0 = disabled). (default: `0`)
+- **acceleration_interval**: Acceleration step interval in milliseconds, an unsigned 8-bit value (0..255); 0 disables acceleration. (default: `0`)
 - **control_speed**: Enable speed control dynamically. (default: `False`)
 - **control_force**: Enable force/traction control. (default: `True`)
 
@@ -250,25 +260,25 @@ true if command accepted.
 
 **Notes**
 
-- Non-blocking; handled in another thread.
+- Motion runs asynchronously, but submission may wait for previous work. A `True` result means accepted, not completed.
 
 
-### `get_position() -> Position`
+### `get_position() -> doly_helper.Position`
 
-Get current estimated position.
+Get current estimated position: `x` and `y` are millimetres and `head` is degrees. See [Position fields](helper.md#position).
 
 **Returns**
 
 - `Position`:
 
 ```text
-Current Position estimate (see Helper.h for definition/units).
+Current Position estimate: the shared doly_helper.Position type.
 ```
 
 
 ### `reset_position() -> None`
 
-Reset current position estimate to (0, 0, 0) (implementation-defined fields).
+Reset the estimated `x`, `y`, and `head` fields to zero.
 
 
 ### `get_state() -> DriveState`
@@ -301,33 +311,56 @@ RPM value (units: revolutions per minute).
 ```
 
 
-### `on_complete(cb_obj: void(onComplete)(uint16_t) -> None`
+### `on_complete(cb: Optional[Callable[[int], None]]) -> None`
 
-Remove a previously registered “command complete” callback.
+Set the complete function callback, replacing any previous callable.
 
-**Parameters**
+- **cb**: Called as `cb(id)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-- **cb_obj**: Same function pointer passed to AddListenerOnComplete().
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
+### `on_error(cb: Optional[Callable[[int, DriveMotorSide, DriveErrorType], None]]) -> None`
 
-### `on_error(cb_obj: void(onError)(uint16_t id, DriveMotorSide side, DriveErrorType) -> None`
+Set the error function callback, replacing any previous callable.
 
-Remove a previously registered error callback.
+- **cb**: Called as `cb(id, side, type)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-**Parameters**
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
-- **cb_obj**: Same function pointer passed to AddListenerOnError().
+### `on_state_change(cb: Optional[Callable[[DriveType, DriveState], None]]) -> None`
 
+Set the state change function callback, replacing any previous callable.
 
-### `on_state_change(cb_obj: void(onChange)(DriveType drive_type, DriveState) -> None`
+- **cb**: Called as `cb(drive_type, state)`; pass `None` to unregister this function callback.
+  It returns `None`. A noncallable, non-`None` value raises `TypeError`.
 
-Remove a previously registered state-change callback.
-
-**Parameters**
-
-- **cb_obj**: Same function pointer passed to AddListenerOnStateChange().
-
+For multiple handlers, use class-based listeners or an application dispatcher.
+See [delayed-callback and exception behavior](index.md#callbacks-and-listeners).
 
 ### `clear_listeners() -> None`
 
-Unregister all static callbacks and clear stored Python functions.
+Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.
+
+
+### `get_version() -> float`
+
+Get the current library version, represented as a float.
+
+## Lifecycle contract
+
+`init()` and `abort()` raise `RuntimeError` from any wrapper callback. Perform
+control/disposal on the application control thread. `dispose()` keeps its historical
+`None` return adapter, including callback rejection; it cannot be interpreted as a
+success status. Motion methods return command-acceptance booleans, not proof that
+the requested motion completed.
+
+See [initialization and disposal](index.md#initialization-and-disposal) for
+component-local cleanup, retained native proxies and interpreter limitations.
+
+

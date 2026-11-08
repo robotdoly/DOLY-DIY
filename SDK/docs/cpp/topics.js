@@ -6,6 +6,7 @@ var topics =
       [ "Links", "index.html#autotoc_md3", null ]
     ] ],
     [ "ArmControl", "group__doly__armcontrol.html", "group__doly__armcontrol" ],
+    [ "BatteryControl", "group__doly__batterycontrol.html", "group__doly__batterycontrol" ],
     [ "Common", "group__doly__sdk__common.html", "group__doly__sdk__common" ],
     [ "DriveControl", "group__doly__drivecontrol.html", "group__doly__drivecontrol" ],
     [ "EdgeControl", "group__doly__edgecontrol.html", "group__doly__edgecontrol" ],

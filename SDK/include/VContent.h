@@ -65,10 +65,10 @@ public:
 	std::string path;
 
 	/** @brief True if the source image has an alpha channel. */
-	bool alpha;
+	bool alpha = false;
 
 	/** @brief True if image color depth is 12-bit. */
-	bool color12Bit;
+	bool color12Bit = false;
 
 	/**
 	 * @brief Frame rate divider.

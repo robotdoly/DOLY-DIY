@@ -4,13 +4,12 @@ example.py
 It demonstrates:
 - Initializing the touch controller
 - Registering the static event listeners
-- Cleaning up (remove_listener + dispose)
+- Cleaning up (dispose)
 
 """
 
 
 import time
-import doly_helper as helper
 import doly_touch as touch
 
 def on_touch(side, state):
@@ -27,33 +26,36 @@ def main():
     except AttributeError:
         pass
 
-    # *** IMPORTANT *** 
-    # Stop doly service if running,
-    # otherwise instance of libraries cause conflict	
-    if helper.stop_doly_service() < 0: 
-        print("[error] Doly service stop failed")
-        return -1
-        
+
 
     # Initialize TouchControl
     rc = touch.init()
     if rc < 0:
         print(f"[error] TouchControl.init failed rc={rc}")
-        return -2  
+        return -2
 
-    # Register static event listeners 
-    touch.on_touch(on_touch)
-    touch.on_touch_activity(on_touch_activity)    
+    result = 0
+    try:
+        # Register static event listeners
+        touch.on_touch(on_touch)
+        touch.on_touch_activity(on_touch_activity)
 
-    # Run for 30 seconds to test touch events
-    print(f"[info] Run for 30 seconds to test touch events")
-    time.sleep(30) 
+        # Run for 30 seconds to test touch events
+        print(f"[info] Run for 30 seconds to test touch events")
+        time.sleep(30)
+    finally:
+        # Cleanup stays on the control thread; preserve any original exception.
+        try:
+            cleanup_rc = touch.dispose()
+            if cleanup_rc < 0:
+                print(f"[error] touch.dispose failed rc={cleanup_rc}")
+                result = 1
+        except Exception as exc:
+            print(f"[error] touch.dispose raised: {exc}")
+            result = 1
+    time.sleep(0.2)
 
-    # Cleanup     
-    touch.dispose()       
-    time.sleep(0.2) 
-
-    return 0
+    return result
 
 
 if __name__ == "__main__":

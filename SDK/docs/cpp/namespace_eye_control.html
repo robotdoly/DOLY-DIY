@@ -29,7 +29,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="doly-logo-v2_48h.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.00</span>
+   <div id="projectname">Doly C++ SDK<span id="projectnumber">&#160;v1.01</span>
    </div>
   </td>
  </tr>
@@ -119,8 +119,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:afcd791ea7c1410e2499c128803f62837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set background image content for a given side.  <br /></td></tr>
 <tr class="memitem:a09729cdf6884ea7b70c5468da2cca67e" id="r_a09729cdf6884ea7b70c5468da2cca67e"><td class="memItemLeft">int8_t&#160;</td><td class="memItemRight"><a class="el" href="#a09729cdf6884ea7b70c5468da2cca67e">setAnimation</a> (uint16_t id, std::string_view name)</td></tr>
 <tr class="memdesc:a09729cdf6884ea7b70c5468da2cca67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a named eye animation (non-blocking).  <br /></td></tr>
-<tr class="memitem:adf1be77706b2701c92b6b432818a9efe" id="r_adf1be77706b2701c92b6b432818a9efe"><td class="memItemLeft">int8_t&#160;</td><td class="memItemRight"><a class="el" href="#adf1be77706b2701c92b6b432818a9efe">setPosition</a> (<a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a> side, int16_t centerX, int16_t centerY, float scaleX=1, float scaleY=1, uint8_t lid_top_end=0, uint8_t lid_bot_start=240)</td></tr>
-<tr class="memdesc:adf1be77706b2701c92b6b432818a9efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set iris position/scale and eyelid limits for a given side.  <br /></td></tr>
+<tr class="memitem:ad8af49aea1ca9157272c0648d1685cb6" id="r_ad8af49aea1ca9157272c0648d1685cb6"><td class="memItemLeft">int8_t&#160;</td><td class="memItemRight"><a class="el" href="#ad8af49aea1ca9157272c0648d1685cb6">setIrisPosition</a> (<a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a> side, int16_t centerX, int16_t centerY, float scaleX=1, float scaleY=1, uint8_t lid_top_end=0, uint8_t lid_bot_start=240)</td></tr>
+<tr class="memdesc:ad8af49aea1ca9157272c0648d1685cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set iris position/scale and eyelid limits for a given side.  <br /></td></tr>
 <tr class="memitem:ac2bb9296f2a7b5c63b21fc3b3579db39" id="r_ac2bb9296f2a7b5c63b21fc3b3579db39"><td class="memItemLeft">int8_t&#160;</td><td class="memItemRight"><a class="el" href="#ac2bb9296f2a7b5c63b21fc3b3579db39">getIrisPosition</a> (<a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a> side, int16_t &amp;x, int16_t &amp;y)</td></tr>
 <tr class="memdesc:ac2bb9296f2a7b5c63b21fc3b3579db39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current iris center position for a given side.  <br /></td></tr>
 <tr class="memitem:a373d46c79b5714adff35b468050db22e" id="r_a373d46c79b5714adff35b468050db22e"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a373d46c79b5714adff35b468050db22e">getVersion</a> ()</td></tr>
@@ -186,8 +186,6 @@ Functions</h2></td></tr>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The top-left corner of each display is defined as x=0, y=0. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a20">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -209,8 +207,6 @@ Functions</h2></td></tr>
 <p>Get current library version. </p>
 <p>Original note: format 0.XYZ (3 digits after major).</p>
 <dl class="section return"><dt>Returns</dt><dd>Version as float. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#_a1">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -249,8 +245,6 @@ Functions</h2></td></tr>
 <li>-2 : LCD init failed </li>
 </ul>
 </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#_a5">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -291,8 +285,6 @@ Functions</h2></td></tr>
 
 <p>Check whether an animation is currently running. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if an animation continues, false otherwise. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#_a14">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -329,8 +321,6 @@ Functions</h2></td></tr>
 <li>-1 : can not found animation, check name </li>
 </ul>
 </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a12">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -480,8 +470,6 @@ Functions</h2></td></tr>
 <li>-2 : out of array, check shape </li>
 </ul>
 </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a8">EyeControl/main.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -520,57 +508,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a340b03b371a3b0f794893607310b56a8" name="a340b03b371a3b0f794893607310b56a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a340b03b371a3b0f794893607310b56a8">&#9670;&#160;</a></span>setLid()</h2>
+<a id="ad8af49aea1ca9157272c0648d1685cb6" name="ad8af49aea1ca9157272c0648d1685cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8af49aea1ca9157272c0648d1685cb6">&#9670;&#160;</a></span>setIrisPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int8_t EyeControl::setLid </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_v_content.html">VContent</a> *</td>          <td class="paramname"><span class="paramname"><em>lid_image</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isTop</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set eyelid image content for a given side. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lid_image</td><td>Lid image content. </td></tr>
-    <tr><td class="paramname">isTop</td><td>True for top lid, false for bottom lid. </td></tr>
-    <tr><td class="paramname">side</td><td>Target eye side.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Status code:<ul>
-<li>0 : success</li>
-<li>-1 : null image pointer </li>
-</ul>
-</dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a18">EyeControl/main.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="adf1be77706b2701c92b6b432818a9efe" name="adf1be77706b2701c92b6b432818a9efe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf1be77706b2701c92b6b432818a9efe">&#9670;&#160;</a></span>setPosition()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int8_t EyeControl::setPosition </td>
+          <td class="memname">int8_t EyeControl::setIrisPosition </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span>, </td>
         </tr>
@@ -626,8 +571,47 @@ Functions</h2></td></tr>
 <li>-1 : centerX or centerY out of range (-250..0..250) </li>
 </ul>
 </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_eye_control_2main_8cpp-example.html#a19">EyeControl/main.cpp</a>.</dd>
+
+</div>
+</div>
+<a id="a340b03b371a3b0f794893607310b56a8" name="a340b03b371a3b0f794893607310b56a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a340b03b371a3b0f794893607310b56a8">&#9670;&#160;</a></span>setLid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t EyeControl::setLid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v_content.html">VContent</a> *</td>          <td class="paramname"><span class="paramname"><em>lid_image</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isTop</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_eye_control_8h.html#a1d619fc156d95957aec281f1fb7e46b8">EyeSide</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set eyelid image content for a given side. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lid_image</td><td>Lid image content. </td></tr>
+    <tr><td class="paramname">isTop</td><td>True for top lid, false for bottom lid. </td></tr>
+    <tr><td class="paramname">side</td><td>Target eye side.</td></tr>
+  </table>
+  </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Status code:<ul>
+<li>0 : success</li>
+<li>-1 : null image pointer </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

@@ -54,6 +54,7 @@ nav:
 - Python SDK:
   - Modules:
     - ArmControl: modules/arm_control.md
+    - BatteryControl: modules/battery_control.md
     - Camera: modules/camera.md
     - DriveControl: modules/drive_control.md
     - EdgeControl: modules/edge_control.md
@@ -72,6 +73,7 @@ nav:
 - API Reference:
   - Index: api/index.md
   - ArmControl: api/arm_control.md
+  - BatteryControl: api/battery_control.md
   - Camera: api/camera.md
   - Color: api/color.md
   - DriveControl: api/drive_control.md
