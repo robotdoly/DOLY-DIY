@@ -1,0 +1,3707 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python SDK documentation for Doly robot (Raspberry Pi OS Kernel 6.6.51, Python 3.11)">
+      
+      
+      
+        <link rel="canonical" href="https://robotdoly.github.io/DOLY-DIY/python/api/eye_control/">
+      
+      
+        <link rel="prev" href="../edge_control/">
+      
+      
+        <link rel="next" href="../fan_control/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/doly_icon_32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>EyeControl - Doly Python SDK</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eyecontrol-api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Doly Python SDK" class="md-header__button md-logo" aria-label="Doly Python SDK" data-md-component="logo">
+      
+  <img src="../../assets/doly_48h_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Doly Python SDK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EyeControl
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/install/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../modules/arm_control/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Python SDK
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshooting/faq/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Doly Python SDK" class="md-nav__button md-logo" aria-label="Doly Python SDK" data-md-component="logo">
+      
+  <img src="../../assets/doly_48h_white.png" alt="logo">
+
+    </a>
+    Doly Python SDK
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python SDK
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python SDK
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/arm_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArmControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/battery_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BatteryControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/camera/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/drive_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DriveControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/edge_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EdgeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/eye_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EyeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/fan_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FanControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/helper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/imu_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ImuControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/io_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/lcd_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LcdControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/led_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LedControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/servo_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ServoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/sound_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoundControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/tof_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TofControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/touch_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TouchControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/tts_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TtsControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arm_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArmControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../battery_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BatteryControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../camera/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Camera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../color/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Color
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drive_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DriveControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EdgeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EyeControl
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EyeControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eyeside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EyeSide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irisshape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IrisShape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eyeeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EyeEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_listenerlistener-optionaleyeeventlistener-priority-bool-false-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_listener(listener: Optional[EyeEventListener], priority: bool = False) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_listenerlistener-eyeeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_listener(listener: EyeEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_startcb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_start(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_completecb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_complete(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_abortcb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_abort(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_listeners-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clear_listeners() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initeye_color-colorcode-bg_color-colorcode-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init(eye_color: ColorCode, bg_color: ColorCode) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        abort() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_active-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_active() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_animating-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_animating() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_eyesshape-irisshape-iris_color-colorcode-bg_color-colorcode-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_eyes(shape: IrisShape, iris_color: ColorCode, bg_color: ColorCode) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_irisshape-irisshape-color-colorcode-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_iris(shape: IrisShape, color: ColorCode, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_iris_positionside-eyeside-tupleint-int-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_iris_position(side: EyeSide) -&gt; tuple[int, int, int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_backgroundcolor-color-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_background(color: Color) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_iris_imageeye_image-vcontent-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_iris_image(eye_image: VContent, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_lid_imagelid_image-vcontent-is_top-bool-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_lid_image(lid_image: VContent, is_top: bool, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_background_imagebg_image-vcontent-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_background_image(bg_image: VContent, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_animationid-int-name-str-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_animation(id: int, name: str) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_positionside-eyeside-centerx-int-centery-int-scalex-float-10-scaley-float-10-lid_top_end-int-0-lid_bot_start-int-240-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_position(side: EyeSide, centerX: int, centerY: int, scaleX: float = 1.0, scaleY: float = 1.0, lid_top_end: int = 0, lid_bot_start: int = 240) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dispose-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dispose() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_version-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_version() -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-ownership-and-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image ownership and restrictions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expression-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expression constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fan_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FanControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../helper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../imu_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ImuControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lcd_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LcdControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../led_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LedControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servo_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ServoControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sound_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoundControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tof_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TofControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../touch_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TouchControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tts_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TtsControl
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vcontent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VContent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eyeside" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EyeSide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irisshape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IrisShape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eyeeventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EyeEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add_listenerlistener-optionaleyeeventlistener-priority-bool-false-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_listener(listener: Optional[EyeEventListener], priority: bool = False) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_listenerlistener-eyeeventlistener-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_listener(listener: EyeEventListener) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_startcb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_start(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_completecb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_complete(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_abortcb-optionalcallableint-none-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_abort(cb: Optional[Callable[[int], None]]) -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_listeners-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clear_listeners() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initeye_color-colorcode-bg_color-colorcode-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init(eye_color: ColorCode, bg_color: ColorCode) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        abort() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_active-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_active() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_animating-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_animating() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_eyesshape-irisshape-iris_color-colorcode-bg_color-colorcode-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_eyes(shape: IrisShape, iris_color: ColorCode, bg_color: ColorCode) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_irisshape-irisshape-color-colorcode-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_iris(shape: IrisShape, color: ColorCode, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_iris_positionside-eyeside-tupleint-int-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_iris_position(side: EyeSide) -&gt; tuple[int, int, int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_backgroundcolor-color-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_background(color: Color) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_iris_imageeye_image-vcontent-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_iris_image(eye_image: VContent, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_lid_imagelid_image-vcontent-is_top-bool-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_lid_image(lid_image: VContent, is_top: bool, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_background_imagebg_image-vcontent-side-eyeside-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_background_image(bg_image: VContent, side: EyeSide) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_animationid-int-name-str-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_animation(id: int, name: str) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_positionside-eyeside-centerx-int-centery-int-scalex-float-10-scaley-float-10-lid_top_end-int-0-lid_bot_start-int-240-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_position(side: EyeSide, centerX: int, centerY: int, scaleX: float = 1.0, scaleY: float = 1.0, lid_top_end: int = 0, lid_bot_start: int = 240) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dispose-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dispose() -&gt; None
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_version-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_version() -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-ownership-and-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image ownership and restrictions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expression-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expression constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="eyecontrol-api-reference">EyeControl API reference<a class="headerlink" href="#eyecontrol-api-reference" title="Permanent link">&para;</a></h1>
+<p>Import:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">doly_eye</span>
+</code></pre></div>
+<p>This page documents the public API exposed by the <code>doly_eye</code> Python module.</p>
+<h2 id="enums">Enums<a class="headerlink" href="#enums" title="Permanent link">&para;</a></h2>
+<h3 id="eyeside"><code>EyeSide</code><a class="headerlink" href="#eyeside" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Both</code></li>
+<li><code>Left</code></li>
+<li><code>Right</code></li>
+</ul>
+<h3 id="irisshape"><code>IrisShape</code><a class="headerlink" href="#irisshape" title="Permanent link">&para;</a></h3>
+<p>Values:</p>
+<ul>
+<li><code>Classic</code></li>
+<li><code>Modern</code></li>
+<li><code>Space</code></li>
+<li><code>Orbit</code></li>
+<li><code>Glow</code></li>
+<li><code>Digi</code></li>
+</ul>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<h3 id="eyeeventlistener"><code>EyeEventListener</code><a class="headerlink" href="#eyeeventlistener" title="Permanent link">&para;</a></h3>
+<p><code>EyeEventListener()</code> constructs the listener base. Subclass it and register it with <code>add_listener()</code> to receive events.</p>
+<p><strong>Methods</strong></p>
+<ul>
+<li><code>onEyeStart(id: int) -&gt; None</code></li>
+<li>Called when an eye action/animation starts.</li>
+<li><code>onEyeComplete(id: int) -&gt; None</code></li>
+<li>Called when an eye action/animation completes.</li>
+<li><code>onEyeAbort(id: int) -&gt; None</code></li>
+<li>Called when an eye action/animation is aborted/stopped.</li>
+</ul>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<h3 id="add_listenerlistener-optionaleyeeventlistener-priority-bool-false-none"><code>add_listener(listener: Optional[EyeEventListener], priority: bool = False) -&gt; None</code><a class="headerlink" href="#add_listenerlistener-optionaleyeeventlistener-priority-bool-false-none" title="Permanent link">&para;</a></h3>
+<p>Register a listener object to receive events. <code>None</code> does nothing. The wrapper
+retains the Python target until removal, clearing or accepted disposal.</p>
+<ul>
+<li><strong>listener</strong>: An instance of <code>EyeEventListener</code> or a subclass, or <code>None</code>.</li>
+<li><strong>priority</strong>: Insert with priority ordering (default <code>False</code>).</li>
+</ul>
+<p>Duplicate object registrations are permitted; each has a distinct native proxy.
+See <a href="../#callbacks-and-listeners">callback ordering and lifetime</a>.</p>
+<h3 id="remove_listenerlistener-eyeeventlistener-none"><code>remove_listener(listener: EyeEventListener) -&gt; None</code><a class="headerlink" href="#remove_listenerlistener-eyeeventlistener-none" title="Permanent link">&para;</a></h3>
+<p>Unregister one matching object registration. <strong>listener</strong> is the Python object
+previously passed to <code>add_listener()</code>. For duplicates, the newest priority
+registration is removed first, otherwise the oldest normal registration.
+Removal does not wait for already executing callbacks to finish.</p>
+<h3 id="on_startcb-optionalcallableint-none-none"><code>on_start(cb: Optional[Callable[[int], None]]) -&gt; None</code><a class="headerlink" href="#on_startcb-optionalcallableint-none-none" title="Permanent link">&para;</a></h3>
+<p>Set the start function callback, replacing any previous callable.</p>
+<ul>
+<li><strong>cb</strong>: Called as <code>cb(id)</code>; pass <code>None</code> to unregister this function callback.
+  It returns <code>None</code>. A noncallable, non-<code>None</code> value raises <code>TypeError</code>.</li>
+</ul>
+<p>For multiple handlers, use class-based listeners or an application dispatcher.
+See <a href="../#callbacks-and-listeners">delayed-callback and exception behavior</a>.</p>
+<h3 id="on_completecb-optionalcallableint-none-none"><code>on_complete(cb: Optional[Callable[[int], None]]) -&gt; None</code><a class="headerlink" href="#on_completecb-optionalcallableint-none-none" title="Permanent link">&para;</a></h3>
+<p>Set the complete function callback, replacing any previous callable.</p>
+<ul>
+<li><strong>cb</strong>: Called as <code>cb(id)</code>; pass <code>None</code> to unregister this function callback.
+  It returns <code>None</code>. A noncallable, non-<code>None</code> value raises <code>TypeError</code>.</li>
+</ul>
+<p>For multiple handlers, use class-based listeners or an application dispatcher.
+See <a href="../#callbacks-and-listeners">delayed-callback and exception behavior</a>.</p>
+<h3 id="on_abortcb-optionalcallableint-none-none"><code>on_abort(cb: Optional[Callable[[int], None]]) -&gt; None</code><a class="headerlink" href="#on_abortcb-optionalcallableint-none-none" title="Permanent link">&para;</a></h3>
+<p>Set the abort function callback, replacing any previous callable.</p>
+<ul>
+<li><strong>cb</strong>: Called as <code>cb(id)</code>; pass <code>None</code> to unregister this function callback.
+  It returns <code>None</code>. A noncallable, non-<code>None</code> value raises <code>TypeError</code>.</li>
+</ul>
+<p>For multiple handlers, use class-based listeners or an application dispatcher.
+See <a href="../#callbacks-and-listeners">delayed-callback and exception behavior</a>.</p>
+<h3 id="clear_listeners-none"><code>clear_listeners() -&gt; None</code><a class="headerlink" href="#clear_listeners-none" title="Permanent link">&para;</a></h3>
+<p>Unregister all object listeners and function callbacks belonging to this component
+and release their stored Python targets. This does not dispose hardware or wait
+for callback drainage. Already executing callbacks may finish.</p>
+<h3 id="initeye_color-colorcode-bg_color-colorcode-int"><code>init(eye_color: ColorCode, bg_color: ColorCode) -&gt; int</code><a class="headerlink" href="#initeye_color-colorcode-bg_color-colorcode-int" title="Permanent link">&para;</a></h3>
+<p>Initialize the eye subsystem (LCD + eye assets).</p>
+<p>This must be called once before other control functions.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>eye_color</strong>: Default iris color (see <a href="../color/#colorcode">ColorCode</a>).</li>
+<li><strong>bg_color</strong>: Default background color (see <a href="../color/#colorcode">ColorCode</a>).</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Status code: - 0 : success - 1 : already initialized - -1 : loadEyeFiles failed - -2 : LCD init failed
+</code></pre></div>
+<h3 id="abort-none"><code>abort() -&gt; None</code><a class="headerlink" href="#abort-none" title="Permanent link">&para;</a></h3>
+<p>Abort/terminate the active animation.</p>
+<p>This preserves native cancellation behavior. It is not a native worker join or
+proof that subsequent image operations are safe. Prefer natural completion before
+image changes; avoid concurrent cancellation and image operations.</p>
+<h3 id="is_active-bool"><code>is_active() -&gt; bool</code><a class="headerlink" href="#is_active-bool" title="Permanent link">&para;</a></h3>
+<p>Check whether the subsystem is active (initialized and running).</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if initialized, false otherwise.
+</code></pre></div>
+<h3 id="is_animating-bool"><code>is_animating() -&gt; bool</code><a class="headerlink" href="#is_animating-bool" title="Permanent link">&para;</a></h3>
+<p>Check whether an animation is currently running.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>bool</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>true if an animation continues, false otherwise.
+</code></pre></div>
+<h3 id="set_eyesshape-irisshape-iris_color-colorcode-bg_color-colorcode-int"><code>set_eyes(shape: IrisShape, iris_color: ColorCode, bg_color: ColorCode) -&gt; int</code><a class="headerlink" href="#set_eyesshape-irisshape-iris_color-colorcode-bg_color-colorcode-int" title="Permanent link">&para;</a></h3>
+<p>Set both iris and background to built-in presets.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>shape</strong>: Built-in iris shape preset.</li>
+<li><strong>iris_color</strong>: Iris color.</li>
+<li><strong>bg_color</strong>: Background color.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>0: success
+-1: iris preset lookup failed
+-2: background preset lookup failed
+</code></pre></div>
+<h3 id="set_irisshape-irisshape-color-colorcode-side-eyeside-int"><code>set_iris(shape: IrisShape, color: ColorCode, side: EyeSide) -&gt; int</code><a class="headerlink" href="#set_irisshape-irisshape-color-colorcode-side-eyeside-int" title="Permanent link">&para;</a></h3>
+<p>Set iris shape and color.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>shape</strong>: Built-in iris preset.</li>
+<li><strong>color</strong>: Shared <code>doly_color.ColorCode</code> value.</li>
+<li><strong>side</strong>: Eye side to render.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>: <code>0</code> on success, <code>-1</code> if the requested iris style is unavailable,
+  or <code>-2</code> if the requested shape is unavailable.</li>
+</ul>
+<h3 id="get_iris_positionside-eyeside-tupleint-int-int"><code>get_iris_position(side: EyeSide) -&gt; tuple[int, int, int]</code><a class="headerlink" href="#get_iris_positionside-eyeside-tupleint-int-int" title="Permanent link">&para;</a></h3>
+<p>Get the current iris center position for a given side. Requires idle Eye processing.</p>
+<ul>
+<li><strong>side</strong>: <code>EyeSide.Left</code> or <code>EyeSide.Right</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p><code>(status, x, y)</code>: status <code>0</code> on success, or <code>-1</code> for a wrong side (including Both).
+Check status before using the coordinates. The top-left corner of each display
+is x=0, y=0; the display center is (120, 120).</p>
+<h3 id="set_backgroundcolor-color-int"><code>set_background(color: Color) -&gt; int</code><a class="headerlink" href="#set_backgroundcolor-color-int" title="Permanent link">&para;</a></h3>
+<p>Set background color.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>color</strong>: A shared <a href="../color/#color">doly_color.Color</a> value.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>: <code>0</code> on normal return. The ownership restrictions and exceptions below
+  still apply.</li>
+</ul>
+<h3 id="set_iris_imageeye_image-vcontent-side-eyeside-int"><code>set_iris_image(eye_image: VContent, side: EyeSide) -&gt; int</code><a class="headerlink" href="#set_iris_imageeye_image-vcontent-side-eyeside-int" title="Permanent link">&para;</a></h3>
+<p>Set iris image content for a given side.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>eye_image</strong>: Iris image content.</li>
+<li><strong>side</strong>: Target eye side.</li>
+</ul>
+<p><strong>Returns and exceptions</strong></p>
+<p>Returns the nonnegative native status on success (normally <code>0</code>). A <code>None</code> image
+or invalid image dimensions/channels/frames raises <code>ValueError</code>. A negative native
+assignment result becomes <code>RuntimeError</code>, with old/new owners retained and further
+guarded Eye operations blocked. Initialization and idle processing are required.
+See <a href="#image-ownership-and-restrictions">image ownership and restrictions</a>.</p>
+<h3 id="set_lid_imagelid_image-vcontent-is_top-bool-side-eyeside-int"><code>set_lid_image(lid_image: VContent, is_top: bool, side: EyeSide) -&gt; int</code><a class="headerlink" href="#set_lid_imagelid_image-vcontent-is_top-bool-side-eyeside-int" title="Permanent link">&para;</a></h3>
+<p>Set eyelid image content for a given side.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>lid_image</strong>: Lid image content.</li>
+<li><strong>is_top</strong>: True for top lid, <code>False</code> for bottom lid.</li>
+<li><strong>side</strong>: Target eye side.</li>
+</ul>
+<p><strong>Returns and exceptions</strong></p>
+<p>Returns the nonnegative native status on success (normally <code>0</code>). A <code>None</code> image
+or invalid image dimensions/channels/frames raises <code>ValueError</code>. A negative native
+assignment result becomes <code>RuntimeError</code>, with old/new owners retained and further
+guarded Eye operations blocked. Initialization and idle processing are required.
+See <a href="#image-ownership-and-restrictions">image ownership and restrictions</a>.</p>
+<h3 id="set_background_imagebg_image-vcontent-side-eyeside-int"><code>set_background_image(bg_image: VContent, side: EyeSide) -&gt; int</code><a class="headerlink" href="#set_background_imagebg_image-vcontent-side-eyeside-int" title="Permanent link">&para;</a></h3>
+<p>Set background image content for a given side.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>bg_image</strong>: Background image content.</li>
+<li><strong>side</strong>: Target eye side.</li>
+</ul>
+<p><strong>Returns and exceptions</strong></p>
+<p>Returns the nonnegative native status on success (normally <code>0</code>). A <code>None</code> image
+or invalid image dimensions/channels/frames raises <code>ValueError</code>. A negative native
+assignment result becomes <code>RuntimeError</code>, with old/new owners retained and further
+guarded Eye operations blocked. Initialization and idle processing are required.
+See <a href="#image-ownership-and-restrictions">image ownership and restrictions</a>.</p>
+<h3 id="set_animationid-int-name-str-int"><code>set_animation(id: int, name: str) -&gt; int</code><a class="headerlink" href="#set_animationid-int-name-str-int" title="Permanent link">&para;</a></h3>
+<p>Submit a named eye animation. Playback runs asynchronously, but submission can
+prepare image assets and wait for previous processing or rendering. A successful
+submission does not mean completion. Start/complete/abort are reported via
+EyeEvent/EyeEventListener.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id</strong>: User-defined id forwarded to event callbacks.</li>
+<li><strong>name</strong>: Animation name; use a string constant from
+  <a href="#expression-constants">doly_eye.expressions</a>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>int</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>0: animation accepted
+-1: animation not found or required event-image preparation failed
+</code></pre></div>
+<h3 id="set_positionside-eyeside-centerx-int-centery-int-scalex-float-10-scaley-float-10-lid_top_end-int-0-lid_bot_start-int-240-int"><code>set_position(side: EyeSide, centerX: int, centerY: int, scaleX: float = 1.0, scaleY: float = 1.0, lid_top_end: int = 0, lid_bot_start: int = 240) -&gt; int</code><a class="headerlink" href="#set_positionside-eyeside-centerx-int-centery-int-scalex-float-10-scaley-float-10-lid_top_end-int-0-lid_bot_start-int-240-int" title="Permanent link">&para;</a></h3>
+<p>Set eye position and scale.
+Initialize Eye first and wait for idle processing.</p>
+<ul>
+<li><strong>side</strong>: <code>EyeSide.Left</code>, <code>EyeSide.Right</code> or <code>EyeSide.Both</code>.</li>
+<li><strong>centerX</strong>, <strong>centerY</strong>: Signed integer center coordinates; native accepted range
+  is -250..250. The top-left is (0, 0), display center (120, 120).</li>
+<li><strong>scaleX</strong>, <strong>scaleY</strong>: Finite, positive scale factors, default <code>1.0</code>.</li>
+<li><strong>lid_top_end</strong>: Unsigned 8-bit top-lid Y end, default <code>0</code>.</li>
+<li><strong>lid_bot_start</strong>: Unsigned 8-bit bottom-lid Y start, default <code>240</code>.</li>
+</ul>
+<p><strong>Returns and exceptions</strong></p>
+<p>Native integer status: <code>0</code> on success, <code>-1</code> for out-of-range center coordinates.
+Nonfinite, nonpositive or unsafe scale
+magnitudes raise <code>ValueError</code> before rendering. Inactive Eye, busy guarded operations
+or uncertain image ownership raise <code>RuntimeError</code>.</p>
+<h3 id="dispose-none"><code>dispose() -&gt; None</code><a class="headerlink" href="#dispose-none" title="Permanent link">&para;</a></h3>
+<p>Clean up Eye Python callbacks/listeners only. This does not call native disposal,
+Abort, image detachment, rendering stop or a native worker join. Image owners
+remain retained. From a wrapper callback this performs nonblocking logical cleanup;
+outside callbacks it waits only for admitted Python callback entries.</p>
+<h3 id="get_version-float"><code>get_version() -&gt; float</code><a class="headerlink" href="#get_version-float" title="Permanent link">&para;</a></h3>
+<p>Get current library version.</p>
+<p>Original note: format 0.XYZ (3 digits after major).</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>float</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Version as float.
+</code></pre></div>
+<h2 id="image-ownership-and-restrictions">Image ownership and restrictions<a class="headerlink" href="#image-ownership-and-restrictions" title="Permanent link">&para;</a></h2>
+<p>Use <a href="../vcontent/">VContent</a> for raw image assignment. Initialize Eye before image
+assignment/position rendering and use idle processing for raw assignments,
+iris-position reads/rendering, and attached-image frame replacement/active-frame
+index reads. Python callers share a mutex; callback callers try-lock and raise
+<code>RuntimeError</code> when busy rather than blocking. Preset and animation operations
+retain native replacement/cancellation behavior, not a worker-join guarantee.</p>
+<p>All assigned images require nonempty frames, a valid active-frame index, converted
+12-bit color metadata, and exact frame lengths. RGB channels must each be 0..15;
+alpha, where present, remains 0..255. Each channel occupies a separate byte:</p>
+<table>
+<thead>
+<tr>
+<th>Slot</th>
+<th>Dimensions</th>
+<th>Channels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background</td>
+<td>Exactly 240×240</td>
+<td>RGB</td>
+</tr>
+<tr>
+<td>Top/bottom lid</td>
+<td>Width 240, height 1–240</td>
+<td>RGBA</td>
+</tr>
+<tr>
+<td>Iris</td>
+<td>At least 2×2</td>
+<td>RGBA</td>
+</tr>
+</tbody>
+</table>
+<p>For each frame the byte count must equal width × height × channel count.
+Validation checks metadata, dimensions, channel layout, active-frame index, and
+frame lengths. It does not inspect individual RGB channel values; maintaining
+the required values is the caller's responsibility. <code>None</code> or invalid structural
+properties raise <code>ValueError</code> before native indexing.
+Eye retains native shared ownership for each slot/side; dropping Python
+references does not free attached content. Replacement retains old owners through
+the native call. If assignment fails with uncertain native ownership, old and new
+owners remain retained and subsequent guarded Eye operations raise <code>RuntimeError</code>.
+Stop image operations after such a failure.</p>
+<p>Final image owners remain resident because there is no supported detach-and-join
+API. Callback disposal never releases them. Preset changes may conservatively
+retain previous owners, which remain protected from mutation while processing.
+Do not mutate attached images during active processing or through external C++
+callers. Do not operate LCD and Eye concurrently.</p>
+<p>Natural animation completion is preferred before image changes. A false
+<code>is_animating()</code> result, Abort, and wrapper mutexes are not a native join or complete
+shutdown proof. Native render-busy checks, cancellation and shutdown races remain
+limitations; wrapper coordination covers Python callers, not native workers or
+external C++ users.</p>
+<h2 id="lifecycle-contract">Lifecycle contract<a class="headerlink" href="#lifecycle-contract" title="Permanent link">&para;</a></h2>
+<p><code>init()</code>, <code>abort()</code> and <code>set_animation()</code> raise <code>RuntimeError</code> from any wrapper
+callback. Schedule these on the application control thread. <code>dispose()</code> is
+callback-only as described above; it is not renderer shutdown. The usual callback
+replacement, resident proxy and unraisable-exception limitations apply.</p>
+<p>See <a href="../#initialization-and-disposal">initialization and disposal</a> for
+component-local cleanup, retained native proxies and interpreter limitations.</p>
+<h2 id="expression-constants">Expression constants<a class="headerlink" href="#expression-constants" title="Permanent link">&para;</a></h2>
+<p><code>doly_eye.expressions</code> exposes the following 142 string constants. Pass the
+constant to <code>set_animation(id, name)</code>; values with spaces must not be inferred
+from the identifier spelling. These are names, not callables or proof that the
+required animation asset is installed.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>String value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expressions.ADMIRING</code></td>
+<td><code>"ADMIRING"</code></td>
+</tr>
+<tr>
+<td><code>expressions.AGGRAVATED</code></td>
+<td><code>"AGGRAVATED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ANNOYED</code></td>
+<td><code>"ANNOYED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ANXIOUS</code></td>
+<td><code>"ANXIOUS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ATTENTION</code></td>
+<td><code>"ATTENTION"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ATTENTION_LEFT</code></td>
+<td><code>"ATTENTION LEFT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ATTENTION_RIGHT</code></td>
+<td><code>"ATTENTION RIGHT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.AWAKE_L</code></td>
+<td><code>"AWAKE L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.AWAKE_R</code></td>
+<td><code>"AWAKE R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BATTERY_LOW</code></td>
+<td><code>"BATTERY LOW"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK</code></td>
+<td><code>"BLINK"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK_BIG</code></td>
+<td><code>"BLINK BIG"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK_L</code></td>
+<td><code>"BLINK L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK_ONLY</code></td>
+<td><code>"BLINK ONLY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK_R</code></td>
+<td><code>"BLINK R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLINK_SLOW</code></td>
+<td><code>"BLINK SLOW"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BLUE</code></td>
+<td><code>"BLUE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BUGGED</code></td>
+<td><code>"BUGGED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BUMP</code></td>
+<td><code>"BUMP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.BURNED_UP</code></td>
+<td><code>"BURNED UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS</code></td>
+<td><code>"CAUTIOUS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_DOWN</code></td>
+<td><code>"CAUTIOUS DOWN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_DOWN_LEFT</code></td>
+<td><code>"CAUTIOUS DOWN LEFT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_DOWN_RIGHT</code></td>
+<td><code>"CAUTIOUS DOWN RIGHT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_LEFT</code></td>
+<td><code>"CAUTIOUS LEFT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_RIGHT</code></td>
+<td><code>"CAUTIOUS RIGHT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CAUTIOUS_UP</code></td>
+<td><code>"CAUTIOUS UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CHAOTIC</code></td>
+<td><code>"CHAOTIC"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CHEERFUL</code></td>
+<td><code>"CHEERFUL"</code></td>
+</tr>
+<tr>
+<td><code>expressions.COLOR_CHANGE</code></td>
+<td><code>"COLOR CHANGE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CONCENTRATE</code></td>
+<td><code>"CONCENTRATE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CONFUSED</code></td>
+<td><code>"CONFUSED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CRAZY_ABOUT</code></td>
+<td><code>"CRAZY ABOUT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CRUSHED</code></td>
+<td><code>"CRUSHED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CYCLOPS_L</code></td>
+<td><code>"CYCLOPS L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.CYCLOPS_R</code></td>
+<td><code>"CYCLOPS R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DAMAGED</code></td>
+<td><code>"DAMAGED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DEJECTED</code></td>
+<td><code>"DEJECTED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DELIGHTED</code></td>
+<td><code>"DELIGHTED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DEMORALIZED</code></td>
+<td><code>"DEMORALIZED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DEPRESSED</code></td>
+<td><code>"DEPRESSED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DESTROYED</code></td>
+<td><code>"DESTROYED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DISCOVER</code></td>
+<td><code>"DISCOVER"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DISAPPOINTED</code></td>
+<td><code>"DISAPPOINTED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DIZZY_L</code></td>
+<td><code>"DIZZY L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DIZZY_R</code></td>
+<td><code>"DIZZY R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DOWN</code></td>
+<td><code>"DOWN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DROP_CENTER</code></td>
+<td><code>"DROP CENTER"</code></td>
+</tr>
+<tr>
+<td><code>expressions.DROWSY</code></td>
+<td><code>"DROWSY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ELEVATED_I</code></td>
+<td><code>"ELEVATED I"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ELEVATED_O</code></td>
+<td><code>"ELEVATED O"</code></td>
+</tr>
+<tr>
+<td><code>expressions.EMPTY</code></td>
+<td><code>"EMPTY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.EXCITED</code></td>
+<td><code>"EXCITED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FED_UP</code></td>
+<td><code>"FED UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FINE</code></td>
+<td><code>"FINE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FIREMAN</code></td>
+<td><code>"FIREMAN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FLAME</code></td>
+<td><code>"FLAME"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FOCUS</code></td>
+<td><code>"FOCUS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FRIGHTENED</code></td>
+<td><code>"FRIGHTENED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FRUSTRATED</code></td>
+<td><code>"FRUSTRATED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FUMING_L</code></td>
+<td><code>"FUMING L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FUMING_R</code></td>
+<td><code>"FUMING R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.FURIOUS</code></td>
+<td><code>"FURIOUS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.GET_BIGGER</code></td>
+<td><code>"GET BIGGER"</code></td>
+</tr>
+<tr>
+<td><code>expressions.GET_SMALLER</code></td>
+<td><code>"GET SMALLER"</code></td>
+</tr>
+<tr>
+<td><code>expressions.HAPPY</code></td>
+<td><code>"HAPPY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.HEARTS</code></td>
+<td><code>"HEARTS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.HEATED</code></td>
+<td><code>"HEATED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.HOPELESS</code></td>
+<td><code>"HOPELESS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.HOSTILE</code></td>
+<td><code>"HOSTILE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.IMPACT_F</code></td>
+<td><code>"IMPACT F"</code></td>
+</tr>
+<tr>
+<td><code>expressions.IMPACT_L</code></td>
+<td><code>"IMPACT L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.IMPACT_R</code></td>
+<td><code>"IMPACT R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.IMPATIENT</code></td>
+<td><code>"IMPATIENT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.INJURED</code></td>
+<td><code>"INJURED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.IRRITATED</code></td>
+<td><code>"IRRITATED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.JEALOUS_L</code></td>
+<td><code>"JEALOUS L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.JEALOUS_R</code></td>
+<td><code>"JEALOUS R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LEFT</code></td>
+<td><code>"LEFT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LIDS_DOWN_5S</code></td>
+<td><code>"LIDS DOWN 5S"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_AHEAD</code></td>
+<td><code>"LOOK AHEAD"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_AHEAD_SLOW</code></td>
+<td><code>"LOOK AHEAD SLOW"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_DOWN</code></td>
+<td><code>"LOOK DOWN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_DOWN_L</code></td>
+<td><code>"LOOK DOWN L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_DOWN_R</code></td>
+<td><code>"LOOK DOWN R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_LEFT</code></td>
+<td><code>"LOOK LEFT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_RIGHT</code></td>
+<td><code>"LOOK RIGHT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_UP</code></td>
+<td><code>"LOOK UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_UP_L</code></td>
+<td><code>"LOOK UP L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOOK_UP_R</code></td>
+<td><code>"LOOK UP R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOW</code></td>
+<td><code>"LOW"</code></td>
+</tr>
+<tr>
+<td><code>expressions.LOW_LONG</code></td>
+<td><code>"LOW LONG"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MELANCHOLY</code></td>
+<td><code>"MELANCHOLY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MID_DOWN</code></td>
+<td><code>"MID DOWN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MID_UP</code></td>
+<td><code>"MID UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MID_UP_L</code></td>
+<td><code>"MID UP L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MID_UP_R</code></td>
+<td><code>"MID UP R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MIXED_UP</code></td>
+<td><code>"MIXED UP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MOODY_LR</code></td>
+<td><code>"MOODY LR"</code></td>
+</tr>
+<tr>
+<td><code>expressions.MOODY_RL</code></td>
+<td><code>"MOODY RL"</code></td>
+</tr>
+<tr>
+<td><code>expressions.NERVOUS</code></td>
+<td><code>"NERVOUS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.OFFENDED</code></td>
+<td><code>"OFFENDED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.OUTRAGED</code></td>
+<td><code>"OUTRAGED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.OVERJOYED</code></td>
+<td><code>"OVERJOYED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.PANICKY</code></td>
+<td><code>"PANICKY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.PASSIONATE</code></td>
+<td><code>"PASSIONATE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.PHOTO</code></td>
+<td><code>"PHOTO"</code></td>
+</tr>
+<tr>
+<td><code>expressions.POLICE</code></td>
+<td><code>"POLICE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.PUZZLED</code></td>
+<td><code>"PUZZLED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.PUMPKIN</code></td>
+<td><code>"PUMPKIN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.RIGHT</code></td>
+<td><code>"RIGHT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ROLL_UD</code></td>
+<td><code>"ROLL UD"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SCAN</code></td>
+<td><code>"SCAN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SHAKE_FRONT</code></td>
+<td><code>"SHAKE FRONT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SHAKE_LR</code></td>
+<td><code>"SHAKE LR"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SHAKE_UD</code></td>
+<td><code>"SHAKE UD"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SHOCKED</code></td>
+<td><code>"SHOCKED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SHY</code></td>
+<td><code>"SHY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SLEEP</code></td>
+<td><code>"SLEEP"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SLEEPY</code></td>
+<td><code>"SLEEPY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SNEEZE</code></td>
+<td><code>"SNEEZE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SPARKLING</code></td>
+<td><code>"SPARKLING"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SQUINT_RL</code></td>
+<td><code>"SQUINT RL"</code></td>
+</tr>
+<tr>
+<td><code>expressions.STORMING</code></td>
+<td><code>"STORMING"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SUNGLASS</code></td>
+<td><code>"SUNGLASS"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SUNGLASS_LR</code></td>
+<td><code>"SUNGLASS LR"</code></td>
+</tr>
+<tr>
+<td><code>expressions.SUNGLASS_UPR</code></td>
+<td><code>"SUNGLASS UPR"</code></td>
+</tr>
+<tr>
+<td><code>expressions.THINK</code></td>
+<td><code>"THINK"</code></td>
+</tr>
+<tr>
+<td><code>expressions.THREATENED_L</code></td>
+<td><code>"THREATENED L"</code></td>
+</tr>
+<tr>
+<td><code>expressions.THREATENED_R</code></td>
+<td><code>"THREATENED R"</code></td>
+</tr>
+<tr>
+<td><code>expressions.THRILLED</code></td>
+<td><code>"THRILLED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.THROWN</code></td>
+<td><code>"THROWN"</code></td>
+</tr>
+<tr>
+<td><code>expressions.TIRED</code></td>
+<td><code>"TIRED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.TROUBLED</code></td>
+<td><code>"TROUBLED"</code></td>
+</tr>
+<tr>
+<td><code>expressions.TURNED_ON</code></td>
+<td><code>"TURNED ON"</code></td>
+</tr>
+<tr>
+<td><code>expressions.UNCOMFORTABLE</code></td>
+<td><code>"UNCOMFORTABLE"</code></td>
+</tr>
+<tr>
+<td><code>expressions.UNHAPPY</code></td>
+<td><code>"UNHAPPY"</code></td>
+</tr>
+<tr>
+<td><code>expressions.UPSET</code></td>
+<td><code>"UPSET"</code></td>
+</tr>
+<tr>
+<td><code>expressions.VR</code></td>
+<td><code>"VR"</code></td>
+</tr>
+<tr>
+<td><code>expressions.WAKE_WORD</code></td>
+<td><code>"WAKE WORD"</code></td>
+</tr>
+<tr>
+<td><code>expressions.WORKOUT</code></td>
+<td><code>"WORKOUT"</code></td>
+</tr>
+<tr>
+<td><code>expressions.ZOOM_IN</code></td>
+<td><code>"ZOOM IN"</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
